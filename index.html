@@ -2,9 +2,928 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>你好，GitHub</title>
+    <title>My Resume</title>
+    <style>
+      /* *{
+        border: solid 1px white;
+} */
+
+body{
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #134256;
+  color:rgba(255,255,255,0.8);
+  font-size: 15px;
+  line-height:28px;
+  letter-spacing:2px;
+  font-weight: 200;
+}
+
+/* 複寫區 */
+ul{
+  padding: 0;
+  list-style:none;
+}
+
+h1{
+  opacity:0.8;
+}
+
+h2{
+  margin: 0;
+  margin-bottom: 25px;
+  font-weight: 400;
+  opacity:0.8;
+}
+h2::after{
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 8px;
+  background-color: #ff6666;
+  margin-left: 10px;
+}
+h4{
+  margin: 0;
+  margin-top: 40px;
+  opacity:0.8;
+  font-weight: 400;
+}
+a{
+  color: white;
+  opacity:0.8;
+  text-decoration: none;
+}
+hr{
+  border: none;
+  border-bottom: solid 4px #ff6666;
+  width: 40%;
+  margin-left: 0;
+}
+
+.resume{
+  display: flex;
+  width:950px;
+  border: solid 8px white;
+  padding: 50px;
+  position: relative;
+  
+}
+.left{
+  flex:5;
+  border-right:solid 1px #ff6666;
+}
+.right{
+  flex:7;
+}
+.left,.right{
+  padding: 15px;
+}
+.left{
+  padding-right: 50px;
+}
+.right{
+  padding-left: 50px;
+  padding-top: 150px;
+}
+.decoration{
+  width: 300px;
+  height: 140px;
+  background: linear-gradient(135deg,#ff6666,#fca4a4);
+  border-radius:70px 0px 0px 70px;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+}
+.listExperience>li{
+  display: flex;
+  margin-bottom: 10px; 
+}
+.listExperience>li:nth-child(1) ul{
+  border-color:#fc5d5d;
+}
+.listExperience>li:nth-child(2) ul{
+  border-color:#fc7676;
+}
+.listExperience>li:nth-child(3) ul{
+  border-color:#f98686;
+}
+.listExperience>li:nth-child(4) ul{
+  border-color:#f9a4a4;
+}
+.listExperience li ul{
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: solid 3px white;
+}
+.listVideo li a{
+  color:aquamarine;
+}
+/* list skills */
+.listSkill{
+  display: flex;
+  flex-wrap: wrap;
+}
+.listSkill li{
+  display:flex;
+  flex-direction:column;
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+}
+
+
+.circle{
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius:50%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 102, 102,0.4);
+}
+.circle::after{
+  content:"";
+  display: block;
+  background-color: #134256;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius:50%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%)
+}
+.p90{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left:50%;
+  top: 0;
+  background-color: #ff6666;
+}
+.p180{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-1{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-2{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  background-color: #ff6666;
+}
+
+
+/* list program */
+.listProgram .bar{
+  width: 150px;
+  height: 10px;
+  border: solid 2px #ff6666;
+  border-radius: 5px;
+}
+.listProgram li{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+.value{
+  height: 100%;
+  width: 60%;
+  background-color: #ff6666;
+}
+.value.p20{
+  width: 20%;
+}
+.value.p40{
+  width: 40%;
+}
+.value.p50{
+  width: 50%;
+}
+.value.p60{
+  width: 60%;
+}
+.value.p75{
+  width: 75%;
+}
+.value.p95{
+  width: 95%;
+}
+.btn{
+  border: solid 3px #ff6666;
+  padding:5px 10px;
+  margin-right: 10px;
+}
+.fill{
+  background-color: #ff6666;
+}
+.video{
+  position: absolute;
+  top: 1800px;
+}
+.photo{
+  position: absolute;
+  width: 150px;
+  border-radius: 50%;
+  left: -160%;
+  top: -2px;
+}
+button{
+  background-color: #134256;
+  border-style: none;
+  cursor: pointer;
+  color: aquamarine;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 2px;
+  font-weight: 200;
+  opacity:0.8;
+  border-radius: 8px;
+}
+button:focus{
+  outline: none;
+}
+button:hover{
+  filter: brightness(85%); 
+}
+.modal{
+  display: none;    
+  z-index: 1;
+  position: fixed;
+  padding-top: 50px;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8)
+}
+.modal-inner{
+  display: flex; 
+  border: 7px solid #ccc;
+  margin: auto;
+  padding: 10px; 
+  width: 80%;
+  flex-direction: row;
+}
+.modal-inner p{
+  float: left;
+}
+.close{
+  float: right;
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+.versionBar{
+  display: inline-block;
+  flex-direction: column;
+  margin-top: -50px;
+  z-index: 9999;
+}
+
+ul .gitlink{
+  line-height: 31px;
+}
+
+
+
+
+    </style>
   </head>
   <body>
-    <h1>覺得厲害</h1>
+  <div class="versionBar">
+    <button class="version-c"><a href="./index.html">中文</a></button>
+    <button class="version-j"><a href="./japaneseResume.html">日本語</a></button>
+    <button class="version-e"><a href="./englishResume.html">English</a></button>  
+  <div class="resume">
+  <div class="left">
+    <h1>陳祺昀</h1>
+    <h4>淡江大學國際企業學系</h4>
+    <hr>
+    <div class="block">
+      <h2>自我介紹</h2>
+      <p>對生活充滿好奇心，樂於嘗試不同可能，挖掘自己的可能性，挑戰自我。喜歡觀察周遭的人事物，細味品嚐生活，期望解決痛點創造人性化的產品。</p>
+      <ul>
+        <li>Birth： 1995/03/09</li>
+        <li>Email： shironchen@gmail.com</li>
+        <li>Tel： +886-923-799-033</li>
+        <li>GPA： 3.56 / 4</li>
+      </ul>
+    </div>
+    <div class="buttons" >
+      <a class="btn fill" href="https://helloshiro.github.io/" target="_blank">2017後半年履歷</a>
+      <a class="btn" href="https://helloshirotw.github.io/" target="_blank">2018前半年履歷</a>
+    </div>
+    
+    <div class="block">
+      <h4>Skills</h4>
+      <h2>程式技能</h2>
+      <ul class="listSkill">
+        <li>
+            <div class="circle">
+              <div class="p270-1"></div>
+              <div class="p270-2"></div>
+            </div>
+            Swift
+          </li>
+        <li>
+            <div class="circle">
+              <div class="p90"></div>
+            </div>
+          Obj-C  
+          </li>
+        <li>
+          <div class="circle">
+            <div class="p180"></div>
+          </div>
+        Html/Css  
+        </li>
+        <li>
+            <div class="circle">
+              <div class="p180"></div>
+            </div>
+          Js  
+          </li>
+        <li>
+          <div class="circle">
+            <div class="p180"></div>
+          </div>
+        SQL  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p90"></div>
+          </div>
+        Linux  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p90"></div>
+          </div>
+          C#
+        </li>
+        <li>
+            <div class="circle">
+                <div class="p180"></div>
+            </div>
+            Git
+          </li>
+          <li>
+              <div class="circle">
+                <div class="p180"></div>
+              </div>
+              Python
+            </li>
+          <li>
+              <div class="circle">
+                <div class="p180"></div>
+              </div>
+              Java
+            </li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>iOS Skills</h4>
+      <h2>專業技能</h2>
+      <ul class="listProgram">
+        <li>
+          Xcode
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          Fastlane
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          Cocoapods
+          <div class="bar">
+            <div class="value p60"></div>
+          </div>
+        </li>
+        <li>
+          Jenkins
+          <div class="bar">
+            <div class="value p50"></div>
+          </div>
+        </li>
+        <li>
+          客製化UI 
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          MVC架構
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          VIPER架構
+          <div class="bar">
+            <div class="value p40"></div>
+          </div>
+        </li>
+        <li>
+            上架流程
+            <div class="bar">
+              <div class="value p75"></div>
+            </div>
+          </li>
+        <li>
+            Unit/UItest
+            <div class="bar">
+              <div class="value p40"></div>
+            </div>
+          </li>
+        <li>
+            Firebase應用
+            <div class="bar">
+              <div class="value p95"></div>
+            </div>
+          </li>
+        <li>
+            MQTT
+            <div class="bar">
+              <div class="value p60"></div>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="block">
+        <h4>Studies</h4>
+        <h2>在學經驗</h2>
+        <ul>
+            <li>財金系公關</li>
+            <li>吉他社幹部</li>
+            <li>金韶獎籌備人員</li>
+            <li>舞研社</li>
+            <li>代表淡江大學與日本長崎大學環境合作計畫</li>
+            <li>旅行社約聘小導遊</li>
+            <li>金韶獎籌備人員</li>
+            <li>舞研社</li>
+          </ul>
+    </div>
+    <div class="block">
+        <h4>Certificate</h4>
+        <h2>證照</h2>
+        <ul>
+          <li>JLPT日本語能力試驗N2</li>
+          <li>Toeic755</li>
+          <li>國貿檢定合格</li>
+          <li>MOS Expert Excel,Word</li>
+        </ul>
+      </div>
+  </div>
+  <div class="right">
+    <div class="decoration">
+      <img src="images/self2.jpg" alt="" class="photo">
+    </div>
+    <div class="block">
+        <h4>Works Experience</h4>
+        <h2>工作經歷</h2>
+        <ul class="listExperience">
+          <li class="year">2014
+            <ul>
+              <li style="font-weight: bold;">精緻冰品店</li>
+              <li>內/外場服務人員</li>
+              <li>冰品製作、環境整潔、庫存清點、結帳收銀、外場服務</li>
+            </ul>
+          </li>
+          <li class="year">2016
+            <ul>
+              <li style="font-weight: bold;">牙材進口貿易公司</li>
+              <li>國貿助理</li>
+              <li>國外廠商聯繫、展場協助、店家關係維護、產品DM翻譯、產品推銷</li>
+            </ul>
+          </li>
+          <li class="year">2018
+            <ul>
+              <li style="font-weight: bold;">菲律賓軟體公司</li>
+              <li>iOS Developer</li>
+              <li>1.與團隊6人維護與開發行動應用程式(SportsBook)</li>
+              <li>2.每日晨會使用Jira追蹤進度</li>
+              <li>3.Git與SoureceTree版本控管</li>
+              <li>4.與UI/UX團隊組織新功能</li>
+              <li>5.解決測試團隊發佈的臭蟲</li>
+              <li>6.Merge前須與iOS團隊CodeReview</li>
+            </ul>
+          </li>
+          <li class="year">2018
+              <ul>
+                <li style="font-weight: bold;">Future Sync.</li>
+                <li>外包工程師</li>
+                <li>1.製作店家管理系統-iOS前端部分</li>
+                <li>2.串接firebase即時資料庫後台</li>
+                <li>3.掃描QRCode後解析url</li>
+                <li>4.UI介面設計與需求討論</li>
+              </ul>
+            </li>
+          <li class="year">2018
+            <ul>
+              <li style="font-weight: bold;">大聲公行動股份有限公司</li>
+              <li>iOS Developer</li>
+              <li>1.與資深工程師共同開發與維護車麻吉APP</li>
+              <li>2.使用zeplin溝通設計細節</li>
+              <li>3.結合Jenkins與fastlane做CI/CD整合</li>
+              <li>4.在單一架構的基礎上，做出多國邏輯需求</li>
+              <li>5.與產品設計團隊站在使用者立場討論功能</li>
+              <li>6.熟悉coding signing流程、自動化管理憑證與Provision Profiles</li>
+              <li>7.實作各種原生元件如Widget, TouchId等</li>
+              <li>8.應對各種資料存取與非同步狀況</li>
+              <li>9.維持可擴充性高的代碼</li>
+            </ul>
+          </li>      
+        </ul>
+      </div>
+    <div class="block">
+        <h4>Released Stuffs</h4>
+        <h2>上架專案</h2>
+        <ul>
+          <li><a href="https://itunes.apple.com/tw/app/%E8%BB%8A%E9%BA%BB%E5%90%89/id1332581201?mt=8" target="_blank">車麻吉</a></li>
+          <li><a href="https://www.wbviet.com/zh-cn/mobile/ios.php" target="_blank">Wellbet</a></li>
+          <li>招待Bar(2019上線)</li>
+        </ul>
+      </div>
+    <div class="block">
+        <h4>What I have done</h4>
+        <h2>小作品<span style="font-size: 12px; color:darkgray">　(點擊查看Demo影片)</span></h2>
+        <ul class="listExperience">
+          <p>2018/1 ~ now</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                  <li>
+                      <button id="myBtn11">letsPicnic</button>
+                      <div id="myModal11" class="modal modal11">
+                        <div class="modal-inner">
+                          <p class="description">
+                            <br>
+                          </p>
+                          <video width="1024" height="500" controls>
+                          <source src="./images/letsPicnic.mp4" type="video/mp4">
+                          </video>
+                        <span class="close close11">&times; </span>
+                      </div>
+                    </div>
+                  </li>
+                <li>
+                  <button id="myBtn1">Friendy</button>
+                  <div id="myModal1" class="modal modal1">
+                    <div class="modal-inner">
+                      <p class="description">
+                        1. xib files 設計視圖<br>
+                        2. Auto-layout<br>
+                        3. Firebase 存取使用者資訊, 訊息內容, 圖片<br>
+                        4. Firebase觀察機制<br>
+                        5. 快取圖片, 記住使用者資訊<br>
+                        6. 處理錯誤與驗證機制<br>
+                        7. 使用第三方套件解析api<br>
+                        8. 存取相機圖庫<br>
+                        9. 影片導入<br>
+                        10. 動畫效果<br>
+                        11. 整合導航欄與標籤列各視圖
+                      </p>
+                      <video width="600" height="500" controls>
+                      <source src="./images/friendy.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close1">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn2">uBike共享機車</button>
+                  <div id="myModal2" class="modal modal2">
+                    <div class="modal-inner">
+                      <p class="description">
+                        <br>
+
+                      </p>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/uBike.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close2">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/helloshirotw/letsPicnic" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/helloshirotw/friendy" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/helloshirotw/uBike" target="blank">原始碼</a></li>
+                </ul>
+            </li>
+            <p>2017/8 ~ 2017/12</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn3">城市即時天氣查詢</button>
+                  <div id="myModal3" class="modal modal3">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/cityWeather.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close3">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn4">ML物品辨識</button>
+                  <div id="myModal4" class="modal modal4">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/mL.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close4">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn5">城市筆記本</button>
+                  <div id="myModal5" class="modal modal5">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/cityMemo.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close5">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/weatherApp" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/cameraML" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/HelloShiro/jsonProject" target="blank">原始碼</a></li>
+                </ul>
+            </li>
+            <li>C#
+              <ul>
+                <li> 
+                  <button id="myBtn6">訂便當系統(MSSQL)</button>
+                  <div id="myModal6" class="modal modal10">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/dingbendongTest.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close6">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn7">單位換算</button>
+                  <div id="myModal7" class="modal modal7">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo01.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close7">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn8">飲料店訂購</button>
+                  <div id="myModal8" class="modal modal8">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo02.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close8">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn9">威力彩/39樂合彩/四星彩</button>
+                  <div id="myModal9" class="modal modal9">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/winformVideo03.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close9">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                <li><a href="https://github.com/HelloShiro/DingBenDong" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/unit_Convert" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/buy_drink" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/lottery" target="blank">原始碼</a></li>
+              </ul>
+            </li>
+            <li><p>Python &nbsp;&nbsp;</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn10">貪食蛇</button>
+                  <div id="myModal10" class="modal modal10">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/pySnake.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close10">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/python_app" target="blank">原始碼</a></li>
+                </ul>
+            </li>          
+          </ul>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<script>
+var modal1 = document.getElementById('myModal1');
+var modal2 = document.getElementById('myModal2');
+var modal3 = document.getElementById('myModal3');
+var modal4 = document.getElementById('myModal4');
+var modal5 = document.getElementById('myModal5');
+var modal6 = document.getElementById('myModal6');
+var modal7 = document.getElementById('myModal7');
+var modal8 = document.getElementById('myModal8');
+var modal9 = document.getElementById('myModal9');
+var modal10 = document.getElementById('myModal10');
+var modal11 = document.getElementById('myModal11');
+
+
+// Get the button that opens the modal
+var btn1 = document.getElementById("myBtn1");
+var btn2 = document.getElementById("myBtn2");
+var btn3 = document.getElementById("myBtn3");
+var btn4 = document.getElementById("myBtn4");
+var btn5 = document.getElementById("myBtn5");
+var btn6 = document.getElementById("myBtn6");
+var btn7 = document.getElementById("myBtn7");
+var btn8 = document.getElementById("myBtn8");
+var btn9 = document.getElementById("myBtn9");
+var btn10 = document.getElementById("myBtn10");
+var btn11 = document.getElementById("myBtn11");
+
+
+// Get the <span> element that closes the modal
+var span1 = document.getElementsByClassName("close1")[0];
+var span2 = document.getElementsByClassName("close2")[0];
+var span3 = document.getElementsByClassName("close3")[0];
+var span4 = document.getElementsByClassName("close4")[0];
+var span5 = document.getElementsByClassName("close5")[0];
+var span6 = document.getElementsByClassName("close6")[0];
+var span7 = document.getElementsByClassName("close7")[0];
+var span8 = document.getElementsByClassName("close8")[0];
+var span9 = document.getElementsByClassName("close9")[0];
+var span10 = document.getElementsByClassName("close10")[0];
+var span11 = document.getElementsByClassName("close11")[0];
+
+
+
+// When the user clicks the button, open the modal 
+btn1.onclick = function() {
+    modal1.style.display = "block";
+}
+btn2.onclick = function() {
+    modal2.style.display = "block";
+} 
+btn3.onclick = function() {
+    modal3.style.display = "block";
+}  
+btn4.onclick = function() {
+    modal4.style.display = "block";
+}  
+btn5.onclick = function() {
+    modal5.style.display = "block";
+}  
+btn6.onclick = function() {
+    modal6.style.display = "block";
+}  
+btn7.onclick = function() {
+    modal7.style.display = "block";
+}  
+btn8.onclick = function() {
+    modal8.style.display = "block";
+}    
+btn9.onclick = function() {
+    modal9.style.display = "block";
+}  
+btn10.onclick = function() {
+    modal10.style.display = "block";
+}  
+btn11.onclick = function() {
+    modal11.style.display = "block";
+}  
+
+// When the user clicks on <span> (x), close the modal
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+span2.onclick = function() {
+    modal2.style.display = "none";
+} 
+span3.onclick = function() {
+    modal3.style.display = "none";
+}   
+span4.onclick = function() {
+    modal4.style.display = "none";
+}
+span5.onclick = function() {
+    modal5.style.display = "none";
+} 
+span6.onclick = function() {
+    modal6.style.display = "none";
+}   
+span7.onclick = function() {
+    modal7.style.display = "none";
+}
+span8.onclick = function() {
+    modal8.style.display = "none";
+} 
+span9.onclick = function() {
+    modal9.style.display = "none";
+}   
+span10.onclick = function() {
+    modal10.style.display = "none";
+}
+span11.onclick = function() {
+    modal11.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal2.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal3) {
+        modal3.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal4) {
+        modal4.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal5) {
+        modal5.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal6) {
+        modal6.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal7) {
+        modal7.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal8) {
+        modal8.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal9) {
+        modal9.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal10) {
+        modal10.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal11) {
+        modal11.style.display = "none";
+    }
+}
+  </script>
   </body>
 </html>

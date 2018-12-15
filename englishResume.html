@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Resume</title>
+    <style>
+      /* *{
+        border: solid 1px white;
+} */
+
+body{
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #684428;
+  color:rgba(255,255,255,0.8);
+  font-size: 15px;
+  line-height:28px;
+  letter-spacing:2px;
+  font-weight: 200;
+}
+
+/* 複寫區 */
+ul{
+  padding: 0;
+  list-style:none;
+}
+
+h1{
+  opacity:0.8;
+}
+
+h2{
+  margin: 0;
+  margin-bottom: 25px;
+  font-weight: 400;
+  opacity:0.8;
+}
+h2::after{
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 8px;
+  background-color: #ff6666;
+  margin-left: 10px;
+}
+h4{
+  margin: 0;
+  margin-top: 40px;
+  opacity:0.8;
+  font-weight: 400;
+}
+a{
+  color: white;
+  opacity:0.8;
+  text-decoration: none;
+}
+hr{
+  border: none;
+  border-bottom: solid 4px #ff6666;
+  width: 40%;
+  margin-left: 0;
+}
+
+.resume{
+  display: flex;
+  width:950px;
+  border: solid 8px white;
+  padding: 50px;
+  position: relative;
+  
+}
+.left{
+  flex:5;
+  border-right:solid 1px #ff6666;
+}
+.right{
+  flex:7;
+}
+.left,.right{
+  padding: 15px;
+}
+.left{
+  padding-right: 50px;
+}
+.right{
+  padding-left: 50px;
+  padding-top: 150px;
+}
+.decoration{
+  width: 300px;
+  height: 140px;
+  background: linear-gradient(135deg,#ff6666,#fca4a4);
+  border-radius:70px 0px 0px 70px;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+}
+.listExperience>li{
+  display: flex;
+  margin-bottom: 10px; 
+}
+.listExperience>li:nth-child(1) ul{
+  border-color:#fc5d5d;
+}
+.listExperience>li:nth-child(2) ul{
+  border-color:#fc7676;
+}
+.listExperience>li:nth-child(3) ul{
+  border-color:#f98686;
+}
+.listExperience>li:nth-child(4) ul{
+  border-color:#f9a4a4;
+}
+.listExperience li ul{
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: solid 3px white;
+}
+.listVideo li a{
+  color:aquamarine;
+}
+/* list skills */
+.listSkill{
+  display: flex;
+  flex-wrap: wrap;
+}
+.listSkill li{
+  display:flex;
+  flex-direction:column;
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+}
+
+
+.circle{
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius:50%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 102, 102,0.4);
+}
+.circle::after{
+  content:"";
+  display: block;
+  background-color: #134256;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius:50%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%)
+}
+.p90{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left:50%;
+  top: 0;
+  background-color: #ff6666;
+}
+.p180{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-1{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-2{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  background-color: #ff6666;
+}
+
+
+/* list program */
+.listProgram .bar{
+  width: 150px;
+  height: 10px;
+  border: solid 2px #ff6666;
+  border-radius: 5px;
+}
+.listProgram li{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+.value{
+  height: 100%;
+  width: 60%;
+  background-color: #ff6666;
+}
+.value.p20{
+  width: 20%;
+}
+.value.p40{
+  width: 40%;
+}
+.value.p50{
+  width: 50%;
+}
+.value.p60{
+  width: 60%;
+}
+.value.p75{
+  width: 75%;
+}
+.btn{
+  border: solid 3px #ff6666;
+  padding:5px 10px;
+  margin-right: 10px;
+}
+.fill{
+  background-color: #ff6666;
+}
+.video{
+  position: absolute;
+  top: 1800px;
+}
+.photo{
+  position: absolute;
+  width: 150px;
+  border-radius: 50%;
+  left: -80%;
+  top: -2px;
+}
+button{
+  background-color: #684428;
+  border-style: none;
+  cursor: pointer;
+  color: orange;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 2px;
+  font-weight: 200;
+  opacity:0.8;
+  border-radius: 8px;
+}
+button:focus{
+  outline: none;
+}
+button:hover{
+  filter: brightness(85%); 
+}
+.modal{
+  display: none;    
+  z-index: 1;
+  position: fixed;
+  padding-top: 50px;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8)
+}
+.modal-inner{
+  border: 7px solid #ccc;
+  margin: auto;
+  padding: 10px; 
+  width: 80%;
+}
+.close{
+  float: right;
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+.versionBar{
+  display: inline-block;
+  flex-direction: column;
+  margin-top: -50px;
+  z-index: 9999;
+}
+
+ul .gitlink{
+  line-height: 31px;
+}
+
+
+
+
+    </style>
+  </head>
+  <body>
+  <div class="versionBar">
+    <button class="version-c"><a href="./index.html">中文</a></button>
+    <button class="version-j"><a href="./japaneseResume.html">日本語</a></button>
+    <button class="version-e"><a href="./englishResume.html">English</a></button>  
+  <div class="resume">
+  <div class="left">
+    <h1>Chen ChiYun</h1>
+    <h4>Graduated from Tamkang University <br>Bachelor of International Business in Major</h4>
+    <hr>
+    <br>
+    <div class="block">
+      <h2>About me</h2>
+      <ul>
+        <li>Birth： 1995/03/09</li>
+        <li>Tel： 0973-338-347</li>
+        <li>GPA： 3.56</li>
+      </ul>
+    </div>
+    <div class="buttons" >
+      <a class="btn fill" href="https://github.com/HelloShiro?tab=repositories" target="_blank">Github</a>
+      <a class="btn" href="https://codepen.io/HelloShiro/" target="_blank">CodePen</a>
+    </div>
+    
+    <div class="block">
+      <h4>-----</h4>
+      <h2>Skills</h2>
+      <ul class="listSkill">
+        <li>
+          <div class="circle">
+            <div class="p90"></div>
+          </div>
+        Web  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p180"></div>
+          </div>
+        SQL Server  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p270-1"></div>
+            <div class="p270-2"></div>
+          </div>
+          IOS
+        </li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>-----</h4>
+      <h2>Programing Skills</h2>
+      <ul class="listProgram">
+        <li>
+          C#
+          <div class="bar">
+            <div class="value p40"></div>
+          </div>
+        </li>
+        <li>
+          JAVA
+          <div class="bar">
+            <div class="value p20"></div>
+          </div>
+        </li>
+        <li>
+          Swift
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          Linux
+          <div class="bar">
+            <div class="value p40"></div>
+          </div>
+        </li>
+        <li>
+          HTML&CSS
+          <div class="bar">
+            <div class="value p20"></div>
+          </div>
+        </li>
+        <li>
+          Python
+          <div class="bar">
+            <div class="value p40"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>-----</h4>
+      <h2>School Experience</h2>
+      <ul class="listExperience">
+          <li class="year">
+              2015
+              <ul>
+                  <li style="font-weight: bold;">Nagasaki University Exchanging Student</li>
+                  <li>-Work with environmental issue with other countries students.</li>
+                  <li>-Backpacking in several citys.</li>
+              </ul>
+          </li>
+          <li class="year">
+              2014~
+              <ul>
+                  <li style="font-weight: bold;">Guitar Club</li>
+                  <li>
+                    -Mentor the new members in my association and help them settle in.
+                  </li>
+                  <li>
+                    -Responsible for organizing guitar and singing competition across universitys.
+                  </li>
+                  <li>-Connect with different people from different groups and help negotiate with them.</li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+  <div class="block">
+    <h4>-----</h4>
+    <h2>Work Experience</h2>
+    <ul class="listExperience">
+        <li class="year">
+            2016
+            <ul>
+                <li style="font-weight: bold;">Sales Assistance intern</li>
+                <li>
+                  -Translate foreign product catalog to Chinese.
+                </li>
+                <li>
+                  -Email with Brazil for import new products.
+                </li>
+                <li>-Cooperate with Japanese on a weekly exhibition.</li>
+            </ul>
+        </li>
+        <li class="year">
+            2015
+            <ul>
+                <li style="font-weight: bold;">Waiter</li>
+                <li>-Providing exquisite icecream and helpful service to customers/</li>
+                <li>-Supporting manager to increase revenue streams and profit targets.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+  <div class="right">
+    <div class="decoration">
+      <img src="images/self.jpg" alt="" class="photo">
+    </div>
+    <div class="block">
+        <h4>-----</h4>
+        <h2>Side projects<span style="font-size: 12px; color:darkgray">　(Click to watch demo)</span></h2>
+        <ul class="listExperience">
+          <p>--Create by StoryBoard--</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn1">uBike</button>
+                  <div id="myModal1" class="modal modal1">
+                    <div class="modal-inner">
+                      <span class="close close1">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen08.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn2">Lists</button>
+                  <div id="myModal2" class="modal modal2">
+                    <div class="modal-inner">
+                      <span class="close close2">&times; </span>
+                      <!-- <p class="description">sdvbnmkjresxcvbnmkiuytrewqß</p> -->
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen05.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn3">Weather API</button>
+                  <div id="myModal3" class="modal modal3">
+                    <div class="modal-inner">
+                      <span class="close close3">&times; </span>
+                      <!-- <p class="description">sdvbnmkjresxcvbnmkiuytrewqß</p> -->
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen07.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn4">Workout Timer</button>
+                  <div id="myModal4" class="modal modal4">
+                    <div class="modal-inner">
+                      <span class="close close4">&times; </span>
+                      <!-- <p class="description"></p> -->
+                      <video width="1024" height="500" controls>
+                      <source src="images/screen06.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/swift_app_IB/tree/master/uber" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_IB/tree/master/notebook" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/weatherApp" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_IB/tree/master/workout" target="blank">Link</a></li>
+                </ul>
+            </li>
+            <p>--Create Programmatically--</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn5">IphoneX Save Area & Auto Layout</button>
+                  <div id="myModal5" class="modal modal5">
+                    <div class="modal-inner">
+                      <span class="close close5">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen01.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn6">MLCore</button>
+                  <div id="myModal6" class="modal modal6">
+                    <div class="modal-inner">
+                      <span class="close close6">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen02.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn7">Json + Cache</button>
+                  <div id="myModal7" class="modal modal7">
+                    <div class="modal-inner">
+                      <span class="close close7">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen03.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn8">Youtube Screen</button>
+                  <div id="myModal8" class="modal modal8">
+                    <div class="modal-inner">
+                      <span class="close close8">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen04.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn9">JoFriend(Not Finished)</button>
+                  <div id="myModal9" class="modal modal9">
+                    <div class="modal-inner">
+                      <span class="close close9">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen09.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>    
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/autoLayout" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/cameraML" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/jsonProject" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/yoututbe" target="blank">Link</a></li>
+                  <li><a href="https://github.com/HelloShiro/joFriends" target="blank">Link</a></li>
+                </ul>
+            </li>
+            <p>--Others--</p>
+            <li>WinForm
+              <ul>
+                <li> 
+                  <button id="myBtn10">Let's Order(MSSQL)</button>
+                  <div id="myModal10" class="modal modal10">
+                    <div class="modal-inner">
+                      <span class="close close10">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="images/dingbendongTest.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn11">Unit Changing</button>
+                  <div id="myModal11" class="modal modal11">
+                    <div class="modal-inner">
+                      <span class="close close11">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo01.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn12">Order Drinks</button>
+                  <div id="myModal12" class="modal modal12">
+                    <div class="modal-inner">
+                      <span class="close close12">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo02.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn13">Lotterys</button>
+                  <div id="myModal13" class="modal modal13">
+                    <div class="modal-inner">
+                      <span class="close close13">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/winformVideo03.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                <li><a href="https://github.com/HelloShiro/DingBenDong" target="blank">Link</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/unit_Convert" target="blank">Link</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/buy_drink" target="blank">Link</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/lottery" target="blank">Link</a></li>
+              </ul>
+            </li>
+            <li><p>Python &nbsp;&nbsp;</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn14">Snake</button>
+                  <div id="myModal14" class="modal modal14">
+                    <div class="modal-inner">
+                      <span class="close close14">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="images/pythonVideo01.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <!-- <li>
+                  <button id="myBtn15">uBike機車交友</button>
+                  <div id="myModal15" class="modal modal15">
+                    <div class="modal-inner">
+                      <span class="close close15">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen02.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn16">uBike機車交友</button>
+                  <div id="myModal16" class="modal modal16">
+                    <div class="modal-inner">
+                      <span class="close close16">&times; </span>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/screen02.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </li> -->
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/python_app" target="blank">Link</a></li>
+                </ul>
+            </li>
+            
+          </ul>
+      </div>
+    <div class="block">
+      <h4>-----</h4>
+      <h2>Certificate</h2>
+      <ul>
+        <li>JLPT N2</li>
+        <li>Toeic755</li>
+        <li>Trade Certificate</li>
+        <li>MOS Expert Excel,Word</li>
+      </ul>
+    </div>
+    <br>
+    <div class="block">
+      <h2 style="color:#bcf2ca; font-weight:bold;">Why iOS app?</h2>
+      <ul>
+        <li>
+            I have try several languages eg. java, python, c#, html etc. and I loves the oriented but not so complicate language - swift, I am comfortable in typing swift, its because swift is more easy to translate from logic to code than others for me.
+        </li> 
+        </ul>
+    </div>
+    <hr>
+    <br>
+    <div class="block">
+        <h2 style="color:#bcf2ca; font-weight:bold;">What I done in half month?</h2>
+        <ul>
+          <li>
+              I have learned some basic programming skills with simple work.
+              For Computer Apps, I try to  designing lottery game by Java and C#. <br>
+              For Web, I use basic html and css carry out my resume. For Apps, I made a topic discussion android App include firebase, and some apps with swift. <br>
+              But it can not be denied that my code is still messy and repeat code still exist, so I am dedicate to coding swift with MVC pattern  and no coupling.
+          </li> 
+          </ul>
+      </div>
+      <hr>
+      <br>
+      <div class="block">
+          <h2 style="color:#bcf2ca; font-weight:bold;">For my professional goals</h2>
+          <ul>
+            <li>
+                Next 2 years:<br>
+                1.Become skilled at working with data structures and algorithms.<br>
+                2.Attend Hackathons.<br>
+                3.Improve problem solving skill and speed.<br>
+                4.Working on an independent project I truly care about.<br>
+                5.Developing software users need.<br><br>
+                Next 5 years:<br>
+                1.Creating products I desired.<br>
+                2.Collaborate with team to brainstorm and create new products.<br>
+                3.Passionate about great technologies.<br>
+            </li> 
+            </ul>
+        </div>
+        <hr>
+        <br>
+  </div>
+</div>
+</div>
+
+<script>
+var modal1 = document.getElementById('myModal1');
+var modal2 = document.getElementById('myModal2');
+var modal3 = document.getElementById('myModal3');
+var modal4 = document.getElementById('myModal4');
+var modal5 = document.getElementById('myModal5');
+var modal6 = document.getElementById('myModal6');
+var modal7 = document.getElementById('myModal7');
+var modal8 = document.getElementById('myModal8');
+var modal9 = document.getElementById('myModal9');
+var modal10 = document.getElementById('myModal10');
+var modal11 = document.getElementById('myModal11');
+var modal12 = document.getElementById('myModal12');
+var modal13 = document.getElementById('myModal13');
+var modal14 = document.getElementById('myModal14');
+// var modal15 = document.getElementById('myModal15');
+// var modal16 = document.getElementById('myModal16');
+
+// Get the button that opens the modal
+var btn1 = document.getElementById("myBtn1");
+var btn2 = document.getElementById("myBtn2");
+var btn3 = document.getElementById("myBtn3");
+var btn4 = document.getElementById("myBtn4");
+var btn5 = document.getElementById("myBtn5");
+var btn6 = document.getElementById("myBtn6");
+var btn7 = document.getElementById("myBtn7");
+var btn8 = document.getElementById("myBtn8");
+var btn9 = document.getElementById("myBtn9");
+var btn10 = document.getElementById("myBtn10");
+var btn11 = document.getElementById("myBtn11");
+var btn12 = document.getElementById("myBtn12");
+var btn13 = document.getElementById("myBtn13");
+var btn14 = document.getElementById("myBtn14");
+// var btn15 = document.getElementById("myBtn15");
+// var btn16 = document.getElementById("myBtn16");
+
+// Get the <span> element that closes the modal
+var span1 = document.getElementsByClassName("close1")[0];
+var span2 = document.getElementsByClassName("close2")[0];
+var span3 = document.getElementsByClassName("close3")[0];
+var span4 = document.getElementsByClassName("close4")[0];
+var span5 = document.getElementsByClassName("close5")[0];
+var span6 = document.getElementsByClassName("close6")[0];
+var span7 = document.getElementsByClassName("close7")[0];
+var span8 = document.getElementsByClassName("close8")[0];
+var span9 = document.getElementsByClassName("close9")[0];
+var span10 = document.getElementsByClassName("close10")[0];
+var span11 = document.getElementsByClassName("close11")[0];
+var span12 = document.getElementsByClassName("close12")[0];
+var span13 = document.getElementsByClassName("close13")[0];
+var span14 = document.getElementsByClassName("close14")[0];
+// var span15 = document.getElementsByClassName("close15")[0];
+// var span16 = document.getElementsByClassName("close16")[0];
+
+
+// When the user clicks the button, open the modal 
+btn1.onclick = function() {
+    modal1.style.display = "block";
+}
+btn2.onclick = function() {
+    modal2.style.display = "block";
+} 
+btn3.onclick = function() {
+    modal3.style.display = "block";
+}  
+btn4.onclick = function() {
+    modal4.style.display = "block";
+}  
+btn5.onclick = function() {
+    modal5.style.display = "block";
+}  
+btn6.onclick = function() {
+    modal6.style.display = "block";
+}  
+btn7.onclick = function() {
+    modal7.style.display = "block";
+}  
+btn8.onclick = function() {
+    modal8.style.display = "block";
+}    
+btn9.onclick = function() {
+    modal9.style.display = "block";
+}  
+btn10.onclick = function() {
+    modal10.style.display = "block";
+}  
+btn11.onclick = function() {
+    modal11.style.display = "block";
+}  
+btn12.onclick = function() {
+    modal12.style.display = "block";
+}  
+btn13.onclick = function() {
+    modal13.style.display = "block";
+}  
+btn14.onclick = function() {
+    modal14.style.display = "block";
+}  
+// btn15.onclick = function() {
+//     modal15.style.display = "block";
+// }  
+// btn16.onclick = function() {
+//     modal16.style.display = "block";
+// }   
+
+// When the user clicks on <span> (x), close the modal
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+span2.onclick = function() {
+    modal2.style.display = "none";
+} 
+span3.onclick = function() {
+    modal3.style.display = "none";
+}   
+span4.onclick = function() {
+    modal4.style.display = "none";
+}
+span5.onclick = function() {
+    modal5.style.display = "none";
+} 
+span6.onclick = function() {
+    modal6.style.display = "none";
+}   
+span7.onclick = function() {
+    modal7.style.display = "none";
+}
+span8.onclick = function() {
+    modal8.style.display = "none";
+} 
+span9.onclick = function() {
+    modal9.style.display = "none";
+}   
+span10.onclick = function() {
+    modal10.style.display = "none";
+}
+span11.onclick = function() {
+    modal11.style.display = "none";
+} 
+span12.onclick = function() {
+    modal12.style.display = "none";
+}   
+span13.onclick = function() {
+    modal13.style.display = "none";
+}
+span14.onclick = function() {
+    modal14.style.display = "none";
+} 
+// span15.onclick = function() {
+//     modal15.style.display = "none";
+// }
+// span16.onclick = function() {
+//     modal16.style.display = "none";
+// }    
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal2.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal3) {
+        modal3.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal4) {
+        modal4.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal5) {
+        modal5.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal6) {
+        modal6.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal7) {
+        modal7.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal8) {
+        modal8.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal9) {
+        modal9.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal10) {
+        modal10.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal11) {
+        modal11.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal12) {
+        modal12.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal13) {
+        modal13.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal14) {
+        modal14.style.display = "none";
+    }
+} 
+// window.onclick = function(event) {
+//     if (event.target == modal15) {
+//         modal15.style.display = "none";
+//     }
+// }   
+// window.onclick = function(event) {
+//     if (event.target == modal16) {
+//         modal16.style.display = "none";
+//     }
+// }   
+
+  </script>
+  </body>
+</html>
