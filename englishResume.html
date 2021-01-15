@@ -117,9 +117,6 @@ hr{
   margin-left: 10px;
   border-left: solid 4px white;
 }
-.listVideo li a{
-  color:aquamarine;
-}
 /* list skills */
 .listSkill{
   display: flex;
@@ -278,7 +275,7 @@ button:hover{
   border: 7px solid #ccc;
   margin: auto;
   padding: 10px; 
-  width: 80%;
+  width: 70%;
 }
 .close{
   float: right;
@@ -298,6 +295,14 @@ ul .gitlink{
   line-height: 31px;
 }
 
+ul .project{
+  line-height: 30px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
     </style>
   </head>
   <body>
@@ -312,9 +317,11 @@ ul .gitlink{
     <br>
     <div class="block">
       <h2>About me</h2>
-      <p>Two and half years iOS develop experience. Currently practicing in data analysis. <br><br>
-        Strong problem-solving skills, drive for results, and ability to work independently.</p>
-        <p>Seeking for challanging data analysis job.</p>
+      <p>Two and half years iOS develop experience.  <br><br>
+        Currently studying MSc Business Analytics in Alliance Manchester Business School until 2021/6. 
+        </p>
+        <!-- <p>Strong problem-solving skills, drive for results, and ability to work independently.</p>  -->
+        <p>Seeking for challanging Data Analysis job located in UK, China or Japan.</p>
       <ul>
         <li>Region： Taiwan</li>
         <li>Birth： 1995/03/09</li>
@@ -324,7 +331,7 @@ ul .gitlink{
     </div>
     <div class="buttons" >
         <a class="btn fill" href="https://www.linkedin.com/in/chenchiyun" target="_blank">Linkedin</a>
-      <a class="btn" href="https://github.com/HelloShiro?tab=repositories" target="_blank">Github</a>
+      <a class="btn" href="https://github.com/shironchen" target="_blank">Github</a>
       <br><br>
       <a class="btn" href="./englishFormalResume.docx" download="ChenChiYun's Resume" target="_blank">Formal Resume</a>
       
@@ -472,7 +479,6 @@ ul .gitlink{
         <li>IELTS overall band 6.5</li>
         <li>Toeic 755 points</li>
         <li>JLPT N2</li>
-        <!-- <li>Taiwan Trade Vertification</li> -->
         <li>MOS Expert Excel, Word</li>
       </ul>
     </div>
@@ -483,31 +489,29 @@ ul .gitlink{
     </div>
     <div class="block">
       <br>
-              <h2>Side projects<span style="font-size: 12px; color:darkgray">　(Click to watch demo)</span></h2>
+              <h2>Side projects<span style="font-size: 12px; color:darkgray">　(This resume is also made by Gary!)</span></h2>
               <ul class="listExperience">
                 <p>--In Appstore Apps--</p>
                 <li><p>IOS</p>
-                  <ul class="listVideo">
-                    <li>
-                      <button id="myBtn1">MimiMao</button>
-                      <div id="myModal1" class="modal modal1">
-                        <div class="modal-inner">
-                          <span class="close close1">&times; </span>
-                          <video width="1024" height="500" controls>
-                          <source src="./images/uBike.mp4" type="video/mp4">
-                          </video>
-                        </div>
-                    </li>
+                  <ul class="project">
+                    <li>MimiMao (For Pet social)</li>
+                    <li>Autopass(Parking Solution)</li>
+
                   </ul>
                   <ul class="gitlink">
                     <li><a href="https://apps.apple.com/gb/app/mimimao/id1538144540" target="blank">Link to App</a></li>
                   </ul>
-                </li>
-                <p>--Not Released--</p>
+                </li> 
+                <p>--Not Released Apps--</p>
                   <li><p>IOS</p>
-                    <ul class="listVideo">
+                    <ul class="project">
+                      <li>Be My Guest</li>
+                      <li>uBike</li>
+                      <li>Picnic Finder</li>
+                    </ul>
+                    <ul class="gitlink">
                       <li>
-                        <button id="myBtn2">Bemyguest</button>
+                        <button id="myBtn2">Watch Demo</button>
                         <div id="myModal2" class="modal modal2">
                           <div class="modal-inner">
                             <span class="close close2">&times; </span>
@@ -518,52 +522,44 @@ ul .gitlink{
                         </div>
                       </li>
                       <li>
-                        <button id="myBtn3">uBike</button>
+                        <button id="myBtn3">Watch Demo</button>
                         <div id="myModal3" class="modal modal3">
                           <div class="modal-inner">
                             <span class="close close3">&times; </span>
-                            <!-- <p class="description">sdvbnmkjresxcvbnmkiuytrewqß</p> -->
                             <video width="1024" height="500" controls>
-                            <source src="./images/friendy.mp4" type="video/mp4">
+                            <source src="./images/uBike.mp4" type="video/mp4">
                             </video>
                           </div>
                         </div>
                       </li>
                       <li>
-                        <button id="myBtn4">Picnic Finder</button>
+                        <button id="myBtn4">Watch Demo</button>
                         <div id="myModal4" class="modal modal4">
                           <div class="modal-inner">
                             <span class="close close4">&times; </span>
-                            <!-- <p class="description">sdvbnmkjresxcvbnmkiuytrewqß</p> -->
                             <video width="1024" height="500" controls>
                             <source src="./images/letsPicnic.mp4" type="video/mp4">
                             </video>
                           </div>
                         </div>
                       </li>
-                      <li>
-                        <button id="myBtn5">Friendy</button>
-                        <div id="myModal5" class="modal modal5">
-                          <div class="modal-inner">
-                            <span class="close close5">&times; </span>
-                            <!-- <p class="description"></p> -->
-                            <video width="1024" height="500" controls>
-                            <source src="images/screen06.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul class="gitlink">
-                      <li><a href="https://github.com/helloshirotw/uBike" target="blank">Link to Git</a></li>
+                        
+                      </ul>
+                      <ul class="gitlink">
+                        <li>&nbsp;</li>
                         <li><a href="https://github.com/helloshirotw/friendy" target="blank">Link to Git</a></li>
                         <li><a href="https://github.com/helloshirotw/letsPicnic" target="blank">Link to Git</a></li>
                       </ul>
                   </li>
+                  <br>
                   <li><p>C#</p>
-                    <ul class="listVideo">
+                    <ul class="project">
+                      <li>Eatogether(MSSQL)</li>
+                      <li>Lottery System</li>
+                    </ul>
+                    <ul class="gitlink">
                       <li>
-                        <button id="myBtn5">Eatogether(MSSQL)</button>
+                        <button id="myBtn5">Watch Demo</button>
                         <div id="myModal5" class="modal modal5">
                           <div class="modal-inner">
                             <span class="close close5">&times; </span>
@@ -574,7 +570,7 @@ ul .gitlink{
                         </div>
                       </li>
                       <li>
-                        <button id="myBtn6">Lottery</button>
+                        <button id="myBtn6">Watch Demo</button>
                         <div id="myModal6" class="modal modal6">
                           <div class="modal-inner">
                             <span class="close close6">&times; </span>
@@ -584,107 +580,24 @@ ul .gitlink{
                           </div>
                         </div>
                       </li>
-                      <!-- <li>
-                        <button id="myBtn7">Drink Order</button>
-                        <div id="myModal7" class="modal modal7">
-                          <div class="modal-inner">
-                            <span class="close close7">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="images/winformVideo02.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li> -->
-                      <!-- <li>
-                        <button id="myBtn8">Youtube Screen</button>
-                        <div id="myModal8" class="modal modal8">
-                          <div class="modal-inner">
-                            <span class="close close8">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="./images/screen04.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button id="myBtn9">JoFriend(Not Finished)</button>
-                        <div id="myModal9" class="modal modal9">
-                          <div class="modal-inner">
-                            <span class="close close9">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="./images/screen09.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>     -->
-                    </ul>
-                    <ul class="gitlink">
-                        <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/autoLayout" target="blank">Link to Git</a></li>
-                        <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/cameraML" target="blank">Link to Git</a></li>
-                        <!-- <li><a href="https://github.com/HelloShiro/jsonProject" target="blank">Link</a></li> -->
-                        <!-- <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/yoututbe" target="blank">Link</a></li>
-                        <li><a href="https://github.com/HelloShiro/joFriends" target="blank">Link</a></li> -->
+                      </ul>
+                      <ul class="gitlink">
+                        <li><a href="https://github.com/HelloShiro/DingBenDong" target="blank">Link to Git</a></li>
+                        <li><a href="https://github.com/HelloShiro/windows_app/tree/master/lottery" target="blank">Link to Git</a></li>
+                     
+
                       </ul>
                   </li>
-                  <!-- <p>--Others--</p> -->
-                  <!-- <li>WinForm
-                    <ul>
-                      <li> 
-                        <button id="myBtn10">Eatogether(MSSQL)</button>
-                        <div id="myModal10" class="modal modal10">
-                          <div class="modal-inner">
-                            <span class="close close10">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="images/dingbendongTest.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button id="myBtn11">Unit Changing</button>
-                        <div id="myModal11" class="modal modal11">
-                          <div class="modal-inner">
-                            <span class="close close11">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="images/winformVideo01.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button id="myBtn12">Order Drinks</button>
-                        <div id="myModal12" class="modal modal12">
-                          <div class="modal-inner">
-                            <span class="close close12">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="images/winformVideo02.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button id="myBtn13">Lotterys</button>
-                        <div id="myModal13" class="modal modal13">
-                          <div class="modal-inner">
-                            <span class="close close13">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="./images/winformVideo03.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
+                  <p>--School Projects--</p>
+                  <li><p>Python</p>
+                    <ul class="project">
+                      <li>Snake Game</li>
+                      <!-- <li>PFSP Problem with Genetic Alg.</li> -->
+                      
+                   </ul>
                     <ul class="gitlink">
-                      <li><a href="https://github.com/HelloShiro/DingBenDong" target="blank">Link</a></li>
-                      <li><a href="https://github.com/HelloShiro/windows_app/tree/master/unit_Convert" target="blank">Link</a></li>
-                      <li><a href="https://github.com/HelloShiro/windows_app/tree/master/buy_drink" target="blank">Link</a></li>
-                      <li><a href="https://github.com/HelloShiro/windows_app/tree/master/lottery" target="blank">Link</a></li>
-                    </ul>
-                  </li> -->
-                  <!-- <li><p>Python &nbsp;&nbsp;</p>
-                    <ul class="listVideo">
                       <li>
-                        <button id="myBtn14">Snake</button>
+                        <button id="myBtn14">Watch Demo</button>
                         <div id="myModal14" class="modal modal14">
                           <div class="modal-inner">
                             <span class="close close14">&times; </span>
@@ -694,33 +607,8 @@ ul .gitlink{
                           </div>
                         </div>
                       </li>
-                      <!-- <li>
-                        <button id="myBtn15">uBike機車交友</button>
-                        <div id="myModal15" class="modal modal15">
-                          <div class="modal-inner">
-                            <span class="close close15">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="./images/screen02.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button id="myBtn16">uBike機車交友</button>
-                        <div id="myModal16" class="modal modal16">
-                          <div class="modal-inner">
-                            <span class="close close16">&times; </span>
-                            <video width="1024" height="500" controls>
-                            <source src="./images/screen02.mp4" type="video/mp4">
-                            </video>
-                          </div>
-                        </div>
-                      </li> -->
-                    <!-- </ul>
-                    <ul class="gitlink">
-                        <li><a href="https://github.com/HelloShiro/python_app" target="blank">Link</a></li>
                       </ul>
-                  </li> -->
+                  </li> 
                   
                 </ul>
             </div>
@@ -788,11 +676,14 @@ ul .gitlink{
       <div class="block">
           <h4>-----</h4>
           <h2>Released Apps</h2>
-          <ul >
-            <li ><a class="webHref" href="https://www.sex8.cc/plugin.php?id=s8_app%3Aintro" target="_blank">Adult Apps</a></li>
-            <li><a class="webHref" href="https://itunes.apple.com/tw/app/%E8%BB%8A%E9%BA%BB%E5%90%89/id1332581201?mt=8" target="_blank">Autopass</a></li>
-            <li><a class="webHref" href="https://www.wbviet.com/zh-cn/mobile/ios.php" target="_blank">Wellbet</a></li>
+          <ul > 
+            <li><a href="https://itunes.apple.com/tw/app/%E8%BB%8A%E9%BA%BB%E5%90%89/id1332581201?mt=8 " target="blank">Autopass (Parking solutions)</a></li>
+            <li><a class="webHref" href="https://www.wbviet.com/zh-cn/mobile/ios.php" target="_blank">Wellbet (Sports)</a></li>
+            <li ><a class="webHref" href="https://www.sex8.cc/plugin.php?id=s8_app:intro&x=159510241" target="_blank">Sex8 (Adults)</a></li>
           </ul>
+        </div>
+        <!-- <div class="block">
+          ## This resume is made by Chen Chi-Yun
         </div>
   </div>
 </div>
