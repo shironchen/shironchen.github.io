@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Resume</title>
+    <style>
+      /* *{
+        border: solid 1px white;
+} */
+
+body{
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #134256;
+  color:rgba(255,255,255,0.8);
+  font-size: 15px;
+  line-height:28px;
+  letter-spacing:2px;
+  font-weight: 200;
+}
+
+/* 複寫區 */
+ul{
+  padding: 0;
+  list-style:none;
+}
+
+h1{
+  opacity:0.8;
+}
+
+h2{
+  margin: 0;
+  margin-bottom: 25px;
+  font-weight: 400;
+  opacity:0.8;
+}
+h2::after{
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 8px;
+  background-color: #ff6666;
+  margin-left: 10px;
+}
+h4{
+  margin: 0;
+  margin-top: 40px;
+  opacity:0.8;
+  font-weight: 400;
+}
+a{
+  color: white;
+  opacity:0.8;
+  text-decoration: none;
+}
+hr{
+  border: none;
+  border-bottom: solid 4px #ff6666;
+  width: 40%;
+  margin-left: 0;
+}
+
+.resume{
+  display: flex;
+  width:950px;
+  border: solid 8px white;
+  padding: 50px;
+  position: relative;
+  
+}
+.left{
+  flex:5;
+  border-right:solid 1px #ff6666;
+}
+.right{
+  flex:7;
+}
+.left,.right{
+  padding: 15px;
+}
+.left{
+  padding-right: 50px;
+}
+.right{
+  padding-left: 50px;
+  padding-top: 150px;
+}
+.decoration{
+  width: 300px;
+  height: 140px;
+  background: linear-gradient(135deg,#ff6666,#fca4a4);
+  border-radius:70px 0px 0px 70px;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+}
+.listExperience>li{
+  display: flex;
+  margin-bottom: 10px; 
+}
+.listExperience>li:nth-child(1) ul{
+  border-color:#fc5d5d;
+}
+.listExperience>li:nth-child(2) ul{
+  border-color:#fc7676;
+}
+.listExperience>li:nth-child(3) ul{
+  border-color:#f98686;
+}
+.listExperience>li:nth-child(4) ul{
+  border-color:#f9a4a4;
+}
+.listExperience li ul{
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: solid 3px white;
+}
+.listVideo li a{
+  color:aquamarine;
+}
+.webHref{
+  color:aquamarine;
+}
+/* list skills */
+.listSkill{
+  display: flex;
+  flex-wrap: wrap;
+}
+.listSkill li{
+  display:flex;
+  flex-direction:column;
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+}
+
+
+.circle{
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius:50%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 102, 102,0.4);
+}
+.circle::after{
+  content:"";
+  display: block;
+  background-color: #134256;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius:50%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%)
+}
+.p90{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left:50%;
+  top: 0;
+  background-color: #ff6666;
+}
+.p180{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-1{
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  background-color: #ff6666;
+}
+.p270-2{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  background-color: #ff6666;
+}
+
+
+/* list program */
+.listProgram .bar{
+  width: 150px;
+  height: 10px;
+  border: solid 2px #ff6666;
+  border-radius: 5px;
+}
+.listProgram li{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+.value{
+  height: 100%;
+  width: 60%;
+  background-color: #ff6666;
+}
+.value.p20{
+  width: 20%;
+}
+.value.p40{
+  width: 40%;
+}
+.value.p50{
+  width: 50%;
+}
+.value.p60{
+  width: 60%;
+}
+.value.p75{
+  width: 75%;
+}
+.value.p95{
+  width: 95%;
+}
+.btn{
+  border: solid 3px #ff6666;
+  padding:5px 10px;
+  margin-right: 10px;
+}
+.fill{
+  background-color: #ff6666;
+}
+.video{
+  position: absolute;
+  top: 1800px;
+}
+.photo{
+  position: absolute;
+  box-shadow:0 0 5px 5px rgba(0,150,200,1);
+  width: 150px;
+  border-radius: 50%;
+  left: -160%;
+  top: -2px;
+}
+button{
+  background-color: #134256;
+  border-style: none;
+  cursor: pointer;
+  color: aquamarine;
+  font-size: 15px;
+  line-height: 28px;
+  letter-spacing: 2px;
+  font-weight: 200;
+  opacity:0.8;
+  border-radius: 8px;
+}
+button:focus{
+  outline: none;
+}
+button:hover{
+  filter: brightness(85%); 
+}
+.modal{
+  display: none;    
+  z-index: 1;
+  position: fixed;
+  padding-top: 50px;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8)
+}
+.modal-inner{
+  display: flex; 
+  border: 7px solid #ccc;
+  margin: auto;
+  padding: 10px; 
+  width: 80%;
+  flex-direction: row;
+}
+.modal-inner p{
+  float: left;
+}
+.close{
+  float: right;
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+.versionBar{
+  display: inline-block;
+  flex-direction: column;
+  margin-top: -50px;
+  z-index: 9999;
+}
+
+ul .gitlink{
+  line-height: 31px;
+}
+
+
+
+
+    </style>
+  </head>
+  <body>
+  <div class="versionBar">
+    <button class="version-c"><a href="./index.html">繁體中文</a></button>
+    <button class="version-c"><a href="./Resume_CN.html">简体中文</a></button>
+    <button class="version-j"><a href="./Resume_JP.html">日本語</a></button>
+    <button class="version-e"><a href="./Resume_EN.html">English</a></button>   
+  <div class="resume">
+  <div class="left">
+    <h1>陳祺昀</h1>
+    <h4>淡江大學國際企業學系</h4>
+    <hr>
+    <div class="block">
+      <h2>自我介紹</h2>
+      <p>兩年iOS移動端開發經驗，目前就讀於曼徹斯特商業分析碩士學位，預計2021/12畢業，正在尋找實習職位。 
+        能快速適應互聯網公司節奏，尋找偏向互聯網用戶增長/數據分析師，</p>
+      <p>對生活充滿好奇心，樂於嘗試不同可能，挖掘自己的可能性。喜歡觀察周遭的人事物，細味品嚐生活，期望解決痛點創造人性化的產品。</p>
+      <ul>
+        <li>Birth： 1995/03/09</li>
+        <li>GPA： 3.3 / 4</li>
+        <li>Email： shironchen@gmail.com</li>
+        <li>Tel： +886-923-799-033</li>
+        <li>Line： boku840309</li>
+      </ul>
+    </div>
+    <div class="buttons" >
+      <br>
+      <a class="btn fill" href="https://www.linkedin.com/in/chenchiyun" target="_blank">Linkin</a>
+      <a class="btn" href="https://www.cakeresume.com/me/shironchen" target="_blank">Cakeresume</a>
+      <br><br>  
+      <a class="btn" href="https://helloshiro.github.io/" target="_blank">第一份履歷(2017)</a>
+      <a class="btn fill" href="./englishFormalResume.pdf" download="ChenChiYun's Resume" target="_blank">英文制式履歷</a>
+    </div>
+    
+    <div class="block">
+      <h4>Skills</h4>
+      <h2>程式技能</h2>
+      <ul class="listSkill">
+        <li>
+            <div class="circle">
+              <div class="p270-1"></div>
+              <div class="p270-2"></div>
+            </div>
+            Swift
+          </li>
+        <li>
+            <div class="circle">
+              <div class="p90"></div>
+            </div>
+          Obj-C  
+          </li>
+        <li>
+          <div class="circle">
+            <div class="p180"></div>
+          </div>
+        Html/Css  
+        </li>
+        <li>
+            <div class="circle">
+              <div class="p180"></div>
+            </div>
+          Js  
+          </li>
+        <li>
+          <div class="circle">
+            <div class="p180"></div>
+          </div>
+        SQL  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p90"></div>
+          </div>
+        Linux  
+        </li>
+        <li>
+          <div class="circle">
+            <div class="p90"></div>
+          </div>
+          C#
+        </li>
+        <li>
+            <div class="circle">
+                <div class="p180"></div>
+            </div>
+            Git
+          </li>
+          <li>
+              <div class="circle">
+                <div class="p180"></div>
+              </div>
+              Python
+            </li>
+          <li>
+              <div class="circle">
+                <div class="p180"></div>
+              </div>
+              Java
+            </li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>iOS Skills</h4>
+      <h2>iOS開發專業技能</h2>
+      <ul class="listProgram">
+        <li>
+          介面設計
+          <div class="bar">
+            <div class="value p95"></div>
+          </div>
+        </li>
+        <li>
+          打包/上架流程
+          <div class="bar">
+            <div class="value p95"></div>
+          </div>
+        </li>
+        <li>
+            架構設計
+            <div class="bar">
+              <div class="value p40"></div>
+            </div>
+          </li>
+        <li>
+          第三方應用
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          自動化流程
+          <div class="bar">
+            <div class="value p75"></div>
+          </div>
+        </li>
+        <li>
+          版本控制
+          <div class="bar">
+            <div class="value p60"></div>
+          </div>
+        </li>
+        <li>
+          整合/單元測試
+          <div class="bar">
+            <div class="value p60"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="block">
+        <h4>Studies</h4>
+        <h2>在學經驗</h2>
+        <ul>
+            <li>財金系公關</li>
+            <li>吉他社幹部</li>
+            <li>金韶獎籌備人員</li>
+            <li>代表淡江大學與日本長崎大學環境合作計畫</li>
+            <li>旅行社約聘小導遊</li>
+            <li>舞研社</li>
+          </ul>
+    </div>
+    <div class="block">
+        <h4>Certificate</h4>
+        <h2>證照</h2>
+        <ul>
+          <li>JLPT日本語能力試驗N2</li>
+          <li>Toeic755</li>
+          <li>國貿檢定合格</li>
+          <li>MOS Expert Excel,Word</li>
+        </ul>
+      </div>
+      <div class="block">
+          <h4>Released Stuffs</h4>
+          <h2>上架專案</h2>
+          <ul >
+            <li ><a class="webHref" href="https://www.sex8.cc/plugin.php?id=s8_app%3Aintro" target="_blank">成人向平台</a></li>
+            <li><a class="webHref" href="https://itunes.apple.com/tw/app/%E8%BB%8A%E9%BA%BB%E5%90%89/id1332581201?mt=8" target="_blank">車麻吉</a></li>
+            <li><a class="webHref" href="https://www.wbviet.com/zh-cn/mobile/ios.php" target="_blank">Wellbet</a></li>
+            <li><a class="webHref" href="https://www.bemyguest.vip" target="_blank">招待Bar</a></li>
+          </ul>
+        </div>
+  </div>
+  <div class="right">
+    <div class="decoration">
+      <img src="self2.jpg" alt="" class="photo">
+    </div>
+    <div class="block">
+        <h4>Works Experience</h4>
+        <h2>工作經歷</h2>
+        <ul class="listExperience">
+          <!--<li class="year">2014
+            <ul>
+              <li style="font-weight: bold;">精緻冰品店</li>
+              <li>內/外場服務人員</li>
+              <li>冰品製作、環境整潔、庫存清點、結帳收銀、外場服務</li>
+            </ul>
+          </li>-->
+          <li class="year">2020
+            <ul>
+              <li style="font-weight: bold;">接案/iOS私教</li>
+              <li>- 在半年內協助無程式基礎的高中畢業生成為iOS初階工程師，起薪是2018台灣大學應屆畢業生月薪1.2倍</li>
+              <li>- 規劃100天程式基礎課程，設計三個App專案，每週六小時討論</li>
+            </ul>
+          </li>
+          <li class="year">2019
+              <ul>
+                <li style="font-weight: bold;">百維科技/資深工程師</li>
+                <li>-運用Jenkins/Fastlane建構自動化管理系統，節省每週約20小時App簽名/打包/上架時間</li>
+                <li>-兩個月內完成開發Websocket聊天(單聊、群聊)iOS移動端App</li>
+                <li>-維護原有三個iOS移動端App，負責JS交互除錯，加入帳戶加密、VR視頻等功能</li>
+              </ul>
+            </li>
+
+            <li class="year">2018
+                <ul>
+                  <li style="font-weight: bold;">Future Sync/合約工程師</li>
+                  <li>- 移動端App負責人，參與初期開發設計並獲得50萬美金種子輪募資</li>
+                  <li>- 討論並實作約20種購物車與兌換功能，設計超過30種非關聯式資料表</li>
+                </ul>
+              </li>
+
+            <li class="year">2018
+                <ul>
+                  <li style="font-weight: bold;">大聲公行動/ iOS初級工程師</li>
+                  <li>- 深度參與15人敏捷開發流程，通過每日站立會提升協作效率</li>
+                  <li>- 與一名資深工程師負責車麻吉iOS移動端App研發，累積50萬+台灣忠實用戶，合作250+停車場與加油站</li>
+                  <li>- 在入職三個月內實作超過50種動畫介面與流程優化後，Appstore排行提升至總排行 No.7 與導航類 No.1</li>
+                  <li>- 在程序中嵌入至少100種行為追蹤代碼，協助分析用戶心理</li>
+                  <li>- 開發iOS延伸程序如Widget, Carplay，</li>
+                  <li>- 串接超過15個與修改3個第三方SDK，實現藍芽交互、金流、多國語系等功能</li>
+                </ul>
+              </li>    
+          
+          <li class="year">2018
+            <ul>
+              <li style="font-weight: bold;">Cybilltek Software/ iOS實習工程師</li>
+              <li>- 與六人移動端開發小組以英文溝通，開發兩款運動遊戲類iOS移動端App</li>
+              <li>- 依照資深工程師的架構VIPER重新設計程序</li>
+              <li>- 與設計師密切合作，代碼審查後實現約10種功能</li>
+              <li>- 與測試工程師密切合作，將應用的崩潰率從8%降低到1%</li>
+            </ul>
+          </li>
+          
+          <li class="year">2016
+              <ul>
+                <li style="font-weight: bold;">Young Sun Dental/ 業務助理實習生</li>
+                <li>- 與日文廠商合作進口矽膠牙線，通過展場與線上通路銷售超過100筆訂單</li>
+                <li>- 開發巴西牙材廠，收到樣品後協助分析在台灣市場的可行性</li>
+                <li>- 翻譯超過20頁產品型錄與手冊</li>
+              </ul>
+            </li>
+            
+        </ul>
+      </div>
+ 
+    <div class="block">
+        <h4>Side Project</h4>
+        <h2>小作品<span style="font-size: 12px; color:darkgray">　(點擊看Demo)</span></h2>
+        <ul class="listExperience">
+          <p>2018/1 ~ 2018/6</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                  <li>
+                      <button id="myBtn11">letsPicnic</button>
+                      <div id="myModal11" class="modal modal11">
+                        <div class="modal-inner">
+                          <p class="description">
+                            <br>
+                          </p>
+                          <video width="1024" height="500" controls>
+                          <source src="./images/letsPicnic.mp4" type="video/mp4">
+                          </video>
+                        <span class="close close11">&times; </span>
+                      </div>
+                    </div>
+                  </li>
+                <li>
+                  <button id="myBtn1">Friendy</button>
+                  <div id="myModal1" class="modal modal1">
+                    <div class="modal-inner">
+                      <p class="description">
+                        1. xib files 設計視圖<br>
+                        2. Auto-layout<br>
+                        3. Firebase 存取使用者資訊, 訊息內容, 圖片<br>
+                        4. Firebase觀察機制<br>
+                        5. 快取圖片, 記住使用者資訊<br>
+                        6. 處理錯誤與驗證機制<br>
+                        7. 使用第三方套件解析api<br>
+                        8. 存取相機圖庫<br>
+                        9. 影片導入<br>
+                        10. 動畫效果<br>
+                        11. 整合導航欄與標籤列各視圖
+                      </p>
+                      <video width="600" height="500" controls>
+                      <source src="./images/friendy.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close1">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn2">uBike共享機車</button>
+                  <div id="myModal2" class="modal modal2">
+                    <div class="modal-inner">
+                      <p class="description">
+                        <br>
+
+                      </p>
+                      <video width="1024" height="500" controls>
+                      <source src="./images/uBike.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close2">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/helloshirotw/letsPicnic" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/helloshirotw/friendy" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/helloshirotw/uBike" target="blank">原始碼</a></li>
+                </ul>
+            </li>
+            <p>2017/8 ~ 2017/12</p>
+            <li><p>IOS</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn3">城市即時天氣查詢</button>
+                  <div id="myModal3" class="modal modal3">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/cityWeather.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close3">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn4">ML物品辨識</button>
+                  <div id="myModal4" class="modal modal4">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/mL.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close4">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn5">城市筆記本</button>
+                  <div id="myModal5" class="modal modal5">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/cityMemo.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close5">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/weatherApp" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/HelloShiro/swift_app_programmatically/tree/master/cameraML" target="blank">原始碼</a></li>
+                  <li><a href="https://github.com/HelloShiro/jsonProject" target="blank">原始碼</a></li>
+                </ul>
+            </li>
+            <li>C#
+              <ul>
+                <li> 
+                  <button id="myBtn6">訂便當系統(MSSQL)</button>
+                  <div id="myModal6" class="modal modal10">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/dingbendongTest.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close6">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn7">單位換算</button>
+                  <div id="myModal7" class="modal modal7">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo01.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close7">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn8">飲料店訂購</button>
+                  <div id="myModal8" class="modal modal8">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/winformVideo02.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close8">&times; </span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button id="myBtn9">威力彩/39樂合彩/四星彩</button>
+                  <div id="myModal9" class="modal modal9">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="./images/winformVideo03.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close9">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                <li><a href="https://github.com/HelloShiro/DingBenDong" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/unit_Convert" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/buy_drink" target="blank">原始碼</a></li>
+                <li><a href="https://github.com/HelloShiro/windows_app/tree/master/lottery" target="blank">原始碼</a></li>
+              </ul>
+            </li>
+            <li><p>Python &nbsp;&nbsp;</p>
+              <ul class="listVideo">
+                <li>
+                  <button id="myBtn10">貪食蛇</button>
+                  <div id="myModal10" class="modal modal10">
+                    <div class="modal-inner">
+                      <video width="1024" height="500" controls>
+                      <source src="images/pySnake.mp4" type="video/mp4">
+                      </video>
+                      <span class="close close10">&times; </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="gitlink">
+                  <li><a href="https://github.com/HelloShiro/python_app" target="blank">原始碼</a></li>
+                </ul>
+            </li>          
+          </ul>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<script>
+var modal1 = document.getElementById('myModal1');
+var modal2 = document.getElementById('myModal2');
+var modal3 = document.getElementById('myModal3');
+var modal4 = document.getElementById('myModal4');
+var modal5 = document.getElementById('myModal5');
+var modal6 = document.getElementById('myModal6');
+var modal7 = document.getElementById('myModal7');
+var modal8 = document.getElementById('myModal8');
+var modal9 = document.getElementById('myModal9');
+var modal10 = document.getElementById('myModal10');
+var modal11 = document.getElementById('myModal11');
+
+
+// Get the button that opens the modal
+var btn1 = document.getElementById("myBtn1");
+var btn2 = document.getElementById("myBtn2");
+var btn3 = document.getElementById("myBtn3");
+var btn4 = document.getElementById("myBtn4");
+var btn5 = document.getElementById("myBtn5");
+var btn6 = document.getElementById("myBtn6");
+var btn7 = document.getElementById("myBtn7");
+var btn8 = document.getElementById("myBtn8");
+var btn9 = document.getElementById("myBtn9");
+var btn10 = document.getElementById("myBtn10");
+var btn11 = document.getElementById("myBtn11");
+
+
+// Get the <span> element that closes the modal
+var span1 = document.getElementsByClassName("close1")[0];
+var span2 = document.getElementsByClassName("close2")[0];
+var span3 = document.getElementsByClassName("close3")[0];
+var span4 = document.getElementsByClassName("close4")[0];
+var span5 = document.getElementsByClassName("close5")[0];
+var span6 = document.getElementsByClassName("close6")[0];
+var span7 = document.getElementsByClassName("close7")[0];
+var span8 = document.getElementsByClassName("close8")[0];
+var span9 = document.getElementsByClassName("close9")[0];
+var span10 = document.getElementsByClassName("close10")[0];
+var span11 = document.getElementsByClassName("close11")[0];
+
+
+
+// When the user clicks the button, open the modal 
+btn1.onclick = function() {
+    modal1.style.display = "block";
+}
+btn2.onclick = function() {
+    modal2.style.display = "block";
+} 
+btn3.onclick = function() {
+    modal3.style.display = "block";
+}  
+btn4.onclick = function() {
+    modal4.style.display = "block";
+}  
+btn5.onclick = function() {
+    modal5.style.display = "block";
+}  
+btn6.onclick = function() {
+    modal6.style.display = "block";
+}  
+btn7.onclick = function() {
+    modal7.style.display = "block";
+}  
+btn8.onclick = function() {
+    modal8.style.display = "block";
+}    
+btn9.onclick = function() {
+    modal9.style.display = "block";
+}  
+btn10.onclick = function() {
+    modal10.style.display = "block";
+}  
+btn11.onclick = function() {
+    modal11.style.display = "block";
+}  
+
+// When the user clicks on <span> (x), close the modal
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+span2.onclick = function() {
+    modal2.style.display = "none";
+} 
+span3.onclick = function() {
+    modal3.style.display = "none";
+}   
+span4.onclick = function() {
+    modal4.style.display = "none";
+}
+span5.onclick = function() {
+    modal5.style.display = "none";
+} 
+span6.onclick = function() {
+    modal6.style.display = "none";
+}   
+span7.onclick = function() {
+    modal7.style.display = "none";
+}
+span8.onclick = function() {
+    modal8.style.display = "none";
+} 
+span9.onclick = function() {
+    modal9.style.display = "none";
+}   
+span10.onclick = function() {
+    modal10.style.display = "none";
+}
+span11.onclick = function() {
+    modal11.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal2.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal3) {
+        modal3.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal4) {
+        modal4.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal5) {
+        modal5.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal6) {
+        modal6.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal7) {
+        modal7.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal8) {
+        modal8.style.display = "none";
+    }
+} 
+window.onclick = function(event) {
+    if (event.target == modal9) {
+        modal9.style.display = "none";
+    }
+}    
+window.onclick = function(event) {
+    if (event.target == modal10) {
+        modal10.style.display = "none";
+    }
+}
+window.onclick = function(event) {
+    if (event.target == modal11) {
+        modal11.style.display = "none";
+    }
+}
+  </script>
+  </body>
+</html>
