@@ -153,6 +153,35 @@ h2{font-size:17px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
 .chips span{font-size:11px;letter-spacing:.12em;color:var(--grn);
   border:1px solid var(--grndk);padding:3px 8px}
 
+/* ============ 工作經驗 ============ */
+.exp{padding:70px 3vw;border-top:1px solid var(--line)}
+.expWrap{max-width:920px;margin:0 auto}
+.tl{border-left:1px solid var(--line);margin-left:5px}
+.job{position:relative;padding:0 0 30px 26px}
+.job:last-child{padding-bottom:0}
+.job::before{content:'';position:absolute;left:-5px;top:7px;width:9px;height:9px;
+  background:var(--grn);box-shadow:0 0 10px rgba(56,255,110,.7)}
+.job.edu::before{background:var(--amb);box-shadow:0 0 10px rgba(255,182,72,.7)}
+.job .when{font-size:12px;letter-spacing:.16em;color:var(--dimmer)}
+.job h3{font-size:18px;letter-spacing:.05em;color:var(--ink);margin:3px 0 9px}
+.job.edu h3{color:var(--amb)}
+.job li{list-style:none;font-size:15px;line-height:1.95;color:var(--dim);
+  padding-left:15px;position:relative}
+.job li::before{content:'›';position:absolute;left:0;color:var(--grn)}
+.job.edu li::before{color:var(--amb)}
+
+/* ============ 個人作品 ============ */
+.works{padding:70px 3vw;border-top:1px solid var(--line)}
+.wGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1180px;margin:0 auto}
+.work{display:block;border:1px solid var(--line);background:var(--panel);padding:20px;
+  transition:.16s}
+.work:hover{border-color:var(--grn);box-shadow:0 0 22px rgba(56,255,110,.14);
+  transform:translateY(-2px)}
+a.work:hover h3{text-shadow:0 0 12px rgba(56,255,110,.5)}
+.work h3{font-size:18px;letter-spacing:.05em;color:var(--ink)}
+.work .wt{display:block;font-size:12px;letter-spacing:.1em;color:var(--amb);margin:5px 0 11px}
+.work p{font-size:14px;line-height:1.9;color:var(--dim);margin-bottom:13px}
+
 /* ============ BIZ (shopee numbers) ============ */
 .biz{padding:70px 3vw;border-top:1px solid var(--line)}
 .bizWrap{max-width:1180px;margin:0 auto}
@@ -258,7 +287,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 /* ============ RWD / MOTION ============ */
 @media(max-width:900px){
-  .grid,.crewGrid{grid-template-columns:1fr}
+  .grid,.crewGrid,.wGrid{grid-template-columns:1fr}
   .bizGrid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
@@ -295,6 +324,8 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   <div class="brand glitch" data-t="陳祺昀">陳祺昀</div>
   <nav>
     <a href="#supply">貨源</a>
+    <a href="#exp">經歷</a>
+    <a href="#works">作品</a>
     <a href="#biz">戰績</a>
     <a href="#crew">團隊</a>
     <a href="#manifesto">宣言</a>
@@ -330,6 +361,20 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
     <h2>// 貨源</h2>
     <p class="secSub">三種身分，同一個人。資料工程、全端開發、電商營運，全部實戰在線。</p>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="exp" id="exp">
+    <div class="expWrap">
+      <h2>// 工作經驗</h2>
+      <p class="secSub">從 iOS 實習一路走到數據工程。每一段都留下可查證的數字。</p>
+      <div class="tl" id="tl"></div>
+    </div>
+  </section>
+
+  <section class="works" id="works">
+    <h2>// 個人作品</h2>
+    <p class="secSub">下班後自己養的東西。全部在線運行，不是躺在 repo 裡的 demo。</p>
+    <div class="wGrid" id="wGrid"></div>
   </section>
 
   <section class="biz" id="biz">
@@ -471,7 +516,7 @@ const GOODS=[
    desc:'5 年 iOS 開發經驗，前後端自己收尾。Swift 上架 App、FastAPI 寫服務、Supabase／Firestore 存資料、Cloud Run 部署，前端純手工不吃框架。',
    chips:['SWIFT','IOS','FASTAPI','SUPABASE','CLOUD RUN','JS']},
   {id:'meowbox',name:'寵物電商',tag:'創辦人 · 喵盒子',
-   desc:'喵盒子 www.meowbox.tw 創辦人。選品、定價、上架節奏都用數據決定，回頭客靠社群經營養出來，月營收穩定 40 萬。',
+   desc:'喵盒子 www.meowbox.tw 創辦人。選品、定價、上架節奏都用數據決定，回頭客靠社群經營養出來，近月營收破 40 萬。',
    chips:['FOUNDER','電商營運','數據選品','SUPABASE'],link:'https://www.meowbox.tw/'}
 ];
 (function buildGrid(){
@@ -494,6 +539,75 @@ const GOODS=[
     }
     grid.appendChild(el);
   }
+})();
+
+/* ---------------- 工作經驗 ---------------- */
+(function buildExp(){
+  const JOBS=[
+    {w:'現在',t:'TVBS · 數據工程師',d:[
+      'GCP 上建置電視台級資料管線：BigQuery 倉儲、dbt 精煉、Terraform 管基礎設施。',
+      '打造 text2sql，自然語言轉 SQL，讓不會寫 SQL 的同事也查得到數據。']},
+    {w:'2022',t:'神策數據 · 數據分析師',d:[
+      '深入客戶業務痛點，提供諮詢服務與專題分析報告。',
+      '設計用戶行為採集方案，協助客戶部署行為分析與運營工具。',
+      '用 SQL 建立用戶標籤，改善精細化運營策略與用戶流失狀況。']},
+    {w:'2021',t:'曼徹斯特大學 · 商業分析碩士',edu:1,d:[
+      '運籌學與風險分析 MSc。Python、R、機器學習、風險分析與最佳化。']},
+    {w:'2020',t:'接案 · iOS 家教',d:[
+      '帶無程式基礎的高中畢業生，半年內成為 iOS 初階工程師。',
+      '規劃 100 天課程、設計三個 App 專案，每週六小時討論。']},
+    {w:'2019',t:'百維科技 · 資深工程師',d:[
+      '用 Jenkins / Fastlane 建自動化管線，每週省下約 20 小時簽名、打包、上架時間。',
+      '兩個月內完成 WebSocket 聊天 App（單聊、群聊）。',
+      '維護三個 Web-based App，處理 JS 交互除錯、帳戶加密、VR 視頻。']},
+    {w:'2019',t:'十維度 · 合約工程師',d:[
+      '移動端 App 負責人，參與初期開發設計，協助取得 50 萬美金種子輪募資。',
+      '實作約 20 種購物車與兌換功能，設計超過 30 種非關聯式資料表。']},
+    {w:'2018',t:'大聲公行動 · iOS 工程師',d:[
+      '共同負責「車麻吉」App，累積 50 萬+ 用戶，合作 250+ 停車場與加油站。',
+      '入職三個月實作 50+ 動畫介面，App Store 總排行升至 No.7、導航類 No.1。',
+      '嵌入 100+ 行為追蹤代碼，開發 Widget 與 CarPlay 延伸程序，串接 15+ 第三方 SDK。']},
+    {w:'2018',t:'Cybilltek · iOS 實習工程師',d:[
+      '六人移動端小組全英文協作，開發兩款運動遊戲類 App。',
+      '依 VIPER 架構重構程式，與測試工程師合作把崩潰率從 8% 降到 1%。']}
+  ];
+  $('#tl').innerHTML=JOBS.map(j=>
+    '<div class="job'+(j.edu?' edu':'')+'"><div class="when">'+j.w+'</div>'
+    +'<h3>'+j.t+'</h3><ul>'+j.d.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('');
+})();
+
+/* ---------------- 個人作品 ---------------- */
+(function buildWorks(){
+  const W=[
+    {n:'喵盒子 meowbox.tw',t:'創辦人 · 貓咪互助地圖',u:'https://www.meowbox.tw/',
+     d:'貓咪互助地圖與寵物電商。純 vanilla HTML/CSS/JS + Supabase，從第一行 code 到上線營運一手包。',
+     c:['VANILLA JS','SUPABASE','電商營運']},
+    {n:'BZBOT',t:'加密貨幣機器人',
+     d:'Discord 機器人盯 Bybit 永續合約，Cloud Run 上長駐跑單，籌碼與開盤預估一手包。',
+     c:['FASTAPI','SUPABASE','CLOUD RUN']},
+    {n:'BZTEAM',t:'私人 AI 團隊',
+     d:'LINE 上的助手團隊：待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
+     c:['LLM','FASTAPI','FIRESTORE']},
+    {n:'TXF ORACLE',t:'台指期預測',
+     d:'每小時出一次盤勢預測，官方價自動對答案記分，LINE 準時播報，猜錯自己認。',
+     c:['LLM','SCHEDULER','LINE']},
+    {n:'TEXT2SQL',t:'自然語言查倉庫',
+     d:'自然語言進、SQL 出，BigQuery 埋單，不會寫 SQL 的人也拿得到數據。',
+     c:['LLM','BIGQUERY','PYTHON']},
+    {n:'MimiMao · LetsPushUp',t:'iOS 上架 App',
+     d:'寵物交友平台與健身社群，兩款皆已上架 App Store。',
+     c:['SWIFT','IOS']},
+    {n:'本站',t:'你正在看的這頁',
+     d:'單檔 vanilla HTML，零依賴零 build。音樂與音效全部 Web Audio 即時合成，圖表是手寫 SVG。歡迎看原始碼。',
+     c:['VANILLA JS','WEB AUDIO','SVG']}
+  ];
+  $('#wGrid').innerHTML=W.map(w=>{
+    const inner='<h3>'+w.n+(w.u?' ↗':'')+'</h3><span class="wt">'+w.t+'</span>'
+      +'<p>'+w.d+'</p><div class="chips">'+w.c.map(c=>'<span>'+c+'</span>').join('')+'</div>';
+    return w.u
+      ? '<a class="work" href="'+w.u+'" target="_blank" rel="noopener">'+inner+'</a>'
+      : '<div class="work">'+inner+'</div>';
+  }).join('');
 })();
 
 /* ---------------- BIZ：指標板塊 + 可收合互動折線圖 ---------------- */
