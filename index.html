@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GARY//OS — DATA DEALER</title>
+<meta name="description" content="Gary Chen — data engineer. I move data. Quietly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#050607;
+  --panel:#090c0a;
+  --panel2:#060807;
+  --ink:#d2e9d8;
+  --dim:#5f7d69;
+  --dimmer:#31453a;
+  --line:#1b2620;
+  --grn:#38ff6e;
+  --grn2:#a4ffbe;
+  --grndk:#0e3a1f;
+  --red:#ff4040;
+  --amb:#ffb648;
+  --blu:#4a58ff;
+  --font:'IBM Plex Mono','Cascadia Mono',ui-monospace,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:var(--grn);text-decoration:none}
+::selection{background:var(--grn);color:#04120a}
+
+/* ============ CRT LAYERS (scanlines / vignette / flicker) ============ */
+body::before{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px)}
+#vig{position:fixed;inset:0;z-index:305;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.42) 100%)}
+#grain{position:fixed;inset:0;width:100%;height:100%;z-index:310;pointer-events:none;
+  opacity:.03;image-rendering:pixelated}
+body::after{content:'';position:fixed;inset:0;z-index:315;pointer-events:none;
+  background:rgba(150,255,190,.015);opacity:0;animation:flick 5s steps(1) infinite}
+@keyframes flick{0%,92%,100%{opacity:0}93%{opacity:1}94%{opacity:0}96%{opacity:.6}97%{opacity:0}}
+
+/* ============ MATRIX RAIN ============ */
+#rainBg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#rainFg{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none;
+  mix-blend-mode:screen;opacity:.75}
+
+/* ============ BOOT GATE ============ */
+#boot{position:fixed;inset:0;z-index:900;background:#030404;display:flex;
+  flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:8vh 8vw;cursor:pointer;transition:opacity .6s}
+#boot.off{opacity:0;pointer-events:none}
+#bootLog{font-family:var(--font);font-size:clamp(11px,1.6vw,15px);line-height:2;
+  color:var(--grn);text-shadow:0 0 8px rgba(56,255,110,.5);white-space:pre-wrap}
+#bootEnter{margin-top:34px;font-size:clamp(13px,2vw,18px);letter-spacing:.24em;
+  color:var(--grn2);border:1px solid var(--grn);padding:14px 26px;
+  animation:pulse 1.2s ease-in-out infinite}
+#bootEnter.hide{display:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px rgba(56,255,110,.25)}
+  50%{box-shadow:0 0 26px rgba(56,255,110,.65)}}
+.cursor::after{content:'█';animation:blink 1s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+/* ============ HEADER ============ */
+header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;
+  align-items:center;padding:14px 3vw;background:rgba(5,6,7,.88);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(3px)}
+.brand{font-size:19px;font-weight:700;letter-spacing:.1em;color:var(--ink)}
+nav{display:flex;gap:12px;align-items:center;font-size:11px;letter-spacing:.14em}
+nav a{color:var(--dim)}
+nav a:hover{color:var(--grn)}
+.chipBtn{background:transparent;border:1px solid var(--dimmer);color:var(--dim);
+  font-family:var(--font);font-size:11px;letter-spacing:.14em;padding:6px 12px;cursor:pointer}
+.chipBtn.on{color:var(--grn);border-color:var(--grn);
+  box-shadow:0 0 14px rgba(56,255,110,.3);text-shadow:0 0 8px rgba(56,255,110,.6)}
+#clock{color:var(--dimmer);font-size:11px;letter-spacing:.14em}
+
+/* ============ GLITCH ============ */
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-t);position:absolute;left:0;top:0;
+  width:100%;overflow:hidden;pointer-events:none;opacity:0}
+.glitch::before{color:var(--blu);clip-path:inset(0 0 52% 0);animation:g1 3.1s steps(1) infinite}
+.glitch::after{color:var(--red);clip-path:inset(52% 0 0 0);animation:g2 2.7s steps(1) infinite}
+@keyframes g1{0%,91%{opacity:0;transform:none}92%,94%{opacity:.85;transform:translate(-3px,-1px)}95%{opacity:0}}
+@keyframes g2{0%,88%{opacity:0;transform:none}89%,91%{opacity:.85;transform:translate(3px,1px)}92%{opacity:0}}
+
+/* ============ TICKER ============ */
+.ticker{overflow:hidden;border-bottom:1px solid var(--line);background:#040504;
+  padding:7px 0;white-space:nowrap}
+.tickIn{display:inline-block;font-size:11px;letter-spacing:.22em;color:var(--grn);
+  text-shadow:0 0 8px rgba(56,255,110,.45);animation:tick 60s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ HERO ============ */
+.hero{padding:12vh 6vw 9vh;position:relative}
+.over{font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:20px}
+.hero h1{font-size:clamp(46px,8vw,110px);line-height:.92;font-weight:700;
+  color:var(--ink);text-shadow:0 0 30px rgba(56,255,110,.12)}
+.hero .sub{margin:26px 0 32px;max-width:560px;font-size:13px;color:var(--dim);
+  letter-spacing:.06em;line-height:1.9}
+.heroBtns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;border:1px solid var(--grn);color:var(--grn);
+  padding:13px 24px;font-size:12px;letter-spacing:.16em;transition:.15s;background:transparent}
+.btn:hover{box-shadow:0 0 22px rgba(56,255,110,.35),inset 0 0 12px rgba(56,255,110,.12);
+  transform:translateY(-1px)}
+.btn.solid{background:var(--grn);color:#04120a;font-weight:700}
+.btn.solid:hover{background:var(--grn2)}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.stat{padding:26px 3vw;border-right:1px solid var(--line);text-align:center}
+.stat:last-child{border-right:none}
+.stat b{display:block;font-size:clamp(22px,3vw,34px);color:var(--grn);
+  text-shadow:0 0 14px rgba(56,255,110,.4)}
+.stat span{font-size:10px;letter-spacing:.22em;color:var(--dim)}
+
+/* ============ SUPPLY ============ */
+.supply{padding:70px 3vw}
+h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
+.secSub{font-size:12px;color:var(--dimmer);letter-spacing:.08em;margin-bottom:34px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1180px;margin:0 auto}
+.card{border:1px solid var(--line);background:var(--panel);padding:20px;
+  cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--grn);box-shadow:0 0 24px rgba(56,255,110,.14);
+  transform:translateY(-2px)}
+.card pre.art{font-size:7px;line-height:7px;color:var(--grn);opacity:.75;
+  margin-bottom:14px;text-shadow:0 0 6px rgba(56,255,110,.4);overflow:hidden}
+.cardHead{display:flex;justify-content:space-between;align-items:baseline;
+  gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.card h3{font-size:16px;letter-spacing:.08em;color:var(--ink)}
+.tag{font-size:9px;letter-spacing:.2em;color:var(--amb);white-space:nowrap}
+.card p{font-size:12px;line-height:1.85;color:var(--dim);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:9px;letter-spacing:.12em;color:var(--grn);
+  border:1px solid var(--grndk);padding:3px 8px}
+
+/* ============ CREW (RPG field) ============ */
+.crew{padding:70px 3vw;border-top:1px solid var(--line)}
+.field{position:relative;height:400px;max-width:1180px;margin:0 auto 40px;
+  border:1px solid var(--line);overflow:hidden;cursor:crosshair;outline:none;
+  background:
+    linear-gradient(rgba(56,255,110,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(56,255,110,.04) 1px,transparent 1px),
+    var(--panel2);
+  background-size:32px 32px,32px 32px,auto}
+.field:focus{border-color:var(--grndk);box-shadow:0 0 18px rgba(56,255,110,.1)}
+.fieldHint{position:absolute;top:8px;left:12px;font-size:10px;letter-spacing:.14em;
+  color:var(--dimmer);pointer-events:none;z-index:3}
+.sprite{position:absolute;left:0;top:0;text-align:center;cursor:pointer;
+  user-select:none;-webkit-user-select:none;z-index:2;will-change:transform}
+.sprite pre{font-size:12px;line-height:13px;color:var(--amb);
+  text-shadow:0 0 6px rgba(255,182,72,.45);pointer-events:none}
+.sprite .nm{font-size:9px;letter-spacing:.14em;color:var(--dim);pointer-events:none}
+.sprite.player pre{color:var(--grn);text-shadow:0 0 8px rgba(56,255,110,.55)}
+.sprite.player .nm{color:var(--grn)}
+.sprite.near pre{text-shadow:0 0 14px rgba(255,182,72,.9)}
+.dlg{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;
+  border:1px solid var(--amb);background:rgba(4,5,4,.94);padding:12px 16px;
+  box-shadow:0 0 20px rgba(255,182,72,.18)}
+.dlg.hide{display:none}
+.dlgName{font-size:10px;letter-spacing:.22em;color:var(--amb);margin-bottom:6px}
+.dlgText{font-size:13px;line-height:1.8;color:var(--ink);min-height:1.8em}
+.dlgMore{position:absolute;right:12px;bottom:6px;font-size:9px;color:var(--dimmer);
+  letter-spacing:.14em;animation:pulse 1.4s ease-in-out infinite}
+.opsLog{max-width:760px;margin:0 auto;border:1px solid var(--line);background:var(--panel2)}
+.opsBar{padding:8px 14px;border-bottom:1px solid var(--line);font-size:10px;
+  letter-spacing:.14em;color:var(--dimmer)}
+.opsBody{padding:16px 18px;font-size:12px;line-height:2.2}
+.opsRow{display:flex;gap:14px;flex-wrap:wrap}
+.opsRow .t{color:var(--grn);min-width:52px}
+.opsRow .w{color:var(--amb);min-width:110px;letter-spacing:.06em}
+.opsRow .d{color:var(--dim);flex:1;min-width:200px}
+
+/* ============ MANIFESTO ============ */
+.manifesto{position:relative;padding:90px 6vw;border-top:1px solid var(--line);
+  text-align:center;overflow:hidden}
+#wings{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:9px;line-height:9px;color:var(--grndk);opacity:.5;pointer-events:none;
+  white-space:pre}
+.manifesto .in{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.manifesto .big{font-size:clamp(22px,3.4vw,36px);font-weight:700;letter-spacing:.06em;
+  margin:18px 0 26px;text-shadow:0 0 24px rgba(56,255,110,.2)}
+.manifesto p{font-size:13px;line-height:2.1;color:var(--dim);letter-spacing:.05em}
+
+/* ============ CONTACT ============ */
+.contact{padding:70px 3vw 90px;border-top:1px solid var(--line);text-align:center}
+.orderBox{display:inline-block;border:1px solid var(--line);background:var(--panel2);
+  padding:36px clamp(20px,6vw,70px);margin-top:22px;text-align:left}
+.orderRow{display:flex;gap:18px;align-items:baseline;padding:10px 0;
+  border-bottom:1px dashed var(--line);font-size:13px}
+.orderRow:last-child{border-bottom:none}
+.orderRow .k{color:var(--dimmer);font-size:10px;letter-spacing:.22em;min-width:90px}
+.orderRow a:hover{text-shadow:0 0 10px rgba(56,255,110,.7)}
+.redacted{color:var(--dimmer);letter-spacing:.1em}
+
+footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-size:10px;letter-spacing:.18em;color:var(--dimmer)}
+
+/* ============ RWD / MOTION ============ */
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .field{height:320px}
+  .fieldHint{font-size:9px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat{border-bottom:1px solid var(--line)}
+  .stat:nth-child(n+3){border-bottom:none}
+  nav a{display:none}
+  #wings{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  #rainBg,#rainFg,#grain{display:none}
+}
+</style>
+</head>
+<body>
+<noscript>ENABLE JAVASCRIPT TO ENTER THE SUPPLY.</noscript>
+
+<div id="boot"><pre id="bootLog"></pre><div id="bootEnter" class="hide">▸ CLICK TO ENTER THE SUPPLY</div></div>
+
+<canvas id="rainBg"></canvas>
+<canvas id="rainFg"></canvas>
+<canvas id="grain" width="160" height="90"></canvas>
+<div id="vig"></div>
+
+<header>
+  <div class="brand glitch" data-t="GARY//OS">GARY//OS</div>
+  <nav>
+    <a href="#supply">SUPPLY</a>
+    <a href="#crew">CREW</a>
+    <a href="#manifesto">MANIFESTO</a>
+    <a href="#contact">CONTACT</a>
+    <span id="clock">--:--:--</span>
+    <button class="chipBtn on" id="sfxChip">SFX:ON</button>
+  </nav>
+</header>
+
+<div class="ticker"><div class="tickIn" id="tick"></div></div>
+
+<main>
+  <section class="hero">
+    <div class="over">// PERSONAL FILE — GARY CHEN · DATA ENGINEER · FOUNDER OF MEOWBOX.TW · TAIPEI</div>
+    <h1>DATA<br>DEALER_</h1>
+    <p class="sub">白天在電視台搬資料，晚上供應自己的 side projects。
+      管線純度 99.9%，交貨準時，全年無休，不賣訂閱。</p>
+    <div class="heroBtns">
+      <a class="btn solid" href="#supply">VIEW THE SUPPLY</a>
+      <a class="btn" href="#contact">CONTACT THE PLUG</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b>6+</b><span>PROJECTS SHIPPED</span></div>
+    <div class="stat"><b>24/7</b><span>PIPELINES RUNNING</span></div>
+    <div class="stat"><b>30萬+</b><span>MONTHLY STORE REVENUE · 6MO RAMP</span></div>
+    <div class="stat"><b>0</b><span>NARCS DETECTED</span></div>
+  </section>
+
+  <section class="supply" id="supply">
+    <h2>// THE SUPPLY</h2>
+    <p class="secSub">六件現貨。全部實戰，全部在線。點卡片驗貨。</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="crew" id="crew">
+    <h2>// THE CREW — bzteam</h2>
+    <p class="secSub">一人公司的組織圖。六個 AI 小弟駐在同一台 Cloud Run，走 LINE 回報，全年無休。點角色交談，或用方向鍵走過去。</p>
+    <div class="field" id="field" tabindex="0" aria-label="bzteam RPG 場景">
+      <div class="fieldHint" id="fieldHint">CLICK A CREW MEMBER TO TALK · ←↑↓→/WASD 移動 · ENTER 交談</div>
+      <div class="dlg hide" id="dlg">
+        <div class="dlgName" id="dlgName"></div>
+        <div class="dlgText" id="dlgText"></div>
+        <div class="dlgMore">▼ 再點一下</div>
+      </div>
+    </div>
+    <div class="opsLog">
+      <div class="opsBar">bzteam@cloudrun:~$ crontab -l · DAILY OPS</div>
+      <div class="opsBody" id="opsBody"></div>
+    </div>
+  </section>
+
+  <section class="manifesto" id="manifesto">
+    <pre id="wings"></pre>
+    <div class="in">
+      <h2>// MANIFESTO</h2>
+      <div class="big">I MOVE DATA. QUIETLY.</div>
+      <p>白天供貨給電視台，晚上供貨給自己。<br>
+        不賣訂閱，不加雜質，管線一旦點火就不熄。<br>
+        出了問題不會等你發現——它自己會傳 LINE 認錯。</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>// PLACE YOUR ORDER</h2>
+    <div class="orderBox">
+      <div class="orderRow"><span class="k">GITHUB</span>
+        <a href="https://github.com/shironchen" target="_blank" rel="noopener">github.com/shironchen</a></div>
+      <div class="orderRow"><span class="k">PAPERWORK</span>
+        <a href="./resume/">正式履歷 — 繁中／简中／日本語／English</a></div>
+      <div class="orderRow"><span class="k">MEOWBOX</span>
+        <a href="https://meowbox.tw" target="_blank" rel="noopener">meowbox.tw — 我創辦的貓咪社群</a></div>
+      <div class="orderRow"><span class="k">EMAIL</span>
+        <a href="mailto:shironchen@gmail.com">shironchen@gmail.com</a></div>
+      <div class="orderRow"><span class="k">LINKEDIN</span>
+        <span class="redacted">[REDACTED — COMING SOON]</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>GARY//OS V1.0 · HANDCRAFTED VANILLA — VIEW SOURCE</span>
+  <span>NO COOKIES · NO TRACKERS · NO NARCS</span>
+</footer>
+
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const R=(a,b)=>a+Math.random()*(b-a);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------- ASCII RENDER (canvas → luminance → glyphs) ---------------- */
+let _ac=null,_ag=null;
+function asciiRender(cols,rows,drawFn,charset){
+  charset=charset||' .:!*#%@';
+  if(!_ac){_ac=document.createElement('canvas');
+    _ag=_ac.getContext('2d',{willReadFrequently:true});}
+  _ac.width=cols;_ac.height=rows;
+  const g=_ag;
+  g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;
+  g.fillStyle='#000';g.fillRect(0,0,cols,rows);
+  g.fillStyle='#fff';g.strokeStyle='#fff';g.lineWidth=1;
+  drawFn(g,cols,rows);
+  const d=g.getImageData(0,0,cols,rows).data;
+  let out='';
+  for(let y=0;y<rows;y++){
+    for(let x=0;x<cols;x++){
+      const v=d[(y*cols+x)*4]/255;
+      out+=charset[Math.min(charset.length-1,(v*charset.length)|0)];
+    }
+    out+='\n';
+  }
+  return out;
+}
+function circ(g,x,y,r,fill){g.beginPath();g.arc(x,y,r,0,7);fill?g.fill():g.stroke();}
+
+/* ---------------- PROJECT CARD ART ---------------- */
+const ART={
+  pipeline(g,w,h){ /* three mains + risers + valves */
+    for(let i=0;i<3;i++){const y=h*(.25+i*.25);
+      g.fillRect(w*.08,y-1,w*.84,3);
+      circ(g,w*(.2+i*.28),y,3,true);}
+    g.fillRect(w*.3,h*.25,3,h*.5);
+    g.fillRect(w*.66,h*.5,3,h*.25);
+  },
+  text2sql(g,w,h){ /* speech bubble → result table */
+    g.strokeRect(w*.08,h*.1,w*.4,h*.32);
+    g.beginPath();g.moveTo(w*.18,h*.42);g.lineTo(w*.14,h*.56);g.lineTo(w*.28,h*.42);g.fill();
+    g.fillRect(w*.52,h*.45,w*.02,h*.02);
+    for(let r=0;r<3;r++)for(let c=0;c<3;c++)
+      g.strokeRect(w*(.52+c*.14),h*(.5+r*.15),w*.14,h*.15);
+  },
+  bzbot(g,w,h){ /* candlesticks */
+    const hs=[.5,.7,.4,.85,.6,.9];
+    for(let i=0;i<6;i++){const x=w*(.12+i*.14),ch=h*hs[i]*.6;
+      g.fillRect(x,h*.85-ch-h*.08,2,ch+h*.16);
+      g.fillRect(x-3,h*.85-ch,8,ch);}
+  },
+  bzteam(g,w,h){ /* crew: satellites around the hub */
+    circ(g,w/2,h/2,h*.16,true);
+    for(let i=0;i<6;i++){const a=i*Math.PI/3;
+      const x=w/2+Math.cos(a)*w*.3,y=h/2+Math.sin(a)*h*.32;
+      circ(g,x,y,h*.09,true);
+      g.beginPath();g.moveTo(w/2,h/2);g.lineTo(x,y);g.stroke();}
+  },
+  meowbox(g,w,h){ /* the cat */
+    circ(g,w/2,h*.58,h*.32,true);
+    g.beginPath();g.moveTo(w*.32,h*.42);g.lineTo(w*.3,h*.08);g.lineTo(w*.46,h*.32);g.fill();
+    g.beginPath();g.moveTo(w*.68,h*.42);g.lineTo(w*.7,h*.08);g.lineTo(w*.54,h*.32);g.fill();
+    g.fillStyle='#000';
+    g.fillRect(w*.4,h*.52,3,5);g.fillRect(w*.58,h*.52,3,5);
+    g.fillRect(w*.485,h*.66,4,3);
+  },
+  txf(g,w,h){ /* the oracle: sine through a crystal ball */
+    circ(g,w/2,h/2,h*.36,false);
+    g.beginPath();
+    for(let x=0;x<w;x++){const y=h/2+Math.sin(x/w*Math.PI*3)*h*.22;
+      x?g.lineTo(x,y):g.moveTo(x,y);}
+    g.stroke();
+    circ(g,w*.82,h*.28,2,true);
+  }
+};
+
+/* ---------------- THE SUPPLY ---------------- */
+const GOODS=[
+  {id:'pipeline',name:'PIPELINE',tag:'THE DAY JOB',
+   desc:'電視台級資料管線。GCP 上進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮。貨源穩定，每日出貨。',
+   chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON']},
+  {id:'text2sql',name:'TEXT2SQL',tag:'SPEAK TO THE WAREHOUSE',
+   desc:'用人話跟資料倉庫談生意。自然語言進，SQL 出，BigQuery 埋單，不會 SQL 的人也拿得到貨。',
+   chips:['LLM','BIGQUERY','PYTHON']},
+  {id:'bzbot',name:'BZBOT',tag:'CRYPTO RUNNER',
+   desc:'Discord 加密貨幣機器人。盯 Bybit 永續合約，Cloud Run 上長駐跑單，籌碼、開盤預估一手包。',
+   chips:['FASTAPI','SUPABASE','CLOUD RUN','DISCORD']},
+  {id:'bzteam',name:'BZTEAM',tag:'THE CREW',
+   desc:'LINE 上的私人 AI 團隊。待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
+   chips:['FASTAPI','FIRESTORE','LINE','SCHEDULER']},
+  {id:'meowbox',name:'MEOWBOX',tag:'FOUNDER · CAT DIVISION',
+   desc:'喵盒子 meowbox.tw，本人創辦的台灣貓咪社群與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，六個月內把賣場營收做到單月 30 萬+。',
+   chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://meowbox.tw'},
+  {id:'txf',name:'TXF ORACLE',tag:'THE FORTUNE TELLER',
+   desc:'台指期每小時預測 routine。雲端排程分析、官方價自動記分、LINE 準時播報，猜錯自己認。',
+   chips:['SCHEDULER','LLM','LINE']}
+];
+(function buildGrid(){
+  const grid=$('#grid');
+  for(const p of GOODS){
+    const el=document.createElement('article');
+    el.className='card';
+    el.innerHTML='<pre class="art"></pre>'
+      +'<div class="cardHead"><h3>'+p.name+'</h3><span class="tag">'+p.tag+'</span></div>'
+      +'<p>'+p.desc+'</p>'
+      +'<div class="chips">'+p.chips.map(c=>'<span>'+c+'</span>').join('')+'</div>';
+    el.querySelector('.art').textContent=asciiRender(46,20,ART[p.id]);
+    if(p.link){
+      el.style.cursor='pointer';
+      el.addEventListener('click',()=>window.open(p.link,'_blank','noopener'));
+    }
+    grid.appendChild(el);
+  }
+})();
+
+/* ---------------- THE CREW (bzteam roster + daily ops) ---------------- */
+const CREW=[
+  {name:'股神',code:'THE ORACLE',
+   frames:[
+     ['    _!_    ','  .-"""-.  ',' / (o) (o)\\','|    ^    |',' \\  ~~~  / ','  `-...-`  ',' [TXF 88%] '],
+     ['    _!_    ','  .-"""-.  ',' / (-) (-)\\','|    ^    |',' \\  ___  / ','  `-...-`  ',' [TXF ??%] ']],
+   desc:'盤勢判讀手。台指期每小時出一次預測，官方價自動對答案記分，戰績攤開，猜錯自己認。'},
+  {name:'蝦皮助手',code:'THE LISTER',
+   frames:[
+     ['   _____   ','  | o o |  ','  |  _  |  ','  |_____|  ',' /|SHOP |\\ ','  |_____|  ','  d     b  '],
+     ['   _____   ','  | - - |  ','  |  o  |  ','  |_____|  ',' \\|SALE!|/ ','  |_____|  ','   d   b   ']],
+   desc:'電商上架手。直接接管 Chrome 開賣場，競品參照、表單自動填、一路點到上架完成。'},
+  {name:'打卡小弟',code:'THE CLOCK',
+   frames:[
+     ['   .---.   ','  /12   \\  ',' |9  +  3| ','  \\  6  /  ','   `---`   ','  _/```\\_  ',' TICK TOCK '],
+     ['   .---.   ','  /12   \\  ',' |9  +--3| ','  \\  6  /  ','   `---`   ','  _/```\\_  ',' TOCK TICK ']],
+   desc:'考勤看守。盯著打卡日曆比對行事曆，該打沒打，LINE 直接催到你打為止。'},
+  {name:'記帳小弟',code:'THE LEDGER',
+   frames:[
+     ['  _______  ',' | $ | # | ',' |---+---| ',' | # | $ | ',' |___|___| ','  (o) (o)  ','  BALANCE  '],
+     ['  _______  ',' | # | $ | ',' |---+---| ',' | $ | # | ',' |___|___| ','  (-) (-)  ','  COUNTING ']],
+   desc:'帳房。每筆流水入庫，錢從哪來去哪一清二楚，月底不用對發票對到懷疑人生。'},
+  {name:'待辦管家',code:'THE KEEPER',
+   frames:[
+     ['  .-----.  ','  |[x]  |  ','  |[x]  |  ','  |[ ]<-|  ','  `-----`  ','  (o___o)  ','  NO LOSS  '],
+     ['  .-----.  ','  |[x]  |  ','  |[x]  |  ','  |[x]OK|  ','  `-----`  ','  (^___^)  ','  +1 DONE  ']],
+   desc:'任務庫管理員。所有 follow-up 進中央待辦庫歸檔，不准寫在紙上，沒做完的隔天繼續追。'},
+  {name:'巡檢兵',code:'THE MEDIC',
+   frames:[
+     ['    _+_    ','  .-|_|-.  ',' | (-)(-)| ','  \\  o  /  ','   |###|   ','  /|   |\\  ',' ALL GREEN '],
+     ['    _+_    ','  .-|_|-.  ',' | (o)(o)| ','  \\  o  /  ','   |#..|   ','  /|   |\\  ',' SCANNING_ ']],
+   desc:'系統軍醫。每天 heartbeat 巡檢全線服務，故障不等老闆發現——自己先傳 LINE 認錯。'}
+];
+/* ---- RPG field: crew wander, visitor walks up and talks ---- */
+(function buildCrew(){
+  const field=$('#field'),dlg=$('#dlg'),dlgName=$('#dlgName'),dlgText=$('#dlgText');
+  const SPR=[ /* tiny walking bodies; frames[] from CREW stay unused here */
+    ['(ò_ó)','/|$|\\',' J L '],
+    ['($v$)','/|S|\\',' J L '],
+    ['(o_o)','/|T|\\',' J L '],
+    ['(=_=)','/|#|\\',' J L '],
+    ['(^_^)','/|V|\\',' J L '],
+    ['(+_+)','/|+|\\',' J L ']
+  ];
+  const TALK=[
+    ['本小時預測：偏多。理由等下一根 K 棒揭曉。','我每小時 :25 出手，:20 對答案，戰績全記在案。','猜錯我自己認，這叫職業道德。'],
+    ['老闆的賣場我顧著，競品我全看過一輪了。','老闆用數據選品定價，六個月做到單月 30 萬。我負責把貨上好上滿。','要買貓咪冰墊嗎？現在下單明天出貨。'],
+    ['你今天打卡了嗎？沒有的話我要開始催了。','行事曆我比對過了，該補的卡我都記得。','TICK TOCK。卡不打，我就傳 LINE。'],
+    ['這個月伙食超支 12%。我只是說出事實。','每一筆我都記著，包括你不想想起的那筆。','收支平衡是一種美德。BALANCE。'],
+    ['你有 3 件事逾期了，我明天還會再提醒。','寫在紙上的待辦不算數，進系統的才算。','+1 DONE。今天也是有產出的一天。'],
+    ['全線巡檢完畢，ALL GREEN。','服務掛掉我第一個知道，然後傳 LINE 認錯。','heartbeat 正常。老闆的系統比老闆健康。']
+  ];
+  const npcs=[];let player=null,keys={},dlgTimer=null,talkIdx=[];
+  function mkSprite(lines,nm,cls){
+    const el=document.createElement('div');
+    el.className='sprite'+(cls?' '+cls:'');
+    el.innerHTML='<pre></pre><div class="nm">'+nm+'</div>';
+    el.querySelector('pre').textContent=lines.join('\n');
+    field.appendChild(el);
+    return el;
+  }
+  function bounds(){return{w:field.clientWidth,h:field.clientHeight};}
+  CREW.forEach((m,i)=>{
+    const b=bounds();
+    const s={el:mkSprite(SPR[i],m.name,''),i,
+      x:R(40,b.w-90),y:R(50,b.h-120),tx:0,ty:0,wait:R(0,2),sp:R(22,40)};
+    s.tx=s.x;s.ty=s.y;
+    s.el.addEventListener('click',e=>{e.stopPropagation();talk(i);});
+    npcs.push(s);talkIdx.push(0);
+  });
+  player={el:mkSprite(['(@_@)','/|G|\\',' J L '],'YOU','player'),
+    x:20,y:20,sp:120};
+  function talk(i){
+    const m=CREW[i],lines=[m.desc].concat(TALK[i]);
+    const line=lines[talkIdx[i]%lines.length];talkIdx[i]++;
+    dlgName.textContent=m.name+' — '+m.code;
+    dlg.classList.remove('hide');
+    SFX.open();
+    /* typewriter */
+    dlgText.textContent='';
+    let p=0;
+    clearInterval(dlgTimer);
+    dlgTimer=setInterval(()=>{
+      dlgText.textContent=line.slice(0,++p);
+      if(p%3===0)SFX.tick();
+      if(p>=line.length)clearInterval(dlgTimer);
+    },26);
+    clearTimeout(talk._hide);
+    talk._hide=setTimeout(()=>dlg.classList.add('hide'),9000);
+  }
+  function nearestNpc(){
+    let best=null,bd=80;
+    for(const n of npcs){
+      const d=Math.hypot(n.x-player.x,n.y-player.y);
+      if(d<bd){bd=d;best=n;}
+    }
+    return best;
+  }
+  /* input: field must be focused so arrows don't scroll the page */
+  if(!matchMedia('(hover:hover)').matches)
+    $('#fieldHint').textContent='TAP A CREW MEMBER TO TALK';
+  field.addEventListener('click',()=>field.focus());
+  const KEY={ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',ArrowUp:'u',w:'u',ArrowDown:'d',s:'d'};
+  field.addEventListener('keydown',e=>{
+    if(KEY[e.key]!==undefined){keys[KEY[e.key]]=1;e.preventDefault();}
+    if(e.key==='Enter'||e.key===' '){
+      const n=nearestNpc();if(n)talk(n.i);
+      e.preventDefault();
+    }
+  });
+  field.addEventListener('keyup',e=>{if(KEY[e.key]!==undefined)keys[KEY[e.key]]=0;});
+  field.addEventListener('blur',()=>{keys={};});
+  /* wander + player movement loop */
+  let last=performance.now();
+  function step(now){
+    const dt=Math.min(.05,(now-last)/1000);last=now;
+    const b=bounds();
+    for(const n of npcs){
+      if(n.wait>0){n.wait-=dt;}
+      else{
+        const dx=n.tx-n.x,dy=n.ty-n.y,d=Math.hypot(dx,dy);
+        if(d<2){n.tx=R(30,b.w-90);n.ty=R(40,b.h-120);n.wait=R(.8,4);}
+        else{n.x+=dx/d*n.sp*dt;n.y+=dy/d*n.sp*dt;}
+      }
+      n.el.style.transform='translate('+n.x+'px,'+n.y+'px)';
+    }
+    let vx=(keys.r?1:0)-(keys.l?1:0),vy=(keys.d?1:0)-(keys.u?1:0);
+    if(vx||vy){
+      const m=Math.hypot(vx,vy);
+      player.x=Math.max(4,Math.min(b.w-64,player.x+vx/m*player.sp*dt));
+      player.y=Math.max(4,Math.min(b.h-68,player.y+vy/m*player.sp*dt));
+    }
+    player.el.style.transform='translate('+player.x+'px,'+player.y+'px)';
+    const near=nearestNpc();
+    for(const n of npcs)n.el.classList.toggle('near',near===n);
+    requestAnimationFrame(step);
+  }
+  if(RM){ /* reduced motion: static placement, click-to-talk only */
+    npcs.forEach(n=>{n.el.style.transform='translate('+n.x+'px,'+n.y+'px)';});
+    player.el.style.transform='translate(20px,20px)';
+  }else requestAnimationFrame(step);
+  const OPS=[
+    ['07:30','THE MEDIC','heartbeat 全系統巡檢 · 沒事不吵，有事 LINE 認錯'],
+    ['09:00','THE CLOCK','打卡日曆比對 · 該打沒打開始催'],
+    ['xx:25','THE ORACLE','台指期盤勢分析 · 每小時出一次手'],
+    ['xx:20','THE ORACLE','官方價對答案 · 自動記分 + 簡報 + LINE 播報'],
+    ['18:00','THE LEDGER','今日帳務結算入庫'],
+    ['23:59','THE KEEPER','待辦清點 · 沒做完的明天繼續追']
+  ];
+  $('#opsBody').innerHTML=OPS.map(r=>
+    '<div class="opsRow"><span class="t">'+r[0]+'</span>'
+    +'<span class="w">'+r[1]+'</span><span class="d">'+r[2]+'</span></div>').join('');
+})();
+
+/* ---------------- WINGS (manifesto backdrop) ---------------- */
+$('#wings').textContent=asciiRender(92,24,function(g,w,h){
+  g.save();g.translate(w/2,h*.58);
+  for(const s of[-1,1]){
+    g.save();g.scale(s,1);
+    for(let i=0;i<9;i++){
+      const a=-.1-i*.11,L=w*.44*(1-i*.055),th=1+(8-i)*.5;
+      g.save();g.rotate(a);g.globalAlpha=.95-i*.08;
+      g.beginPath();g.moveTo(w*.03,0);g.lineTo(w*.03+L,-th);g.lineTo(w*.03+L*.94,th*.4);
+      g.closePath();g.fill();g.restore();
+    }
+    g.restore();
+  }
+  g.restore();
+},' .:!*#%');
+
+/* ---------------- TICKER + CLOCK ---------------- */
+$('#tick').textContent=('★ THE SUPPLY: DATA PIPELINES · BOTS · CAT SITES ★ DATA-DRIVEN: STORE REVENUE NT$300K+/MO IN 6 MONTHS ★ SQL PURITY 99.9% ★ RUNS ON GCP · SLEEPS NEVER ★ INSTANT DELIVERY ★ NO NARCS ★ ').repeat(6);
+setInterval(()=>{$('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
+
+/* ---------------- MATRIX RAIN (bg + fg bleed layer) ---------------- */
+const RAIN_G='GARY01$%#*+=<>/\\|SELECTFROMWHERE';
+(function buildRain(){
+  if(RM)return;
+  const bg=$('#rainBg'),fg=$('#rainFg');
+  const gb=bg.getContext('2d'),gf=fg.getContext('2d');
+  let W,H,cols=[],t=0;
+  function setup(){
+    const d=Math.min(devicePixelRatio||1,1.25);
+    W=innerWidth;H=innerHeight;
+    bg.width=fg.width=W*d;bg.height=fg.height=H*d;
+    gb.setTransform(d,0,0,d,0,0);gf.setTransform(d,0,0,d,0,0);
+    const gap=innerWidth<700?26:17;
+    cols=[];
+    for(let i=0;i<Math.ceil(W/gap);i++)
+      cols.push({x:i*gap+8,sp:R(60,180),off:R(0,H*2),tr:(R(6,16))|0});
+  }
+  function drawCol(g,c,head,trail){
+    const y0=(t*c.sp+c.off)%(H+c.tr*16)-c.tr*16;
+    for(let k=0;k<c.tr;k++){
+      const y=y0+k*16;
+      if(y<-16||y>H+16)continue;
+      const ch=RAIN_G[(Math.abs(Math.sin(c.x*7.7+k*13.1+((t*3)|0)))*RAIN_G.length)|0]||'0';
+      g.fillStyle=k===c.tr-1
+        ?'rgba(220,255,230,'+head+')'
+        :'rgba(56,255,110,'+(trail*(k/c.tr))+')';
+      g.fillText(ch,c.x,y);
+    }
+  }
+  function frame(){
+    t+=.05;
+    gb.clearRect(0,0,W,H);gf.clearRect(0,0,W,H);
+    gb.font=gf.font='700 13px "IBM Plex Mono",monospace';
+    gb.textAlign=gf.textAlign='center';
+    for(let i=0;i<cols.length;i++){
+      drawCol(gb,cols[i],.5,.28);
+      if(i%4===0)drawCol(gf,cols[i],.1,.05);
+    }
+    requestAnimationFrame(frame);
+  }
+  setup();addEventListener('resize',setup);
+  requestAnimationFrame(frame);
+})();
+
+/* ---------------- GRAIN ---------------- */
+(function(){
+  if(RM)return;
+  const gc=$('#grain'),gg=gc.getContext('2d');
+  const id=gg.createImageData(gc.width,gc.height);
+  function frame(){
+    const d=id.data;
+    for(let i=0;i<d.length;i+=4){const v=(Math.random()*255)|0;
+      d[i]=d[i+1]=d[i+2]=v;d[i+3]=255;}
+    gg.putImageData(id,0,0);
+  }
+  setInterval(frame,120);
+})();
+
+/* ================= AUDIO — all synthesized, zero files =================
+   Music: dark ambient loop (drone + slow pad chords + sparse blips).
+   SFX: tiny square-sweep ticks. One AudioContext; the SFX chip
+   suspends/resumes it, which silences everything at once. */
+let AC=null,sndOn=true,musicOn=false;
+function ac(){
+  if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+  return AC;
+}
+function env(gn,t0,a,d,v){
+  gn.gain.setValueAtTime(0,t0);
+  gn.gain.linearRampToValueAtTime(v,t0+a);
+  gn.gain.exponentialRampToValueAtTime(.0001,t0+a+d);
+}
+function tone(f0,f1,dur,type,v,when){
+  const c=ac();if(!c||!sndOn)return;
+  const T=c.currentTime+(when||0);
+  const o=c.createOscillator();o.type=type;
+  o.frequency.setValueAtTime(f0,T);
+  o.frequency.exponentialRampToValueAtTime(Math.max(1,f1),T+dur);
+  const gn=c.createGain();env(gn,T,.006,dur,v);
+  o.connect(gn);gn.connect(c.destination);
+  o.start(T);o.stop(T+dur+.05);
+}
+const SFX={
+  tick(){tone(820,380,.05,'square',.05);},
+  open(){tone(560,940,.09,'square',.06);tone(1200,300,.12,'sawtooth',.02,.05);},
+  enter(){tone(220,880,.3,'square',.06);tone(440,1760,.4,'triangle',.05,.15);
+    tone(110,55,.5,'sawtooth',.05,.3);}
+};
+
+/* ---- music: dark phonk step sequencer (92 BPM, 16 steps/bar) ---- */
+let MG=null;
+function buildMusic(){
+  const c=ac();if(!c||MG)return;
+  const master=c.createGain();master.gain.value=.17;
+  const comp=c.createDynamicsCompressor();
+  comp.threshold.value=-18;comp.ratio.value=4;
+  master.connect(comp);comp.connect(c.destination);
+  /* dotted-8th delay bus for plucks/pads */
+  const delay=c.createDelay(1);delay.delayTime.value=.489; /* .375 beat @92bpm */
+  const fb=c.createGain();fb.gain.value=.32;
+  const wet=c.createGain();wet.gain.value=.22;
+  delay.connect(fb);fb.connect(delay);delay.connect(wet);wet.connect(master);
+  /* shared noise buffer (hats / snare / crackle) */
+  const nb=c.createBuffer(1,c.sampleRate,c.sampleRate);
+  const nd=nb.getChannelData(0);
+  for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  /* vinyl crackle floor for the lo-fi dirt */
+  const cr=c.createBufferSource();cr.buffer=nb;cr.loop=true;cr.playbackRate.value=.35;
+  const crF=c.createBiquadFilter();crF.type='bandpass';crF.frequency.value=3200;crF.Q.value=.4;
+  const crG=c.createGain();crG.gain.value=.012;
+  cr.connect(crF);crF.connect(crG);crG.connect(master);cr.start();
+  MG={c,master,delay,nb};
+}
+function noiseHit(T,filt,f,q,a,d,v){
+  const c=MG.c;
+  const s=c.createBufferSource();s.buffer=MG.nb;
+  s.playbackRate.value=R(.9,1.1);
+  const fl=c.createBiquadFilter();fl.type=filt;fl.frequency.value=f;fl.Q.value=q;
+  const gn=c.createGain();env(gn,T,a,d,v);
+  s.connect(fl);fl.connect(gn);gn.connect(MG.master);
+  s.start(T);s.stop(T+a+d+.05);
+}
+const V={
+  kick(T){const c=MG.c;
+    const o=c.createOscillator();o.type='sine';
+    o.frequency.setValueAtTime(150,T);
+    o.frequency.exponentialRampToValueAtTime(42,T+.11);
+    const gn=c.createGain();env(gn,T,.004,.3,.85);
+    o.connect(gn);gn.connect(MG.master);o.start(T);o.stop(T+.4);
+    noiseHit(T,'highpass',3500,.5,.001,.02,.12); /* beater click */
+  },
+  snare(T){
+    noiseHit(T,'bandpass',1800,.9,.002,.16,.3);
+    const c=MG.c;
+    const o=c.createOscillator();o.type='triangle';o.frequency.value=185;
+    const gn=c.createGain();env(gn,T,.002,.09,.2);
+    o.connect(gn);gn.connect(MG.master);o.start(T);o.stop(T+.15);
+  },
+  hat(T,open){noiseHit(T,'highpass',7800,1,.001,open?.22:.035,open?.09:.11);},
+  bass(T,f,dur){const c=MG.c;
+    const o=c.createOscillator();o.type='sine';o.frequency.value=f;
+    const o2=c.createOscillator();o2.type='square';o2.frequency.value=f;
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=420;
+    const g2=c.createGain();g2.gain.value=.25;
+    const gn=c.createGain();
+    gn.gain.setValueAtTime(0,T);
+    gn.gain.linearRampToValueAtTime(.5,T+.012);
+    gn.gain.setValueAtTime(.5,T+dur*.6);
+    gn.gain.exponentialRampToValueAtTime(.0001,T+dur);
+    o.connect(gn);o2.connect(g2);g2.connect(lp);lp.connect(gn);gn.connect(MG.master);
+    o.start(T);o.stop(T+dur+.05);o2.start(T);o2.stop(T+dur+.05);
+  },
+  pad(T,freqs){const c=MG.c;
+    for(const f of freqs){
+      const o=c.createOscillator();o.type='sawtooth';
+      o.frequency.value=f;o.detune.value=R(-7,7);
+      const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=750;
+      const gn=c.createGain();
+      gn.gain.setValueAtTime(0,T);
+      gn.gain.linearRampToValueAtTime(.045,T+1.6);
+      gn.gain.setValueAtTime(.045,T+3.4);
+      gn.gain.linearRampToValueAtTime(0,T+5.2);
+      o.connect(lp);lp.connect(gn);gn.connect(MG.master);gn.connect(MG.delay);
+      o.start(T);o.stop(T+5.4);
+    }
+  },
+  pluck(T,f){const c=MG.c;
+    const o=c.createOscillator();o.type='square';o.frequency.value=f;
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1600;
+    const gn=c.createGain();env(gn,T,.004,.16,.075);
+    o.connect(lp);lp.connect(gn);gn.connect(MG.delay);gn.connect(MG.master);
+    o.start(T);o.stop(T+.25);
+  }
+};
+/* patterns — A harmonic-minor phonk riff, roots per bar: Am Am G C */
+const BPM=92,SPB=60/BPM/4; /* seconds per 16th */
+const P_KICK=[1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0];
+const P_SNR =[0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1];
+const P_HAT =[1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1];
+const ROOTS=[55,55,49,65.41];
+const CHORDS=[[110,130.81,164.81],[110,130.81,164.81],[98,123.47,146.83],[130.81,164.81,196]];
+const ARP=[220,261.63,329.63,415.3]; /* A C E G# — harmonic minor bite */
+let seqStep=0,seqBar=0,nextT=0,seqOn=false;
+function playStep(s,T){
+  const root=ROOTS[seqBar%4];
+  if(P_KICK[s]){V.kick(T);V.bass(T,root,SPB*3);}
+  if(s===14)V.bass(T,root*1.5,SPB*1.8); /* passing fifth */
+  if(P_SNR[s]&&(s!==15||seqBar%2===1))V.snare(T);
+  if(P_HAT[s])V.hat(T+(s%2?SPB*.06:0),s%8===7); /* swung, open on the 7s */
+  if(s===0&&seqBar%2===0)V.pad(T,CHORDS[seqBar%4]);
+  if(seqBar%4===3&&s>=8&&s%2===0)V.pluck(T,ARP[(s-8)/2]);
+}
+function schedule(){
+  const c=MG.c;
+  while(nextT<c.currentTime+.12){
+    playStep(seqStep,nextT);
+    seqStep=(seqStep+1)%16;
+    if(seqStep===0)seqBar++;
+    nextT+=SPB;
+  }
+}
+function musicPlay(){
+  const c=ac();if(!c)return;
+  buildMusic();
+  if(c.state==='suspended')c.resume().catch(()=>{});
+  if(!seqOn){
+    seqOn=true;musicOn=true;
+    nextT=c.currentTime+.1;
+    setInterval(schedule,40);
+  }
+}
+
+/* ---- SFX chip: one switch silences the whole context ---- */
+$('#sfxChip').addEventListener('click',function(){
+  sndOn=!sndOn;
+  this.textContent=sndOn?'SFX:ON':'SFX:OFF';
+  this.classList.toggle('on',sndOn);
+  const c=ac();if(!c)return;
+  if(sndOn){c.resume().catch(()=>{});SFX.tick();}
+  else c.suspend().catch(()=>{});
+});
+
+/* ---------------- BOOT SEQUENCE ---------------- */
+(function(){
+  const bootEl=$('#boot'),log=$('#bootLog'),enterEl=$('#bootEnter');
+  const LINES=[
+    'GARY//OS V1.0 (build 2026) · PERSONAL TERMINAL · AUTHORIZED EYES ONLY',
+    '> establishing encrypted tunnel .......... OK',
+    '> mounting /dev/pipeline ................. OK',
+    '> loading skill manifest [██████] 6/6',
+    '> scanning for recruiters ................ FOUND (welcome)',
+    'ACCESS GRANTED_'
+  ];
+  let entered=false;
+  function typeLines(i){
+    if(i>=LINES.length){
+      log.classList.remove('cursor');
+      enterEl.classList.remove('hide');
+      return;
+    }
+    log.classList.add('cursor');
+    log.textContent+=LINES[i]+'\n';
+    setTimeout(()=>typeLines(i+1),RM?0:R(180,420));
+  }
+  function enter(){
+    if(entered)return;entered=true;
+    SFX.enter();
+    musicPlay(); /* the click gesture legitimizes audio start */
+    bootEl.classList.add('off');
+    setTimeout(()=>bootEl.remove(),650);
+  }
+  bootEl.addEventListener('click',enter);
+  addEventListener('keydown',e=>{if(!entered&&e.key==='Enter')enter();});
+  typeLines(0);
+})();
+
+/* ---------------- HOVER / CLICK TICKS ---------------- */
+if(matchMedia('(hover:hover)').matches){
+  document.addEventListener('mouseenter',e=>{
+    if(e.target instanceof Element&&e.target.closest('.btn,.card,nav a,.orderRow a'))SFX.tick();
+  },true);
+}
+document.addEventListener('click',e=>{
+  if(e.target instanceof Element&&e.target.closest('.card'))SFX.open();
+});
+</script>
+</body>
+</html>
