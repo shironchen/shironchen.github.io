@@ -139,34 +139,17 @@ h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
 .chips span{font-size:9px;letter-spacing:.12em;color:var(--grn);
   border:1px solid var(--grndk);padding:3px 8px}
 
-/* ============ CREW (RPG field) ============ */
+/* ============ CREW ============ */
 .crew{padding:70px 3vw;border-top:1px solid var(--line)}
-.field{position:relative;height:400px;max-width:1180px;margin:0 auto 40px;
-  border:1px solid var(--line);overflow:hidden;cursor:crosshair;outline:none;
-  background:
-    linear-gradient(rgba(56,255,110,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(56,255,110,.04) 1px,transparent 1px),
-    var(--panel2);
-  background-size:32px 32px,32px 32px,auto}
-.field:focus{border-color:var(--grndk);box-shadow:0 0 18px rgba(56,255,110,.1)}
-.fieldHint{position:absolute;top:8px;left:12px;font-size:10px;letter-spacing:.14em;
-  color:var(--dimmer);pointer-events:none;z-index:3}
-.sprite{position:absolute;left:0;top:0;text-align:center;cursor:pointer;
-  user-select:none;-webkit-user-select:none;z-index:2;will-change:transform}
-.sprite pre{font-size:12px;line-height:13px;color:var(--amb);
-  text-shadow:0 0 6px rgba(255,182,72,.45);pointer-events:none}
-.sprite .nm{font-size:9px;letter-spacing:.14em;color:var(--dim);pointer-events:none}
-.sprite.player pre{color:var(--grn);text-shadow:0 0 8px rgba(56,255,110,.55)}
-.sprite.player .nm{color:var(--grn)}
-.sprite.near pre{text-shadow:0 0 14px rgba(255,182,72,.9)}
-.dlg{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;
-  border:1px solid var(--amb);background:rgba(4,5,4,.94);padding:12px 16px;
-  box-shadow:0 0 20px rgba(255,182,72,.18)}
-.dlg.hide{display:none}
-.dlgName{font-size:10px;letter-spacing:.22em;color:var(--amb);margin-bottom:6px}
-.dlgText{font-size:13px;line-height:1.8;color:var(--ink);min-height:1.8em}
-.dlgMore{position:absolute;right:12px;bottom:6px;font-size:9px;color:var(--dimmer);
-  letter-spacing:.14em;animation:pulse 1.4s ease-in-out infinite}
+.crewGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1180px;margin:0 auto 40px}
+.member{border:1px solid var(--line);background:var(--panel);padding:20px;
+  text-align:center;transition:.18s}
+.member:hover{border-color:var(--amb);box-shadow:0 0 24px rgba(255,182,72,.12)}
+.member pre{font-size:11px;line-height:13px;color:var(--amb);
+  text-shadow:0 0 6px rgba(255,182,72,.4);margin-bottom:12px}
+.member h3{font-size:15px;letter-spacing:.1em;color:var(--ink)}
+.member .code{font-size:9px;letter-spacing:.24em;color:var(--amb);margin:4px 0 10px}
+.member p{font-size:12px;line-height:1.85;color:var(--dim);text-align:left}
 .opsLog{max-width:760px;margin:0 auto;border:1px solid var(--line);background:var(--panel2)}
 .opsBar{padding:8px 14px;border-bottom:1px solid var(--line);font-size:10px;
   letter-spacing:.14em;color:var(--dimmer)}
@@ -204,9 +187,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 /* ============ RWD / MOTION ============ */
 @media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .field{height:320px}
-  .fieldHint{font-size:9px}
+  .grid,.crewGrid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
   .stat{border-bottom:1px solid var(--line)}
@@ -271,15 +252,8 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
   <section class="crew" id="crew">
     <h2>// THE CREW — bzteam</h2>
-    <p class="secSub">一人公司的組織圖。六個 AI 小弟駐在同一台 Cloud Run，走 LINE 回報，全年無休。點角色交談，或用方向鍵走過去。</p>
-    <div class="field" id="field" tabindex="0" aria-label="bzteam RPG 場景">
-      <div class="fieldHint" id="fieldHint">CLICK A CREW MEMBER TO TALK · ←↑↓→/WASD 移動 · ENTER 交談</div>
-      <div class="dlg hide" id="dlg">
-        <div class="dlgName" id="dlgName"></div>
-        <div class="dlgText" id="dlgText"></div>
-        <div class="dlgMore">▼ 再點一下</div>
-      </div>
-    </div>
+    <p class="secSub">一人公司的組織圖。六個 AI 小弟駐在同一台 Cloud Run，走 LINE 回報，全年無休。</p>
+    <div class="crewGrid" id="crewGrid"></div>
     <div class="opsLog">
       <div class="opsBar">bzteam@cloudrun:~$ crontab -l · DAILY OPS</div>
       <div class="opsBody" id="opsBody"></div>
@@ -469,114 +443,33 @@ const CREW=[
      ['    _+_    ','  .-|_|-.  ',' | (o)(o)| ','  \\  o  /  ','   |#..|   ','  /|   |\\  ',' SCANNING_ ']],
    desc:'系統軍醫。每天 heartbeat 巡檢全線服務，故障不等老闆發現——自己先傳 LINE 認錯。'}
 ];
-/* ---- RPG field: crew wander, visitor walks up and talks ---- */
 (function buildCrew(){
-  const field=$('#field'),dlg=$('#dlg'),dlgName=$('#dlgName'),dlgText=$('#dlgText');
-  const SPR=[ /* tiny walking bodies; frames[] from CREW stay unused here */
-    ['(ò_ó)','/|$|\\',' J L '],
-    ['($v$)','/|S|\\',' J L '],
-    ['(o_o)','/|T|\\',' J L '],
-    ['(=_=)','/|#|\\',' J L '],
-    ['(^_^)','/|V|\\',' J L '],
-    ['(+_+)','/|+|\\',' J L ']
-  ];
-  const TALK=[
-    ['本小時預測：偏多。理由等下一根 K 棒揭曉。','我每小時 :25 出手，:20 對答案，戰績全記在案。','猜錯我自己認，這叫職業道德。'],
-    ['老闆的賣場我顧著，競品我全看過一輪了。','老闆用數據選品定價，六個月做到單月 30 萬。我負責把貨上好上滿。','要買貓咪冰墊嗎？現在下單明天出貨。'],
-    ['你今天打卡了嗎？沒有的話我要開始催了。','行事曆我比對過了，該補的卡我都記得。','TICK TOCK。卡不打，我就傳 LINE。'],
-    ['這個月伙食超支 12%。我只是說出事實。','每一筆我都記著，包括你不想想起的那筆。','收支平衡是一種美德。BALANCE。'],
-    ['你有 3 件事逾期了，我明天還會再提醒。','寫在紙上的待辦不算數，進系統的才算。','+1 DONE。今天也是有產出的一天。'],
-    ['全線巡檢完畢，ALL GREEN。','服務掛掉我第一個知道，然後傳 LINE 認錯。','heartbeat 正常。老闆的系統比老闆健康。']
-  ];
-  const npcs=[];let player=null,keys={},dlgTimer=null,talkIdx=[];
-  function mkSprite(lines,nm,cls){
-    const el=document.createElement('div');
-    el.className='sprite'+(cls?' '+cls:'');
-    el.innerHTML='<pre></pre><div class="nm">'+nm+'</div>';
-    el.querySelector('pre').textContent=lines.join('\n');
-    field.appendChild(el);
-    return el;
+  const grid=$('#crewGrid');
+  for(const m of CREW){
+    const el=document.createElement('article');
+    el.className='member';
+    el.innerHTML='<pre></pre><h3>'+m.name+'</h3>'
+      +'<div class="code">'+m.code+'</div><p>'+m.desc+'</p>';
+    el.querySelector('pre').textContent=m.frames[0].join('\n');
+    grid.appendChild(el);
   }
-  function bounds(){return{w:field.clientWidth,h:field.clientHeight};}
-  CREW.forEach((m,i)=>{
-    const b=bounds();
-    const s={el:mkSprite(SPR[i],m.name,''),i,
-      x:R(40,b.w-90),y:R(50,b.h-120),tx:0,ty:0,wait:R(0,2),sp:R(22,40)};
-    s.tx=s.x;s.ty=s.y;
-    s.el.addEventListener('click',e=>{e.stopPropagation();talk(i);});
-    npcs.push(s);talkIdx.push(0);
-  });
-  player={el:mkSprite(['(@_@)','/|G|\\',' J L '],'YOU','player'),
-    x:20,y:20,sp:120};
-  function talk(i){
-    const m=CREW[i],lines=[m.desc].concat(TALK[i]);
-    const line=lines[talkIdx[i]%lines.length];talkIdx[i]++;
-    dlgName.textContent=m.name+' — '+m.code;
-    dlg.classList.remove('hide');
-    SFX.open();
-    /* typewriter */
-    dlgText.textContent='';
-    let p=0;
-    clearInterval(dlgTimer);
-    dlgTimer=setInterval(()=>{
-      dlgText.textContent=line.slice(0,++p);
-      if(p%3===0)SFX.tick();
-      if(p>=line.length)clearInterval(dlgTimer);
-    },26);
-    clearTimeout(talk._hide);
-    talk._hide=setTimeout(()=>dlg.classList.add('hide'),9000);
+  /* idle animation: long rest on frame 0, quick flash of frame 1;
+     the oracle re-rolls his TXF score every time he lands back on base */
+  if(!RM){
+    grid.querySelectorAll('.member pre').forEach((pre,i)=>{
+      const F=CREW[i].frames;
+      let fi=0;
+      (function loop(){
+        setTimeout(()=>{
+          fi=(fi+1)%F.length;
+          if(i===0&&fi===0)
+            F[0][6]=' [TXF '+(R(74,97)|0)+'%] ';
+          pre.textContent=F[fi].join('\n');
+          loop();
+        },fi===0?R(1600,4200):R(220,420));
+      })();
+    });
   }
-  function nearestNpc(){
-    let best=null,bd=80;
-    for(const n of npcs){
-      const d=Math.hypot(n.x-player.x,n.y-player.y);
-      if(d<bd){bd=d;best=n;}
-    }
-    return best;
-  }
-  /* input: field must be focused so arrows don't scroll the page */
-  if(!matchMedia('(hover:hover)').matches)
-    $('#fieldHint').textContent='TAP A CREW MEMBER TO TALK';
-  field.addEventListener('click',()=>field.focus());
-  const KEY={ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',ArrowUp:'u',w:'u',ArrowDown:'d',s:'d'};
-  field.addEventListener('keydown',e=>{
-    if(KEY[e.key]!==undefined){keys[KEY[e.key]]=1;e.preventDefault();}
-    if(e.key==='Enter'||e.key===' '){
-      const n=nearestNpc();if(n)talk(n.i);
-      e.preventDefault();
-    }
-  });
-  field.addEventListener('keyup',e=>{if(KEY[e.key]!==undefined)keys[KEY[e.key]]=0;});
-  field.addEventListener('blur',()=>{keys={};});
-  /* wander + player movement loop */
-  let last=performance.now();
-  function step(now){
-    const dt=Math.min(.05,(now-last)/1000);last=now;
-    const b=bounds();
-    for(const n of npcs){
-      if(n.wait>0){n.wait-=dt;}
-      else{
-        const dx=n.tx-n.x,dy=n.ty-n.y,d=Math.hypot(dx,dy);
-        if(d<2){n.tx=R(30,b.w-90);n.ty=R(40,b.h-120);n.wait=R(.8,4);}
-        else{n.x+=dx/d*n.sp*dt;n.y+=dy/d*n.sp*dt;}
-      }
-      n.el.style.transform='translate('+n.x+'px,'+n.y+'px)';
-    }
-    let vx=(keys.r?1:0)-(keys.l?1:0),vy=(keys.d?1:0)-(keys.u?1:0);
-    if(vx||vy){
-      const m=Math.hypot(vx,vy);
-      player.x=Math.max(4,Math.min(b.w-64,player.x+vx/m*player.sp*dt));
-      player.y=Math.max(4,Math.min(b.h-68,player.y+vy/m*player.sp*dt));
-    }
-    player.el.style.transform='translate('+player.x+'px,'+player.y+'px)';
-    const near=nearestNpc();
-    for(const n of npcs)n.el.classList.toggle('near',near===n);
-    requestAnimationFrame(step);
-  }
-  if(RM){ /* reduced motion: static placement, click-to-talk only */
-    npcs.forEach(n=>{n.el.style.transform='translate('+n.x+'px,'+n.y+'px)';});
-    player.el.style.transform='translate(20px,20px)';
-  }else requestAnimationFrame(step);
   const OPS=[
     ['07:30','THE MEDIC','heartbeat 全系統巡檢 · 沒事不吵，有事 LINE 認錯'],
     ['09:00','THE CLOCK','打卡日曆比對 · 該打沒打開始催'],
