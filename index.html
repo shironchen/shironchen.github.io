@@ -54,9 +54,9 @@ body::after{content:'';position:fixed;inset:0;z-index:315;pointer-events:none;
   flex-direction:column;justify-content:center;align-items:flex-start;
   padding:8vh 8vw;cursor:pointer;transition:opacity .6s}
 #boot.off{opacity:0;pointer-events:none}
-#bootLog{font-family:var(--font);font-size:clamp(11px,1.6vw,15px);line-height:2;
+#bootLog{font-family:var(--font);font-size:clamp(13px,1.9vw,17px);line-height:2;
   color:var(--grn);text-shadow:0 0 8px rgba(56,255,110,.5);white-space:pre-wrap}
-#bootEnter{margin-top:34px;font-size:clamp(13px,2vw,18px);letter-spacing:.24em;
+#bootEnter{margin-top:34px;font-size:clamp(15px,2.2vw,20px);letter-spacing:.24em;
   color:var(--grn2);border:1px solid var(--grn);padding:14px 26px;
   animation:pulse 1.2s ease-in-out infinite}
 #bootEnter.hide{display:none}
@@ -69,15 +69,15 @@ body::after{content:'';position:fixed;inset:0;z-index:315;pointer-events:none;
 header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;
   align-items:center;padding:14px 3vw;background:rgba(5,6,7,.88);
   border-bottom:1px solid var(--line);backdrop-filter:blur(3px)}
-.brand{font-size:19px;font-weight:700;letter-spacing:.1em;color:var(--ink)}
-nav{display:flex;gap:12px;align-items:center;font-size:11px;letter-spacing:.14em}
+.brand{font-size:22px;font-weight:700;letter-spacing:.1em;color:var(--ink)}
+nav{display:flex;gap:12px;align-items:center;font-size:13px;letter-spacing:.14em}
 nav a{color:var(--dim)}
 nav a:hover{color:var(--grn)}
 .chipBtn{background:transparent;border:1px solid var(--dimmer);color:var(--dim);
-  font-family:var(--font);font-size:11px;letter-spacing:.14em;padding:6px 12px;cursor:pointer}
+  font-family:var(--font);font-size:12px;letter-spacing:.14em;padding:6px 12px;cursor:pointer}
 .chipBtn.on{color:var(--grn);border-color:var(--grn);
   box-shadow:0 0 14px rgba(56,255,110,.3);text-shadow:0 0 8px rgba(56,255,110,.6)}
-#clock{color:var(--dimmer);font-size:11px;letter-spacing:.14em}
+#clock{color:var(--dimmer);font-size:12px;letter-spacing:.14em}
 
 /* ============ GLITCH ============ */
 .glitch{position:relative;display:inline-block}
@@ -91,20 +91,20 @@ nav a:hover{color:var(--grn)}
 /* ============ TICKER ============ */
 .ticker{overflow:hidden;border-bottom:1px solid var(--line);background:#040504;
   padding:7px 0;white-space:nowrap}
-.tickIn{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--grn);
+.tickIn{display:inline-block;font-size:12px;letter-spacing:.12em;color:var(--grn);
   text-shadow:0 0 8px rgba(56,255,110,.45);animation:tick 60s linear infinite}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ============ HERO ============ */
 .hero{padding:12vh 6vw 9vh;position:relative}
-.over{font-size:11px;letter-spacing:.12em;color:var(--dim);margin-bottom:20px}
-.hero h1{font-size:clamp(46px,8vw,110px);line-height:.92;font-weight:700;
+.over{font-size:13px;letter-spacing:.12em;color:var(--dim);margin-bottom:20px}
+.hero h1{font-size:clamp(52px,8.6vw,120px);line-height:.92;font-weight:700;
   color:var(--ink);text-shadow:0 0 30px rgba(56,255,110,.12)}
-.hero .sub{margin:26px 0 32px;max-width:560px;font-size:13px;color:var(--dim);
+.hero .sub{margin:26px 0 32px;max-width:600px;font-size:15px;color:var(--dim);
   letter-spacing:.06em;line-height:1.9}
 .heroBtns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;border:1px solid var(--grn);color:var(--grn);
-  padding:13px 24px;font-size:12px;letter-spacing:.1em;transition:.15s;background:transparent}
+  padding:14px 26px;font-size:13px;letter-spacing:.1em;transition:.15s;background:transparent}
 .btn:hover{box-shadow:0 0 22px rgba(56,255,110,.35),inset 0 0 12px rgba(56,255,110,.12);
   transform:translateY(-1px)}
 .btn.solid{background:var(--grn);color:#04120a;font-weight:700}
@@ -122,36 +122,59 @@ nav a:hover{color:var(--grn)}
 .card.feat h3{color:var(--amb)}
 .card.feat .chips span{border-color:rgba(255,182,72,.35)}
 .card .ribbon{position:absolute;top:0;right:0;background:var(--amb);color:#1a1206;
-  font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 10px}
+  font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 11px}
 
 /* ============ STATS ============ */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
   border-bottom:1px solid var(--line)}
 .stat{padding:26px 3vw;border-right:1px solid var(--line);text-align:center}
 .stat:last-child{border-right:none}
-.stat b{display:block;font-size:clamp(22px,3vw,34px);color:var(--grn);
+.stat b{display:block;font-size:clamp(26px,3.4vw,40px);color:var(--grn);
   text-shadow:0 0 14px rgba(56,255,110,.4)}
-.stat span{font-size:11px;letter-spacing:.1em;color:var(--dim)}
+.stat span{font-size:12px;letter-spacing:.1em;color:var(--dim)}
 
 /* ============ SUPPLY ============ */
 .supply{padding:70px 3vw}
-h2{font-size:13px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
-.secSub{font-size:12px;color:var(--dimmer);letter-spacing:.08em;margin-bottom:34px}
+h2{font-size:15px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
+.secSub{font-size:13px;color:var(--dimmer);letter-spacing:.08em;margin-bottom:34px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1180px;margin:0 auto}
 .card{border:1px solid var(--line);background:var(--panel);padding:20px;
   cursor:pointer;transition:.18s;position:relative;overflow:hidden}
 .card:hover{border-color:var(--grn);box-shadow:0 0 24px rgba(56,255,110,.14);
   transform:translateY(-2px)}
-.card pre.art{font-size:7px;line-height:7px;color:var(--grn);opacity:.75;
+.card pre.art{font-size:9px;line-height:9px;color:var(--grn);opacity:.75;
   margin-bottom:14px;text-shadow:0 0 6px rgba(56,255,110,.4);overflow:hidden}
 .cardHead{display:flex;justify-content:space-between;align-items:baseline;
   gap:8px;flex-wrap:wrap;margin-bottom:6px}
-.card h3{font-size:16px;letter-spacing:.08em;color:var(--ink)}
-.tag{font-size:10px;letter-spacing:.08em;color:var(--amb);white-space:nowrap}
-.card p{font-size:12px;line-height:1.85;color:var(--dim);margin-bottom:14px}
+.card h3{font-size:18px;letter-spacing:.08em;color:var(--ink)}
+.tag{font-size:11px;letter-spacing:.08em;color:var(--amb);white-space:nowrap}
+.card p{font-size:13px;line-height:1.85;color:var(--dim);margin-bottom:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{font-size:9px;letter-spacing:.12em;color:var(--grn);
+.chips span{font-size:10px;letter-spacing:.12em;color:var(--grn);
   border:1px solid var(--grndk);padding:3px 8px}
+
+/* ============ BIZ (shopee numbers) ============ */
+.biz{padding:70px 3vw;border-top:1px solid var(--line)}
+.bizWrap{max-width:1180px;margin:0 auto}
+.bizGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.bizStat{border:1px solid var(--line);background:var(--panel);padding:20px 22px}
+.bizStat b{display:block;font-size:clamp(24px,3vw,34px);color:var(--amb);
+  text-shadow:0 0 16px rgba(255,182,72,.35);line-height:1.2}
+.bizStat span{display:block;margin-top:6px;font-size:12px;letter-spacing:.06em;color:var(--dim)}
+.bizStat i{font-style:normal;color:var(--grn)}
+.chartBox{border:1px solid var(--line);background:var(--panel2)}
+.chartBar{padding:9px 15px;border-bottom:1px solid var(--line);font-size:11px;
+  letter-spacing:.08em;color:var(--dimmer)}
+.chartBody{padding:18px}
+.row{display:flex;align-items:center;gap:12px;font-size:12px;margin-bottom:9px}
+.row:last-child{margin-bottom:0}
+.row .mo{color:var(--dim);min-width:64px}
+.row .track{flex:1;height:14px;background:#0b0f0c;border:1px solid var(--line);position:relative}
+.row .fill{position:absolute;left:0;top:0;bottom:0;background:var(--amb);
+  box-shadow:0 0 12px rgba(255,182,72,.4);opacity:.85}
+.row .val{color:var(--amb);min-width:76px;text-align:right}
+.row .ord{color:var(--dimmer);min-width:74px;text-align:right}
+.bizNote{margin-top:16px;font-size:12px;line-height:1.9;color:var(--dimmer)}
 
 /* ============ CREW ============ */
 .crew{padding:70px 3vw;border-top:1px solid var(--line)}
@@ -159,15 +182,15 @@ h2{font-size:13px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
 .member{border:1px solid var(--line);background:var(--panel);padding:20px;
   text-align:center;transition:.18s}
 .member:hover{border-color:var(--amb);box-shadow:0 0 24px rgba(255,182,72,.12)}
-.member pre{font-size:11px;line-height:13px;color:var(--amb);
+.member pre{font-size:13px;line-height:15px;color:var(--amb);
   text-shadow:0 0 6px rgba(255,182,72,.4);margin-bottom:12px}
-.member h3{font-size:15px;letter-spacing:.1em;color:var(--ink)}
-.member .code{font-size:10px;letter-spacing:.08em;color:var(--amb);margin:4px 0 10px}
-.member p{font-size:12px;line-height:1.85;color:var(--dim);text-align:left}
+.member h3{font-size:17px;letter-spacing:.1em;color:var(--ink)}
+.member .code{font-size:11px;letter-spacing:.08em;color:var(--amb);margin:4px 0 10px}
+.member p{font-size:13px;line-height:1.85;color:var(--dim);text-align:left}
 .opsLog{max-width:760px;margin:0 auto;border:1px solid var(--line);background:var(--panel2)}
-.opsBar{padding:8px 14px;border-bottom:1px solid var(--line);font-size:10px;
+.opsBar{padding:9px 15px;border-bottom:1px solid var(--line);font-size:11px;
   letter-spacing:.14em;color:var(--dimmer)}
-.opsBody{padding:16px 18px;font-size:12px;line-height:2.2}
+.opsBody{padding:16px 18px;font-size:13px;line-height:2.2}
 .opsRow{display:flex;gap:14px;flex-wrap:wrap}
 .opsRow .t{color:var(--grn);min-width:52px}
 .opsRow .w{color:var(--amb);min-width:110px;letter-spacing:.06em}
@@ -180,9 +203,9 @@ h2{font-size:13px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
   font-size:9px;line-height:9px;color:var(--grndk);opacity:.5;pointer-events:none;
   white-space:pre}
 .manifesto .in{position:relative;z-index:2;max-width:680px;margin:0 auto}
-.manifesto .big{font-size:clamp(22px,3.4vw,36px);font-weight:700;letter-spacing:.06em;
+.manifesto .big{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:.06em;
   margin:18px 0 26px;text-shadow:0 0 24px rgba(56,255,110,.2)}
-.manifesto p{font-size:13px;line-height:2.1;color:var(--dim);letter-spacing:.05em}
+.manifesto p{font-size:15px;line-height:2.1;color:var(--dim);letter-spacing:.05em}
 .manifesto .goal{display:inline-block;margin-top:14px;color:var(--amb);
   text-shadow:0 0 12px rgba(255,182,72,.35)}
 
@@ -191,19 +214,20 @@ h2{font-size:13px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
 .orderBox{display:inline-block;border:1px solid var(--line);background:var(--panel2);
   padding:36px clamp(20px,6vw,70px);margin-top:22px;text-align:left}
 .orderRow{display:flex;gap:18px;align-items:baseline;padding:10px 0;
-  border-bottom:1px dashed var(--line);font-size:13px}
+  border-bottom:1px dashed var(--line);font-size:15px}
 .orderRow:last-child{border-bottom:none}
-.orderRow .k{color:var(--dimmer);font-size:11px;letter-spacing:.08em;min-width:90px}
+.orderRow .k{color:var(--dimmer);font-size:12px;letter-spacing:.08em;min-width:100px}
 .orderRow a:hover{text-shadow:0 0 10px rgba(56,255,110,.7)}
 .redacted{color:var(--dimmer);letter-spacing:.1em}
 
 footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   justify-content:space-between;flex-wrap:wrap;gap:8px;
-  font-size:11px;letter-spacing:.08em;color:var(--dimmer)}
+  font-size:12px;letter-spacing:.08em;color:var(--dimmer)}
 
 /* ============ RWD / MOTION ============ */
 @media(max-width:900px){
-  .grid,.crewGrid{grid-template-columns:1fr}
+  .grid,.crewGrid,.bizGrid{grid-template-columns:1fr}
+  .row .ord{display:none}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
   .stat{border-bottom:1px solid var(--line)}
@@ -231,6 +255,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   <div class="brand glitch" data-t="陳祺昀">陳祺昀</div>
   <nav>
     <a href="#supply">貨源</a>
+    <a href="#biz">戰績</a>
     <a href="#crew">團隊</a>
     <a href="#manifesto">宣言</a>
     <a href="#contact">聯絡</a>
@@ -244,7 +269,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 <main>
   <section class="hero">
     <div class="over">// 個人檔案 — 陳祺昀（BZ）· AI 數據應用工程師 · 喵盒子創辦人 · 台北</div>
-    <h1>數據<br>販子_</h1>
+    <h1>AI<br>工程師_</h1>
     <p class="sub">白天在電視台搬資料，晚上在電商倉庫搬貨。
       交貨準時，全年無休。</p>
     <div class="heroBtns">
@@ -257,7 +282,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   <section class="stats">
     <div class="stat"><b>6+</b><span>出貨專案</span></div>
     <div class="stat"><b>24/7</b><span>管線運轉中</span></div>
-    <div class="stat"><b>30萬+</b><span>賣場月營收 · 六個月達成</span></div>
+    <div class="stat"><b>257萬</b><span>蝦皮賣場營收 · 2026 前七月</span></div>
     <div class="stat"><b>0</b><span>條子出沒</span></div>
   </section>
 
@@ -265,6 +290,20 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
     <h2>// 貨源</h2>
     <p class="secSub">六件現貨。全部實戰，全部在線。點卡片驗貨。</p>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="biz" id="biz">
+    <div class="bizWrap">
+      <h2>// 數據戰績 — 喵盒子蝦皮賣場</h2>
+      <p class="secSub">沒有砸廣告。選品、定價、上架節奏都用數據決定，回頭客靠社群經營養出來。以下是後台實際數字。</p>
+      <div class="bizGrid" id="bizGrid"></div>
+      <div class="chartBox">
+        <div class="chartBar">meowbox@shopee:~$ 每月銷售額 · 2026/01 — 2026/07</div>
+        <div class="chartBody" id="chartBody"></div>
+      </div>
+      <p class="bizNote">資料來源：蝦皮賣場後台銷售報表（全部訂單），統計期間 2026/01/01–2026/07/31。
+        已付款訂單口徑為 237.6 萬、4,435 筆。</p>
+    </div>
   </section>
 
   <section class="crew" id="crew">
@@ -300,6 +339,8 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
         <a href="https://www.meowbox.tw/" target="_blank" rel="noopener">www.meowbox.tw — 喵盒子．貓咪互助地圖（我創辦的）</a></div>
       <div class="orderRow"><span class="k">信箱</span>
         <a href="mailto:shironchen@gmail.com">shironchen@gmail.com</a></div>
+      <div class="orderRow"><span class="k">手機</span>
+        <a href="tel:+886972840649">+886-972-840-649</a></div>
       <div class="orderRow"><span class="k">LINKEDIN</span>
         <span class="redacted">[保密中 — 近期補上]</span></div>
     </div>
@@ -398,7 +439,7 @@ const GOODS=[
    desc:'電視台級資料管線。GCP 上進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮。貨源穩定，每日出貨。',
    chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON']},
   {id:'meowbox',name:'MEOWBOX',tag:'創辦人 · 貓咪部門',
-   desc:'喵盒子 www.meowbox.tw，本人創辦的貓咪互助地圖與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，六個月內把賣場營收做到單月 30 萬+。',
+   desc:'喵盒子 www.meowbox.tw，本人創辦的貓咪互助地圖與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，2026 前七個月做到 257 萬營收、4,798 筆訂單，訂單數年增 363%。',
    chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://www.meowbox.tw/'},
   {id:'txf',name:'TXF ORACLE',tag:'期貨算命仙',
    desc:'台指期每小時預測 routine。雲端排程分析、官方價自動記分、LINE 準時播報，猜錯自己認。',
@@ -430,6 +471,30 @@ const GOODS=[
     }
     grid.appendChild(el);
   }
+})();
+
+/* ---------------- BIZ: shopee numbers (real backend export) ---------------- */
+(function buildBiz(){
+  const STATS=[
+    ['NT$ 257萬','2026 前七個月銷售額','（4,798 筆訂單）'],
+    ['+363%','訂單數年增','比 2025 同期'],
+    ['3.04%','訂單轉換率','7.7 萬訪客進站'],
+    ['NT$ 536','平均客單價','靠組合包與加購拉高'],
+    ['15.8萬','商品點擊數','自然流量為主'],
+    ['0.83%','退款率','40 / 4,798 筆']
+  ];
+  $('#bizGrid').innerHTML=STATS.map(s=>
+    '<div class="bizStat"><b>'+s[0]+'</b><span>'+s[1]+'</span><span><i>'+s[2]+'</i></span></div>').join('');
+
+  /* 月營收：直接取自後台匯出的 xlsx */
+  const M=[['01',343027,669],['02',357897,685],['03',313591,592],['04',416878,779],
+           ['05',381657,686],['06',358724,637],['07',402237,750]];
+  const max=Math.max(...M.map(m=>m[1]));
+  $('#chartBody').innerHTML=M.map(m=>
+    '<div class="row"><span class="mo">2026/'+m[0]+'</span>'
+    +'<span class="track"><span class="fill" style="width:'+(m[1]/max*100).toFixed(1)+'%"></span></span>'
+    +'<span class="val">'+(m[1]/10000).toFixed(1)+' 萬</span>'
+    +'<span class="ord">'+m[2]+' 單</span></div>').join('');
 })();
 
 /* ---------------- THE CREW (bzteam roster + daily ops) ---------------- */
@@ -522,7 +587,7 @@ $('#wings').textContent=asciiRender(92,24,function(g,w,h){
 },' .:!*#%');
 
 /* ---------------- TICKER + CLOCK ---------------- */
-$('#tick').textContent=('★ 目標職位：AI 數據應用工程師 ★ 現貨：資料管線 · LLM 應用 · 機器人 · 貓咪網站 ★ 喵盒子 www.meowbox.tw 創辦人 ★ 數據驅動：賣場月營收 30 萬+，六個月達成 ★ SQL 純度 99.9% ★ 跑在 GCP，從不休息 ★ 即時出貨 ★ 沒有條子 ★ ').repeat(6);
+$('#tick').textContent=('★ 目標職位：AI 數據應用工程師 ★ 現貨：資料管線 · LLM 應用 · 機器人 · 貓咪網站 ★ 喵盒子 www.meowbox.tw 創辦人 ★ 數據驅動：蝦皮賣場 2026 前七月營收 257 萬 · 訂單年增 363% ★ SQL 純度 99.9% ★ 跑在 GCP，從不休息 ★ 即時出貨 ★ 沒有條子 ★ ').repeat(6);
 setInterval(()=>{$('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
 
 /* ---------------- MATRIX RAIN (bg + fg bleed layer) ---------------- */
