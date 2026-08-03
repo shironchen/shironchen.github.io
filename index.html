@@ -110,6 +110,20 @@ nav a:hover{color:var(--grn)}
 .btn.solid{background:var(--grn);color:#04120a;font-weight:700}
 .btn.solid:hover{background:var(--grn2)}
 
+/* meowbox CTA — amber so it reads as a separate destination, not a jump link */
+.btn.meow{border-color:var(--amb);color:var(--amb)}
+.btn.meow:hover{box-shadow:0 0 22px rgba(255,182,72,.45),inset 0 0 12px rgba(255,182,72,.14);
+  background:rgba(255,182,72,.06)}
+
+/* the founder card is the one piece of the supply that is actually mine */
+.card.feat{border-color:var(--amb);background:linear-gradient(180deg,rgba(255,182,72,.05),transparent 60%),var(--panel)}
+.card.feat:hover{border-color:var(--amb);box-shadow:0 0 30px rgba(255,182,72,.28)}
+.card.feat pre.art{color:var(--amb);text-shadow:0 0 8px rgba(255,182,72,.5)}
+.card.feat h3{color:var(--amb)}
+.card.feat .chips span{border-color:rgba(255,182,72,.35)}
+.card .ribbon{position:absolute;top:0;right:0;background:var(--amb);color:#1a1206;
+  font-size:9px;font-weight:700;letter-spacing:.18em;padding:4px 10px}
+
 /* ============ STATS ============ */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
   border-bottom:1px solid var(--line)}
@@ -229,11 +243,12 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   <section class="hero">
     <div class="over">// PERSONAL FILE — 陳祺昀 (BZ) · DATA ENGINEER · FOUNDER OF MEOWBOX.TW · TAIPEI</div>
     <h1>DATA<br>DEALER_</h1>
-    <p class="sub">白天在電視台搬資料，晚上供應自己的 side projects。
-      管線純度 99.9%，交貨準時，全年無休，不賣訂閱。</p>
+    <p class="sub">白天在電視台搬資料，晚上在電商倉庫搬貨。
+      交貨準時，全年無休。</p>
     <div class="heroBtns">
       <a class="btn solid" href="#supply">VIEW THE SUPPLY</a>
       <a class="btn" href="#contact">CONTACT THE PLUG</a>
+      <a class="btn meow" href="https://www.meowbox.tw/" target="_blank" rel="noopener">喵盒子 MEOWBOX.TW ↗</a>
     </div>
   </section>
 
@@ -279,7 +294,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
       <div class="orderRow"><span class="k">PAPERWORK</span>
         <a href="./resume/">正式履歷 — 繁中／简中／日本語／English</a></div>
       <div class="orderRow"><span class="k">MEOWBOX</span>
-        <a href="https://meowbox.tw" target="_blank" rel="noopener">meowbox.tw — 我創辦的貓咪社群</a></div>
+        <a href="https://www.meowbox.tw/" target="_blank" rel="noopener">www.meowbox.tw — 喵盒子．貓咪互助地圖（我創辦的）</a></div>
       <div class="orderRow"><span class="k">EMAIL</span>
         <a href="mailto:shironchen@gmail.com">shironchen@gmail.com</a></div>
       <div class="orderRow"><span class="k">LINKEDIN</span>
@@ -386,8 +401,8 @@ const GOODS=[
    desc:'LINE 上的私人 AI 團隊。待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
    chips:['FASTAPI','FIRESTORE','LINE','SCHEDULER']},
   {id:'meowbox',name:'MEOWBOX',tag:'FOUNDER · CAT DIVISION',
-   desc:'喵盒子 meowbox.tw，本人創辦的台灣貓咪社群與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，六個月內把賣場營收做到單月 30 萬+。',
-   chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://meowbox.tw'},
+   desc:'喵盒子 www.meowbox.tw，本人創辦的貓咪互助地圖與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，六個月內把賣場營收做到單月 30 萬+。',
+   chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://www.meowbox.tw/'},
   {id:'txf',name:'TXF ORACLE',tag:'THE FORTUNE TELLER',
    desc:'台指期每小時預測 routine。雲端排程分析、官方價自動記分、LINE 準時播報，猜錯自己認。',
    chips:['SCHEDULER','LLM','LINE']}
@@ -402,6 +417,10 @@ const GOODS=[
       +'<p>'+p.desc+'</p>'
       +'<div class="chips">'+p.chips.map(c=>'<span>'+c+'</span>').join('')+'</div>';
     el.querySelector('.art').textContent=asciiRender(46,20,ART[p.id]);
+    if(p.id==='meowbox'){
+      el.classList.add('feat');
+      el.insertAdjacentHTML('afterbegin','<span class="ribbon">MY OWN</span>');
+    }
     if(p.link){
       el.style.cursor='pointer';
       el.addEventListener('click',()=>window.open(p.link,'_blank','noopener'));
@@ -500,7 +519,7 @@ $('#wings').textContent=asciiRender(92,24,function(g,w,h){
 },' .:!*#%');
 
 /* ---------------- TICKER + CLOCK ---------------- */
-$('#tick').textContent=('★ THE SUPPLY: DATA PIPELINES · BOTS · CAT SITES ★ DATA-DRIVEN: STORE REVENUE NT$300K+/MO IN 6 MONTHS ★ SQL PURITY 99.9% ★ RUNS ON GCP · SLEEPS NEVER ★ INSTANT DELIVERY ★ NO NARCS ★ ').repeat(6);
+$('#tick').textContent=('★ THE SUPPLY: DATA PIPELINES · BOTS · CAT SITES ★ FOUNDER OF MEOWBOX.TW · 喵盒子 ★ DATA-DRIVEN: STORE REVENUE NT$300K+/MO IN 6 MONTHS ★ SQL PURITY 99.9% ★ RUNS ON GCP · SLEEPS NEVER ★ INSTANT DELIVERY ★ NO NARCS ★ ').repeat(6);
 setInterval(()=>{$('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
 
 /* ---------------- MATRIX RAIN (bg + fg bleed layer) ---------------- */
