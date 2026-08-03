@@ -162,18 +162,46 @@ h2{font-size:15px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
   text-shadow:0 0 16px rgba(255,182,72,.35);line-height:1.2}
 .bizStat span{display:block;margin-top:6px;font-size:12px;letter-spacing:.06em;color:var(--dim)}
 .bizStat i{font-style:normal;color:var(--grn)}
-.chartBox{border:1px solid var(--line);background:var(--panel2)}
-.chartBar{padding:9px 15px;border-bottom:1px solid var(--line);font-size:11px;
-  letter-spacing:.08em;color:var(--dimmer)}
-.chartBody{padding:18px}
-.row{display:flex;align-items:center;gap:12px;font-size:12px;margin-bottom:9px}
-.row:last-child{margin-bottom:0}
-.row .mo{color:var(--dim);min-width:64px}
-.row .track{flex:1;height:14px;background:#0b0f0c;border:1px solid var(--line);position:relative}
-.row .fill{position:absolute;left:0;top:0;bottom:0;background:var(--amb);
-  box-shadow:0 0 12px rgba(255,182,72,.4);opacity:.85}
-.row .val{color:var(--amb);min-width:76px;text-align:right}
-.row .ord{color:var(--dimmer);min-width:74px;text-align:right}
+/* 可收合面板 */
+.panel{border:1px solid var(--line);background:var(--panel2)}
+.panelHead{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  padding:12px 16px;background:transparent;border:0;border-bottom:1px solid var(--line);
+  color:var(--dim);font-family:var(--font);font-size:12px;letter-spacing:.08em;
+  cursor:pointer;text-align:left}
+.panelHead:hover{color:var(--amb)}
+.panelHead .caret{color:var(--amb);transition:transform .25s}
+.panel.closed .panelHead{border-bottom-color:transparent}
+.panel.closed .caret{transform:rotate(-90deg)}
+.panelBody{overflow:hidden;transition:max-height .35s ease}
+/* 指標切換 */
+.mchips{display:flex;flex-wrap:wrap;gap:8px;padding:16px 16px 0}
+.mchip{background:transparent;border:1px solid var(--dimmer);color:var(--dim);
+  font-family:var(--font);font-size:12px;letter-spacing:.06em;padding:6px 13px;cursor:pointer;
+  transition:.15s}
+.mchip:hover{color:var(--amb);border-color:var(--amb)}
+.mchip.on{color:#1a1206;background:var(--amb);border-color:var(--amb);font-weight:700;
+  box-shadow:0 0 16px rgba(255,182,72,.3)}
+/* 折線圖 */
+.chartWrap{position:relative;padding:14px 16px 16px;touch-action:pan-y}
+.chartWrap svg{display:block;width:100%;height:auto;overflow:visible}
+.gridline{stroke:var(--line);stroke-width:1}
+.axtx{fill:var(--dimmer);font-family:var(--font);font-size:10px}
+.area{fill:url(#gAmb)}
+.pline{fill:none;stroke:var(--amb);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;
+  filter:drop-shadow(0 0 6px rgba(255,182,72,.55))}
+.pline.anim{transition:stroke-dashoffset 1.1s ease-out}
+.dot{fill:var(--panel2);stroke:var(--amb);stroke-width:2}
+.hair{stroke:var(--amb);stroke-width:1;stroke-dasharray:3 3;opacity:0}
+.hdot{fill:var(--amb);opacity:0;filter:drop-shadow(0 0 8px rgba(255,182,72,.9))}
+.chartWrap.live .hair,.chartWrap.live .hdot{opacity:1}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .12s;
+  border:1px solid var(--amb);background:rgba(4,5,4,.96);padding:9px 13px;font-size:12px;
+  line-height:1.75;white-space:nowrap;z-index:4;box-shadow:0 0 20px rgba(255,182,72,.28)}
+.chartWrap.live .tip{opacity:1}
+.tip .tm{color:var(--dimmer);font-size:11px}
+.tip b{color:var(--amb);font-size:14px}
+.tip .sub{color:var(--dim)}
+.chartHint{padding:0 16px 14px;font-size:11px;color:var(--dimmer);letter-spacing:.06em}
 .bizNote{margin-top:16px;font-size:12px;line-height:1.9;color:var(--dimmer)}
 
 /* ============ CREW ============ */
@@ -226,8 +254,8 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 /* ============ RWD / MOTION ============ */
 @media(max-width:900px){
-  .grid,.crewGrid,.bizGrid{grid-template-columns:1fr}
-  .row .ord{display:none}
+  .grid,.crewGrid{grid-template-columns:1fr}
+  .bizGrid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
   .stat{border-bottom:1px solid var(--line)}
@@ -297,9 +325,19 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
       <h2>// 數據戰績 — 喵盒子蝦皮賣場</h2>
       <p class="secSub">沒有砸廣告。選品、定價、上架節奏都用數據決定，回頭客靠社群經營養出來。以下是後台實際數字。</p>
       <div class="bizGrid" id="bizGrid"></div>
-      <div class="chartBox">
-        <div class="chartBar">meowbox@shopee:~$ 每月銷售額 · 2026/01 — 2026/07</div>
-        <div class="chartBody" id="chartBody"></div>
+      <div class="panel" id="bizPanel">
+        <button class="panelHead" id="bizToggle" aria-expanded="true" aria-controls="bizBody">
+          <span>meowbox@shopee:~$ 每月營運數據 · 2026/01 — 2026/07</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="panelBody" id="bizBody">
+          <div class="mchips" id="mchips"></div>
+          <div class="chartWrap" id="chartWrap">
+            <svg id="chart" role="img" aria-label="每月營運數據折線圖"></svg>
+            <div class="tip" id="tip"></div>
+          </div>
+          <div class="chartHint">切換上方指標看不同面向 · 滑過或點圖表查各月數字</div>
+        </div>
       </div>
       <p class="bizNote">資料來源：蝦皮賣場後台銷售報表（全部訂單），統計期間 2026/01/01–2026/07/31。
         已付款訂單口徑為 237.6 萬、4,435 筆。</p>
@@ -486,15 +524,160 @@ const GOODS=[
   $('#bizGrid').innerHTML=STATS.map(s=>
     '<div class="bizStat"><b>'+s[0]+'</b><span>'+s[1]+'</span><span><i>'+s[2]+'</i></span></div>').join('');
 
-  /* 月營收：直接取自後台匯出的 xlsx */
-  const M=[['01',343027,669],['02',357897,685],['03',313591,592],['04',416878,779],
-           ['05',381657,686],['06',358724,637],['07',402237,750]];
-  const max=Math.max(...M.map(m=>m[1]));
-  $('#chartBody').innerHTML=M.map(m=>
-    '<div class="row"><span class="mo">2026/'+m[0]+'</span>'
-    +'<span class="track"><span class="fill" style="width:'+(m[1]/max*100).toFixed(1)+'%"></span></span>'
-    +'<span class="val">'+(m[1]/10000).toFixed(1)+' 萬</span>'
-    +'<span class="ord">'+m[2]+' 單</span></div>').join('');
+})();
+
+/* ---------------- BIZ CHART：可收合 + 可互動折線圖 ---------------- */
+(function bizChart(){
+  /* 後台匯出報表（全部訂單）逐月數字 */
+  const D=[
+    {m:'2026/01',rev:343027,ord:669,aov:512.75,cvr:3.20,vis:13285,clk:20883},
+    {m:'2026/02',rev:357897,ord:685,aov:522.48,cvr:3.31,vis:12296,clk:20692},
+    {m:'2026/03',rev:313591,ord:592,aov:529.71,cvr:2.89,vis:11872,clk:20519},
+    {m:'2026/04',rev:416878,ord:779,aov:535.15,cvr:3.28,vis:12837,clk:23743},
+    {m:'2026/05',rev:381657,ord:686,aov:556.35,cvr:2.86,vis:13280,clk:24023},
+    {m:'2026/06',rev:358724,ord:637,aov:563.15,cvr:2.92,vis:12532,clk:21779},
+    {m:'2026/07',rev:402237,ord:750,aov:536.32,cvr:2.84,vis:14351,clk:26401}
+  ];
+  const MET=[
+    {k:'rev',t:'銷售額',f:v=>(v/10000).toFixed(1)+' 萬',ax:v=>(v/10000).toFixed(0)+'萬',
+     sub:d=>d.ord+' 筆訂單 · 客單價 NT$'+d.aov.toFixed(0)},
+    {k:'ord',t:'訂單數',f:v=>v+' 筆',ax:v=>v.toFixed(0),
+     sub:d=>'銷售額 '+(d.rev/10000).toFixed(1)+' 萬'},
+    {k:'aov',t:'客單價',f:v=>'NT$ '+v.toFixed(0),ax:v=>v.toFixed(0),
+     sub:d=>d.ord+' 筆訂單'},
+    {k:'cvr',t:'轉換率',f:v=>v.toFixed(2)+' %',ax:v=>v.toFixed(1)+'%',
+     sub:d=>d.vis.toLocaleString()+' 訪客 → '+d.ord+' 單'},
+    {k:'vis',t:'訪客數',f:v=>v.toLocaleString()+' 人',ax:v=>(v/1000).toFixed(0)+'k',
+     sub:d=>'轉換率 '+d.cvr.toFixed(2)+'%'},
+    {k:'clk',t:'商品點擊',f:v=>v.toLocaleString(),ax:v=>(v/1000).toFixed(0)+'k',
+     sub:d=>d.vis.toLocaleString()+' 位訪客帶來'}
+  ];
+  const NS='http://www.w3.org/2000/svg';
+  const svg=$('#chart'),wrap=$('#chartWrap'),tip=$('#tip'),chipBox=$('#mchips');
+  const panel=$('#bizPanel'),body=$('#bizBody'),tog=$('#bizToggle');
+  let cur=0,X=[],Y=[],geo=null;
+
+  function mk(n,a){const e=document.createElementNS(NS,n);
+    for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+  chipBox.innerHTML=MET.map((m,i)=>
+    '<button class="mchip'+(i?'':' on')+'" data-i="'+i+'">'+m.t+'</button>').join('');
+  chipBox.addEventListener('click',e=>{
+    const b=e.target.closest('.mchip'); if(!b)return;
+    cur=+b.dataset.i;
+    chipBox.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('on',c===b));
+    hide(); draw(true); SFX.open();
+  });
+
+  function draw(animate){
+    const m=MET[cur];
+    const W=Math.max(280,wrap.clientWidth-32);
+    const H=Math.max(190,Math.min(330,Math.round(W*0.42)));
+    const PL=W<420?42:56,PR=14,PT=16,PB=28;
+    const iw=W-PL-PR,ih=H-PT-PB;
+    const vals=D.map(d=>d[m.k]);
+    let mn=Math.min(...vals),mx=Math.max(...vals);
+    const pad=(mx-mn)*0.22||mx*0.1;
+    mn=Math.max(0,mn-pad);mx=mx+pad;
+    X=D.map((_,i)=>PL+iw*(i/(D.length-1)));
+    Y=D.map(d=>PT+ih*(1-(d[m.k]-mn)/(mx-mn)));
+    geo={PL:PL,iw:iw,H:H};
+
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    svg.setAttribute('width',W); svg.setAttribute('height',H);
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+
+    const defs=mk('defs');
+    const g=mk('linearGradient',{id:'gAmb',x1:0,y1:0,x2:0,y2:1});
+    g.appendChild(mk('stop',{offset:'0%','stop-color':'#ffb648','stop-opacity':'.28'}));
+    g.appendChild(mk('stop',{offset:'100%','stop-color':'#ffb648','stop-opacity':'0'}));
+    defs.appendChild(g); svg.appendChild(defs);
+
+    for(let i=0;i<=4;i++){
+      const y=PT+ih*i/4,v=mx-(mx-mn)*i/4;
+      svg.appendChild(mk('line',{class:'gridline',x1:PL,y1:y,x2:PL+iw,y2:y}));
+      const t=mk('text',{class:'axtx',x:PL-8,y:y+3.5,'text-anchor':'end'});
+      t.textContent=m.ax(v); svg.appendChild(t);
+    }
+    D.forEach((d,i)=>{
+      const t=mk('text',{class:'axtx',x:X[i],y:PT+ih+18,'text-anchor':'middle'});
+      t.textContent=d.m.slice(5); svg.appendChild(t);
+    });
+
+    let ap='M'+X[0]+','+(PT+ih);
+    D.forEach((_,i)=>{ap+=' L'+X[i]+','+Y[i];});
+    ap+=' L'+X[X.length-1]+','+(PT+ih)+' Z';
+    svg.appendChild(mk('path',{class:'area',d:ap}));
+
+    const lp='M'+X.map((x,i)=>x+','+Y[i]).join(' L');
+    const line=mk('path',{class:'pline',d:lp});
+    svg.appendChild(line);
+    if(animate&&!RM){
+      const L=line.getTotalLength();
+      line.style.strokeDasharray=L; line.style.strokeDashoffset=L;
+      requestAnimationFrame(()=>{line.classList.add('anim');line.style.strokeDashoffset=0;});
+    }
+    D.forEach((_,i)=>svg.appendChild(mk('circle',{class:'dot',cx:X[i],cy:Y[i],r:3.5})));
+
+    svg.appendChild(mk('line',{class:'hair',id:'hair',x1:0,y1:PT,x2:0,y2:PT+ih}));
+    svg.appendChild(mk('circle',{class:'hdot',id:'hdot',cx:0,cy:0,r:5.5}));
+  }
+
+  function show(i,m){
+    const d=D[i];
+    svg.querySelector('#hair').setAttribute('x1',X[i]);
+    svg.querySelector('#hair').setAttribute('x2',X[i]);
+    const hd=svg.querySelector('#hdot');
+    hd.setAttribute('cx',X[i]); hd.setAttribute('cy',Y[i]);
+    tip.innerHTML='<div class="tm">'+d.m+'</div><b>'+m.f(d[m.k])+'</b>'
+      +'<div class="sub">'+m.sub(d)+'</div>';
+    wrap.classList.add('live');
+    const scale=wrap.clientWidth/ (geo.iw+geo.PL+14);
+    const px=16+X[i]*scale, py=16+Y[i]*scale;
+    const tw=tip.offsetWidth,th=tip.offsetHeight;
+    let L=px-tw/2; L=Math.max(8,Math.min(wrap.clientWidth-tw-8,L));
+    let T=py-th-14; if(T<4)T=py+16;
+    tip.style.left=L+'px'; tip.style.top=T+'px';
+  }
+  function hide(){wrap.classList.remove('live');}
+
+  function locate(ev){
+    const r=svg.getBoundingClientRect();
+    const x=(ev.clientX-r.left)/r.width*(geo.iw+geo.PL+14);
+    let best=0,bd=1e9;
+    X.forEach((xx,i)=>{const d=Math.abs(xx-x);if(d<bd){bd=d;best=i;}});
+    show(best,MET[cur]);
+  }
+  wrap.addEventListener('pointermove',locate);
+  wrap.addEventListener('pointerdown',locate);
+  wrap.addEventListener('pointerleave',hide);
+
+  /* 收合 */
+  tog.addEventListener('click',()=>{
+    const open=panel.classList.contains('closed');
+    SFX.tick();
+    if(open){
+      panel.classList.remove('closed');
+      body.style.maxHeight=body.scrollHeight+'px';
+      body.addEventListener('transitionend',function done(){
+        body.style.maxHeight='none';
+        body.removeEventListener('transitionend',done);
+        draw(true);
+      },{once:true});
+    }else{
+      hide();
+      body.style.maxHeight=body.scrollHeight+'px';
+      requestAnimationFrame(()=>{
+        panel.classList.add('closed');
+        body.style.maxHeight='0px';
+      });
+    }
+    tog.setAttribute('aria-expanded',open?'true':'false');
+  });
+
+  let rt=null;
+  addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{hide();draw(false);},160);});
+  draw(!RM);
 })();
 
 /* ---------------- THE CREW (bzteam roster + daily ops) ---------------- */
