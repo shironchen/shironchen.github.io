@@ -241,12 +241,14 @@ h2{font-size:17px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
 
 /* ============ CONTACT ============ */
 .contact{padding:70px 3vw 90px;border-top:1px solid var(--line);text-align:center}
-.orderBox{display:inline-block;border:1px solid var(--line);background:var(--panel2);
+.orderBox{display:inline-block;max-width:100%;box-sizing:border-box;
+  border:1px solid var(--line);background:var(--panel2);
   padding:36px clamp(20px,6vw,70px);margin-top:22px;text-align:left}
 .orderRow{display:flex;gap:18px;align-items:baseline;padding:10px 0;
   border-bottom:1px dashed var(--line);font-size:16px}
 .orderRow:last-child{border-bottom:none}
 .orderRow .k{color:var(--dim);font-size:13px;letter-spacing:.08em;min-width:100px}
+.orderRow a,.orderRow .redacted{overflow-wrap:anywhere}
 .orderRow a:hover{text-shadow:0 0 10px rgba(56,255,110,.7)}
 .redacted{color:var(--dimmer);letter-spacing:.1em}
 
@@ -262,8 +264,16 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   .stat:nth-child(2){border-right:none}
   .stat{border-bottom:1px solid var(--line)}
   .stat:nth-child(n+3){border-bottom:none}
-  nav a{display:none}
+  header{flex-wrap:wrap;row-gap:10px}
+  nav{width:100%;justify-content:space-between;gap:8px}
+  #clock{display:none}
   #wings{display:none}
+}
+@media(max-width:520px){
+  .orderBox{display:block;width:100%;padding:24px 18px}
+  .orderRow{flex-direction:column;align-items:flex-start;gap:2px}
+  .orderRow .k{min-width:0}
+  .hero{padding:9vh 6vw 7vh}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -318,7 +328,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
   <section class="supply" id="supply">
     <h2>// 貨源</h2>
-    <p class="secSub">六件現貨。全部實戰，全部在線。點卡片驗貨。</p>
+    <p class="secSub">三種身分，同一個人。資料工程、全端開發、電商營運，全部實戰在線。</p>
     <div class="grid" id="grid"></div>
   </section>
 
@@ -424,71 +434,45 @@ function circ(g,x,y,r,fill){g.beginPath();g.arc(x,y,r,0,7);fill?g.fill():g.strok
 
 /* ---------------- PROJECT CARD ART ---------------- */
 const ART={
-  pipeline(g,w,h){ /* three mains + risers + valves */
+  data(g,w,h){ /* 資料管線：幹管 + 立管 + 閥 */
     for(let i=0;i<3;i++){const y=h*(.25+i*.25);
       g.fillRect(w*.08,y-1,w*.84,3);
       circ(g,w*(.2+i*.28),y,3,true);}
     g.fillRect(w*.3,h*.25,3,h*.5);
     g.fillRect(w*.66,h*.5,3,h*.25);
   },
-  text2sql(g,w,h){ /* speech bubble → result table */
-    g.strokeRect(w*.08,h*.1,w*.4,h*.32);
-    g.beginPath();g.moveTo(w*.18,h*.42);g.lineTo(w*.14,h*.56);g.lineTo(w*.28,h*.42);g.fill();
-    g.fillRect(w*.52,h*.45,w*.02,h*.02);
-    for(let r=0;r<3;r++)for(let c=0;c<3;c++)
-      g.strokeRect(w*(.52+c*.14),h*(.5+r*.15),w*.14,h*.15);
+  full(g,w,h){ /* 全端：手機 ↔ 伺服器堆疊 */
+    g.strokeRect(w*.07,h*.16,w*.25,h*.68);
+    g.fillRect(w*.115,h*.24,w*.16,h*.42);
+    circ(g,w*.195,h*.75,2.2,true);
+    g.fillRect(w*.34,h*.48,w*.15,2);
+    for(let i=0;i<3;i++){
+      g.strokeRect(w*.53,h*(.2+i*.24),w*.38,h*.16);
+      circ(g,w*.59,h*(.28+i*.24),2,true);
+      g.fillRect(w*.66,h*(.27+i*.24),w*.18,2);
+    }
   },
-  bzbot(g,w,h){ /* candlesticks */
-    const hs=[.5,.7,.4,.85,.6,.9];
-    for(let i=0;i<6;i++){const x=w*(.12+i*.14),ch=h*hs[i]*.6;
-      g.fillRect(x,h*.85-ch-h*.08,2,ch+h*.16);
-      g.fillRect(x-3,h*.85-ch,8,ch);}
-  },
-  bzteam(g,w,h){ /* crew: satellites around the hub */
-    circ(g,w/2,h/2,h*.16,true);
-    for(let i=0;i<6;i++){const a=i*Math.PI/3;
-      const x=w/2+Math.cos(a)*w*.3,y=h/2+Math.sin(a)*h*.32;
-      circ(g,x,y,h*.09,true);
-      g.beginPath();g.moveTo(w/2,h/2);g.lineTo(x,y);g.stroke();}
-  },
-  meowbox(g,w,h){ /* the cat */
+  meowbox(g,w,h){ /* 貓 */
     circ(g,w/2,h*.58,h*.32,true);
     g.beginPath();g.moveTo(w*.32,h*.42);g.lineTo(w*.3,h*.08);g.lineTo(w*.46,h*.32);g.fill();
     g.beginPath();g.moveTo(w*.68,h*.42);g.lineTo(w*.7,h*.08);g.lineTo(w*.54,h*.32);g.fill();
     g.fillStyle='#000';
     g.fillRect(w*.4,h*.52,3,5);g.fillRect(w*.58,h*.52,3,5);
     g.fillRect(w*.485,h*.66,4,3);
-  },
-  txf(g,w,h){ /* the oracle: sine through a crystal ball */
-    circ(g,w/2,h/2,h*.36,false);
-    g.beginPath();
-    for(let x=0;x<w;x++){const y=h/2+Math.sin(x/w*Math.PI*3)*h*.22;
-      x?g.lineTo(x,y):g.moveTo(x,y);}
-    g.stroke();
-    circ(g,w*.82,h*.28,2,true);
   }
 };
 
 /* ---------------- THE SUPPLY ---------------- */
 const GOODS=[
-  {id:'text2sql',name:'TEXT2SQL',tag:'跟倉庫說人話',
-   desc:'用人話跟資料倉庫談生意。自然語言進，SQL 出，BigQuery 埋單，不會 SQL 的人也拿得到貨。',
-   chips:['LLM','BIGQUERY','PYTHON']},
-  {id:'pipeline',name:'PIPELINE',tag:'正職本業',
-   desc:'電視台級資料管線。GCP 上進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮。貨源穩定，每日出貨。',
-   chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON']},
-  {id:'meowbox',name:'MEOWBOX',tag:'創辦人 · 貓咪部門',
-   desc:'喵盒子 www.meowbox.tw，本人創辦的貓咪互助地圖與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，2026 前七個月做到 257 萬營收、4,798 筆訂單，訂單數年增 363%。',
-   chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://www.meowbox.tw/'},
-  {id:'txf',name:'TXF ORACLE',tag:'期貨算命仙',
-   desc:'台指期每小時預測 routine。雲端排程分析、官方價自動記分、LINE 準時播報，猜錯自己認。',
-   chips:['SCHEDULER','LLM','LINE']},
-  {id:'bzteam',name:'BZTEAM',tag:'我的 AI 團隊',
-   desc:'LINE 上的私人 AI 團隊。待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
-   chips:['LLM','FASTAPI','FIRESTORE','LINE']},
-  {id:'bzbot',name:'BZBOT',tag:'幣圈跑單',
-   desc:'Discord 加密貨幣機器人。盯 Bybit 永續合約，Cloud Run 上長駐跑單，籌碼、開盤預估一手包。',
-   chips:['FASTAPI','SUPABASE','CLOUD RUN','DISCORD']}
+  {id:'data',name:'數據工程師',tag:'正職本業 · 4 年',
+   desc:'4 年資料工程經驗，曼徹斯特大學商業分析碩士。電視台級資料管線一手包：GCP 進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮，每日穩定出貨。',
+   chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON','SQL']},
+  {id:'full',name:'全端工程師',tag:'5 年 iOS 開發',
+   desc:'5 年 iOS 開發經驗，前後端自己收尾。Swift 上架 App、FastAPI 寫服務、Supabase／Firestore 存資料、Cloud Run 部署，前端純手工不吃框架。',
+   chips:['SWIFT','IOS','FASTAPI','SUPABASE','CLOUD RUN','JS']},
+  {id:'meowbox',name:'寵物電商',tag:'創辦人 · 喵盒子',
+   desc:'喵盒子 www.meowbox.tw 創辦人。選品、定價、上架節奏都用數據決定，回頭客靠社群經營養出來，月營收穩定 40 萬。',
+   chips:['FOUNDER','電商營運','數據選品','SUPABASE'],link:'https://www.meowbox.tw/'}
 ];
 (function buildGrid(){
   const grid=$('#grid');
