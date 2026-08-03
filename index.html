@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>陳祺昀 — DATA DEALER</title>
-<meta name="description" content="陳祺昀 (bz) — data engineer. I move data. Quietly.">
+<title>陳祺昀 — AI 數據應用工程師</title>
+<meta name="description" content="陳祺昀（bz）— AI 數據應用工程師。把 LLM 接上真實資料管線，做成有人在用的產品。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -91,20 +91,20 @@ nav a:hover{color:var(--grn)}
 /* ============ TICKER ============ */
 .ticker{overflow:hidden;border-bottom:1px solid var(--line);background:#040504;
   padding:7px 0;white-space:nowrap}
-.tickIn{display:inline-block;font-size:11px;letter-spacing:.22em;color:var(--grn);
+.tickIn{display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--grn);
   text-shadow:0 0 8px rgba(56,255,110,.45);animation:tick 60s linear infinite}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ============ HERO ============ */
 .hero{padding:12vh 6vw 9vh;position:relative}
-.over{font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:20px}
+.over{font-size:11px;letter-spacing:.12em;color:var(--dim);margin-bottom:20px}
 .hero h1{font-size:clamp(46px,8vw,110px);line-height:.92;font-weight:700;
   color:var(--ink);text-shadow:0 0 30px rgba(56,255,110,.12)}
 .hero .sub{margin:26px 0 32px;max-width:560px;font-size:13px;color:var(--dim);
   letter-spacing:.06em;line-height:1.9}
 .heroBtns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;border:1px solid var(--grn);color:var(--grn);
-  padding:13px 24px;font-size:12px;letter-spacing:.16em;transition:.15s;background:transparent}
+  padding:13px 24px;font-size:12px;letter-spacing:.1em;transition:.15s;background:transparent}
 .btn:hover{box-shadow:0 0 22px rgba(56,255,110,.35),inset 0 0 12px rgba(56,255,110,.12);
   transform:translateY(-1px)}
 .btn.solid{background:var(--grn);color:#04120a;font-weight:700}
@@ -122,7 +122,7 @@ nav a:hover{color:var(--grn)}
 .card.feat h3{color:var(--amb)}
 .card.feat .chips span{border-color:rgba(255,182,72,.35)}
 .card .ribbon{position:absolute;top:0;right:0;background:var(--amb);color:#1a1206;
-  font-size:9px;font-weight:700;letter-spacing:.18em;padding:4px 10px}
+  font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 10px}
 
 /* ============ STATS ============ */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
@@ -131,11 +131,11 @@ nav a:hover{color:var(--grn)}
 .stat:last-child{border-right:none}
 .stat b{display:block;font-size:clamp(22px,3vw,34px);color:var(--grn);
   text-shadow:0 0 14px rgba(56,255,110,.4)}
-.stat span{font-size:10px;letter-spacing:.22em;color:var(--dim)}
+.stat span{font-size:11px;letter-spacing:.1em;color:var(--dim)}
 
 /* ============ SUPPLY ============ */
 .supply{padding:70px 3vw}
-h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
+h2{font-size:13px;letter-spacing:.14em;color:var(--dim);margin-bottom:8px}
 .secSub{font-size:12px;color:var(--dimmer);letter-spacing:.08em;margin-bottom:34px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1180px;margin:0 auto}
 .card{border:1px solid var(--line);background:var(--panel);padding:20px;
@@ -147,7 +147,7 @@ h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
 .cardHead{display:flex;justify-content:space-between;align-items:baseline;
   gap:8px;flex-wrap:wrap;margin-bottom:6px}
 .card h3{font-size:16px;letter-spacing:.08em;color:var(--ink)}
-.tag{font-size:9px;letter-spacing:.2em;color:var(--amb);white-space:nowrap}
+.tag{font-size:10px;letter-spacing:.08em;color:var(--amb);white-space:nowrap}
 .card p{font-size:12px;line-height:1.85;color:var(--dim);margin-bottom:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:9px;letter-spacing:.12em;color:var(--grn);
@@ -162,7 +162,7 @@ h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
 .member pre{font-size:11px;line-height:13px;color:var(--amb);
   text-shadow:0 0 6px rgba(255,182,72,.4);margin-bottom:12px}
 .member h3{font-size:15px;letter-spacing:.1em;color:var(--ink)}
-.member .code{font-size:9px;letter-spacing:.24em;color:var(--amb);margin:4px 0 10px}
+.member .code{font-size:10px;letter-spacing:.08em;color:var(--amb);margin:4px 0 10px}
 .member p{font-size:12px;line-height:1.85;color:var(--dim);text-align:left}
 .opsLog{max-width:760px;margin:0 auto;border:1px solid var(--line);background:var(--panel2)}
 .opsBar{padding:8px 14px;border-bottom:1px solid var(--line);font-size:10px;
@@ -183,6 +183,8 @@ h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
 .manifesto .big{font-size:clamp(22px,3.4vw,36px);font-weight:700;letter-spacing:.06em;
   margin:18px 0 26px;text-shadow:0 0 24px rgba(56,255,110,.2)}
 .manifesto p{font-size:13px;line-height:2.1;color:var(--dim);letter-spacing:.05em}
+.manifesto .goal{display:inline-block;margin-top:14px;color:var(--amb);
+  text-shadow:0 0 12px rgba(255,182,72,.35)}
 
 /* ============ CONTACT ============ */
 .contact{padding:70px 3vw 90px;border-top:1px solid var(--line);text-align:center}
@@ -191,13 +193,13 @@ h2{font-size:13px;letter-spacing:.3em;color:var(--dim);margin-bottom:8px}
 .orderRow{display:flex;gap:18px;align-items:baseline;padding:10px 0;
   border-bottom:1px dashed var(--line);font-size:13px}
 .orderRow:last-child{border-bottom:none}
-.orderRow .k{color:var(--dimmer);font-size:10px;letter-spacing:.22em;min-width:90px}
+.orderRow .k{color:var(--dimmer);font-size:11px;letter-spacing:.08em;min-width:90px}
 .orderRow a:hover{text-shadow:0 0 10px rgba(56,255,110,.7)}
 .redacted{color:var(--dimmer);letter-spacing:.1em}
 
 footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   justify-content:space-between;flex-wrap:wrap;gap:8px;
-  font-size:10px;letter-spacing:.18em;color:var(--dimmer)}
+  font-size:11px;letter-spacing:.08em;color:var(--dimmer)}
 
 /* ============ RWD / MOTION ============ */
 @media(max-width:900px){
@@ -216,9 +218,9 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 </style>
 </head>
 <body>
-<noscript>ENABLE JAVASCRIPT TO ENTER THE SUPPLY.</noscript>
+<noscript>請開啟 JavaScript 才能進站。</noscript>
 
-<div id="boot"><pre id="bootLog"></pre><div id="bootEnter" class="hide">▸ CLICK TO ENTER THE SUPPLY</div></div>
+<div id="boot"><pre id="bootLog"></pre><div id="bootEnter" class="hide">▸ 點擊進站</div></div>
 
 <canvas id="rainBg"></canvas>
 <canvas id="rainFg"></canvas>
@@ -228,12 +230,12 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 <header>
   <div class="brand glitch" data-t="陳祺昀">陳祺昀</div>
   <nav>
-    <a href="#supply">SUPPLY</a>
-    <a href="#crew">CREW</a>
-    <a href="#manifesto">MANIFESTO</a>
-    <a href="#contact">CONTACT</a>
+    <a href="#supply">貨源</a>
+    <a href="#crew">團隊</a>
+    <a href="#manifesto">宣言</a>
+    <a href="#contact">聯絡</a>
     <span id="clock">--:--:--</span>
-    <button class="chipBtn on" id="sfxChip">SFX:ON</button>
+    <button class="chipBtn on" id="sfxChip">音效:開</button>
   </nav>
 </header>
 
@@ -241,36 +243,36 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 <main>
   <section class="hero">
-    <div class="over">// PERSONAL FILE — 陳祺昀 (BZ) · DATA ENGINEER · FOUNDER OF MEOWBOX.TW · TAIPEI</div>
-    <h1>DATA<br>DEALER_</h1>
+    <div class="over">// 個人檔案 — 陳祺昀（BZ）· AI 數據應用工程師 · 喵盒子創辦人 · 台北</div>
+    <h1>數據<br>販子_</h1>
     <p class="sub">白天在電視台搬資料，晚上在電商倉庫搬貨。
       交貨準時，全年無休。</p>
     <div class="heroBtns">
-      <a class="btn solid" href="#supply">VIEW THE SUPPLY</a>
-      <a class="btn" href="#contact">CONTACT THE PLUG</a>
-      <a class="btn meow" href="https://www.meowbox.tw/" target="_blank" rel="noopener">喵盒子 MEOWBOX.TW ↗</a>
+      <a class="btn solid" href="#supply">看貨</a>
+      <a class="btn" href="#contact">找我談</a>
+      <a class="btn meow" href="https://www.meowbox.tw/" target="_blank" rel="noopener">喵盒子 www.meowbox.tw ↗</a>
     </div>
   </section>
 
   <section class="stats">
-    <div class="stat"><b>6+</b><span>PROJECTS SHIPPED</span></div>
-    <div class="stat"><b>24/7</b><span>PIPELINES RUNNING</span></div>
-    <div class="stat"><b>30萬+</b><span>MONTHLY STORE REVENUE · 6MO RAMP</span></div>
-    <div class="stat"><b>0</b><span>NARCS DETECTED</span></div>
+    <div class="stat"><b>6+</b><span>出貨專案</span></div>
+    <div class="stat"><b>24/7</b><span>管線運轉中</span></div>
+    <div class="stat"><b>30萬+</b><span>賣場月營收 · 六個月達成</span></div>
+    <div class="stat"><b>0</b><span>條子出沒</span></div>
   </section>
 
   <section class="supply" id="supply">
-    <h2>// THE SUPPLY</h2>
+    <h2>// 貨源</h2>
     <p class="secSub">六件現貨。全部實戰，全部在線。點卡片驗貨。</p>
     <div class="grid" id="grid"></div>
   </section>
 
   <section class="crew" id="crew">
-    <h2>// THE CREW — bzteam</h2>
+    <h2>// 我的團隊 — bzteam</h2>
     <p class="secSub">一人公司的組織圖。六個 AI 小弟駐在同一台 Cloud Run，走 LINE 回報，全年無休。</p>
     <div class="crewGrid" id="crewGrid"></div>
     <div class="opsLog">
-      <div class="opsBar">bzteam@cloudrun:~$ crontab -l · DAILY OPS</div>
+      <div class="opsBar">bzteam@cloudrun:~$ crontab -l · 每日排程</div>
       <div class="opsBody" id="opsBody"></div>
     </div>
   </section>
@@ -278,34 +280,35 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   <section class="manifesto" id="manifesto">
     <pre id="wings"></pre>
     <div class="in">
-      <h2>// MANIFESTO</h2>
-      <div class="big">I MOVE DATA. QUIETLY.</div>
+      <h2>// 宣言</h2>
+      <div class="big">我搬資料，安靜地搬。</div>
       <p>白天供貨給電視台，晚上供貨給自己。<br>
         不賣訂閱，不加雜質，管線一旦點火就不熄。<br>
-        出了問題不會等你發現——它自己會傳 LINE 認錯。</p>
+        出了問題不會等你發現——它自己會傳 LINE 認錯。<br>
+        <span class="goal">現在的目標：AI 數據應用工程師——把 LLM 接上真實資料，做成有人真的在用的東西。</span></p>
     </div>
   </section>
 
   <section class="contact" id="contact">
-    <h2>// PLACE YOUR ORDER</h2>
+    <h2>// 下單</h2>
     <div class="orderBox">
       <div class="orderRow"><span class="k">GITHUB</span>
         <a href="https://github.com/shironchen" target="_blank" rel="noopener">github.com/shironchen</a></div>
-      <div class="orderRow"><span class="k">PAPERWORK</span>
+      <div class="orderRow"><span class="k">正式履歷</span>
         <a href="./resume/">正式履歷 — 繁中／简中／日本語／English</a></div>
-      <div class="orderRow"><span class="k">MEOWBOX</span>
+      <div class="orderRow"><span class="k">喵盒子</span>
         <a href="https://www.meowbox.tw/" target="_blank" rel="noopener">www.meowbox.tw — 喵盒子．貓咪互助地圖（我創辦的）</a></div>
-      <div class="orderRow"><span class="k">EMAIL</span>
+      <div class="orderRow"><span class="k">信箱</span>
         <a href="mailto:shironchen@gmail.com">shironchen@gmail.com</a></div>
       <div class="orderRow"><span class="k">LINKEDIN</span>
-        <span class="redacted">[REDACTED — COMING SOON]</span></div>
+        <span class="redacted">[保密中 — 近期補上]</span></div>
     </div>
   </section>
 </main>
 
 <footer>
-  <span>陳祺昀 V1.0 · HANDCRAFTED VANILLA — VIEW SOURCE</span>
-  <span>NO COOKIES · NO TRACKERS · NO NARCS</span>
+  <span>陳祺昀 V1.0 · 純手工 vanilla — 歡迎看原始碼</span>
+  <span>無 cookie · 無追蹤 · 無條子</span>
 </footer>
 
 <script>
@@ -388,24 +391,24 @@ const ART={
 
 /* ---------------- THE SUPPLY ---------------- */
 const GOODS=[
-  {id:'pipeline',name:'PIPELINE',tag:'THE DAY JOB',
-   desc:'電視台級資料管線。GCP 上進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮。貨源穩定，每日出貨。',
-   chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON']},
-  {id:'text2sql',name:'TEXT2SQL',tag:'SPEAK TO THE WAREHOUSE',
+  {id:'text2sql',name:'TEXT2SQL',tag:'跟倉庫說人話',
    desc:'用人話跟資料倉庫談生意。自然語言進，SQL 出，BigQuery 埋單，不會 SQL 的人也拿得到貨。',
    chips:['LLM','BIGQUERY','PYTHON']},
-  {id:'bzbot',name:'BZBOT',tag:'CRYPTO RUNNER',
-   desc:'Discord 加密貨幣機器人。盯 Bybit 永續合約，Cloud Run 上長駐跑單，籌碼、開盤預估一手包。',
-   chips:['FASTAPI','SUPABASE','CLOUD RUN','DISCORD']},
-  {id:'bzteam',name:'BZTEAM',tag:'THE CREW',
-   desc:'LINE 上的私人 AI 團隊。待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
-   chips:['FASTAPI','FIRESTORE','LINE','SCHEDULER']},
-  {id:'meowbox',name:'MEOWBOX',tag:'FOUNDER · CAT DIVISION',
+  {id:'pipeline',name:'PIPELINE',tag:'正職本業',
+   desc:'電視台級資料管線。GCP 上進貨、BigQuery 倉儲、dbt 精煉、Terraform 管地皮。貨源穩定，每日出貨。',
+   chips:['GCP','BIGQUERY','DBT','TERRAFORM','PYTHON']},
+  {id:'meowbox',name:'MEOWBOX',tag:'創辦人 · 貓咪部門',
    desc:'喵盒子 www.meowbox.tw，本人創辦的貓咪互助地圖與賣場。從第一行 code 到上線營運一手包，用數據分析選品與定價，六個月內把賣場營收做到單月 30 萬+。',
    chips:['FOUNDER','HTML','JS','SUPABASE'],link:'https://www.meowbox.tw/'},
-  {id:'txf',name:'TXF ORACLE',tag:'THE FORTUNE TELLER',
+  {id:'txf',name:'TXF ORACLE',tag:'期貨算命仙',
    desc:'台指期每小時預測 routine。雲端排程分析、官方價自動記分、LINE 準時播報，猜錯自己認。',
-   chips:['SCHEDULER','LLM','LINE']}
+   chips:['SCHEDULER','LLM','LINE']},
+  {id:'bzteam',name:'BZTEAM',tag:'我的 AI 團隊',
+   desc:'LINE 上的私人 AI 團隊。待辦、打卡、記帳、排程 routine，一個 Cloud Run 養一整組小弟。',
+   chips:['LLM','FASTAPI','FIRESTORE','LINE']},
+  {id:'bzbot',name:'BZBOT',tag:'幣圈跑單',
+   desc:'Discord 加密貨幣機器人。盯 Bybit 永續合約，Cloud Run 上長駐跑單，籌碼、開盤預估一手包。',
+   chips:['FASTAPI','SUPABASE','CLOUD RUN','DISCORD']}
 ];
 (function buildGrid(){
   const grid=$('#grid');
@@ -419,7 +422,7 @@ const GOODS=[
     el.querySelector('.art').textContent=asciiRender(46,20,ART[p.id]);
     if(p.id==='meowbox'){
       el.classList.add('feat');
-      el.insertAdjacentHTML('afterbegin','<span class="ribbon">MY OWN</span>');
+      el.insertAdjacentHTML('afterbegin','<span class="ribbon">自家貨</span>');
     }
     if(p.link){
       el.style.cursor='pointer';
@@ -431,32 +434,32 @@ const GOODS=[
 
 /* ---------------- THE CREW (bzteam roster + daily ops) ---------------- */
 const CREW=[
-  {name:'股神',code:'THE ORACLE',
+  {name:'股神',code:'盤勢判讀',
    frames:[
      ['    _!_    ','  .-"""-.  ',' / (o) (o)\\','|    ^    |',' \\  ~~~  / ','  `-...-`  ',' [TXF 88%] '],
      ['    _!_    ','  .-"""-.  ',' / (-) (-)\\','|    ^    |',' \\  ___  / ','  `-...-`  ',' [TXF ??%] ']],
    desc:'盤勢判讀手。台指期每小時出一次預測，官方價自動對答案記分，戰績攤開，猜錯自己認。'},
-  {name:'蝦皮助手',code:'THE LISTER',
+  {name:'蝦皮助手',code:'電商上架',
    frames:[
      ['   _____   ','  | o o |  ','  |  _  |  ','  |_____|  ',' /|SHOP |\\ ','  |_____|  ','  d     b  '],
      ['   _____   ','  | - - |  ','  |  o  |  ','  |_____|  ',' \\|SALE!|/ ','  |_____|  ','   d   b   ']],
    desc:'電商上架手。直接接管 Chrome 開賣場，競品參照、表單自動填、一路點到上架完成。'},
-  {name:'打卡小弟',code:'THE CLOCK',
+  {name:'打卡小弟',code:'考勤看守',
    frames:[
      ['   .---.   ','  /12   \\  ',' |9  +  3| ','  \\  6  /  ','   `---`   ','  _/```\\_  ',' TICK TOCK '],
      ['   .---.   ','  /12   \\  ',' |9  +--3| ','  \\  6  /  ','   `---`   ','  _/```\\_  ',' TOCK TICK ']],
    desc:'考勤看守。盯著打卡日曆比對行事曆，該打沒打，LINE 直接催到你打為止。'},
-  {name:'記帳小弟',code:'THE LEDGER',
+  {name:'記帳小弟',code:'帳務結算',
    frames:[
      ['  _______  ',' | $ | # | ',' |---+---| ',' | # | $ | ',' |___|___| ','  (o) (o)  ','  BALANCE  '],
      ['  _______  ',' | # | $ | ',' |---+---| ',' | $ | # | ',' |___|___| ','  (-) (-)  ','  COUNTING ']],
    desc:'帳房。每筆流水入庫，錢從哪來去哪一清二楚，月底不用對發票對到懷疑人生。'},
-  {name:'待辦管家',code:'THE KEEPER',
+  {name:'待辦管家',code:'任務追蹤',
    frames:[
      ['  .-----.  ','  |[x]  |  ','  |[x]  |  ','  |[ ]<-|  ','  `-----`  ','  (o___o)  ','  NO LOSS  '],
      ['  .-----.  ','  |[x]  |  ','  |[x]  |  ','  |[x]OK|  ','  `-----`  ','  (^___^)  ','  +1 DONE  ']],
    desc:'任務庫管理員。所有 follow-up 進中央待辦庫歸檔，不准寫在紙上，沒做完的隔天繼續追。'},
-  {name:'巡檢兵',code:'THE MEDIC',
+  {name:'巡檢兵',code:'系統巡檢',
    frames:[
      ['    _+_    ','  .-|_|-.  ',' | (-)(-)| ','  \\  o  /  ','   |###|   ','  /|   |\\  ',' ALL GREEN '],
      ['    _+_    ','  .-|_|-.  ',' | (o)(o)| ','  \\  o  /  ','   |#..|   ','  /|   |\\  ',' SCANNING_ ']],
@@ -490,12 +493,12 @@ const CREW=[
     });
   }
   const OPS=[
-    ['07:30','THE MEDIC','heartbeat 全系統巡檢 · 沒事不吵，有事 LINE 認錯'],
-    ['09:00','THE CLOCK','打卡日曆比對 · 該打沒打開始催'],
-    ['xx:25','THE ORACLE','台指期盤勢分析 · 每小時出一次手'],
-    ['xx:20','THE ORACLE','官方價對答案 · 自動記分 + 簡報 + LINE 播報'],
-    ['18:00','THE LEDGER','今日帳務結算入庫'],
-    ['23:59','THE KEEPER','待辦清點 · 沒做完的明天繼續追']
+    ['07:30','巡檢兵','heartbeat 全系統巡檢 · 沒事不吵，有事 LINE 認錯'],
+    ['09:00','打卡小弟','打卡日曆比對 · 該打沒打開始催'],
+    ['xx:25','股神','台指期盤勢分析 · 每小時出一次手'],
+    ['xx:20','股神','官方價對答案 · 自動記分 + 簡報 + LINE 播報'],
+    ['18:00','記帳小弟','今日帳務結算入庫'],
+    ['23:59','待辦管家','待辦清點 · 沒做完的明天繼續追']
   ];
   $('#opsBody').innerHTML=OPS.map(r=>
     '<div class="opsRow"><span class="t">'+r[0]+'</span>'
@@ -519,7 +522,7 @@ $('#wings').textContent=asciiRender(92,24,function(g,w,h){
 },' .:!*#%');
 
 /* ---------------- TICKER + CLOCK ---------------- */
-$('#tick').textContent=('★ THE SUPPLY: DATA PIPELINES · BOTS · CAT SITES ★ FOUNDER OF MEOWBOX.TW · 喵盒子 ★ DATA-DRIVEN: STORE REVENUE NT$300K+/MO IN 6 MONTHS ★ SQL PURITY 99.9% ★ RUNS ON GCP · SLEEPS NEVER ★ INSTANT DELIVERY ★ NO NARCS ★ ').repeat(6);
+$('#tick').textContent=('★ 目標職位：AI 數據應用工程師 ★ 現貨：資料管線 · LLM 應用 · 機器人 · 貓咪網站 ★ 喵盒子 www.meowbox.tw 創辦人 ★ 數據驅動：賣場月營收 30 萬+，六個月達成 ★ SQL 純度 99.9% ★ 跑在 GCP，從不休息 ★ 即時出貨 ★ 沒有條子 ★ ').repeat(6);
 setInterval(()=>{$('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
 
 /* ---------------- MATRIX RAIN (bg + fg bleed layer) ---------------- */
@@ -737,7 +740,7 @@ function musicPlay(){
 /* ---- SFX chip: one switch silences the whole context ---- */
 $('#sfxChip').addEventListener('click',function(){
   sndOn=!sndOn;
-  this.textContent=sndOn?'SFX:ON':'SFX:OFF';
+  this.textContent=sndOn?'音效:開':'音效:關';
   this.classList.toggle('on',sndOn);
   const c=ac();if(!c)return;
   if(sndOn){c.resume().catch(()=>{});SFX.tick();}
@@ -748,12 +751,12 @@ $('#sfxChip').addEventListener('click',function(){
 (function(){
   const bootEl=$('#boot'),log=$('#bootLog'),enterEl=$('#bootEnter');
   const LINES=[
-    '陳祺昀 V1.0 (build 2026) · PERSONAL TERMINAL · AUTHORIZED EYES ONLY',
-    '> establishing encrypted tunnel .......... OK',
-    '> mounting /dev/pipeline ................. OK',
-    '> loading skill manifest [██████] 6/6',
-    '> scanning for recruiters ................ FOUND (welcome)',
-    'ACCESS GRANTED_'
+    '陳祺昀 V1.0 (build 2026) · 個人終端機 · 閒雜人等勿入',
+    '> 建立加密通道 ............ OK',
+    '> 掛載 /dev/pipeline ...... OK',
+    '> 載入技能清單 [██████] 6/6',
+    '> 掃描獵頭中 .............. 發現（歡迎光臨）',
+    '存取許可_'
   ];
   let entered=false;
   function typeLines(i){
