@@ -4,7 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>陳祺昀 — AI 數據應用工程師</title>
-<meta name="description" content="陳祺昀（bz）— AI 數據應用工程師。把 LLM 接上真實資料管線，做成有人在用的產品。">
+<meta name="description" content="陳祺昀（bz）— AI 數據應用工程師。把 LLM 接上真實資料管線，做成有人在用的產品。TVBS／星展銀行 4 年資料工程，5 年 iOS 開發，喵盒子創辦人。">
+<link rel="canonical" href="https://shironchen.github.io/">
+
+<!-- favicon：內嵌 SVG，維持零檔案依賴 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050607'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='19' font-weight='700' fill='%2338ff6e' text-anchor='middle'%3EBZ%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="./og.png">
+
+<!-- 社群預覽卡（LinkedIn／LINE／Slack／FB） -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="陳祺昀 · 個人終端機">
+<meta property="og:title" content="陳祺昀 — AI 數據應用工程師">
+<meta property="og:description" content="資料管線 · LLM 應用 · 全端 · 喵盒子創辦人。TVBS／星展銀行 4 年資料工程，5 年 iOS 開發。">
+<meta property="og:url" content="https://shironchen.github.io/">
+<meta property="og:image" content="https://shironchen.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="陳祺昀 — AI 數據應用工程師">
+<meta name="twitter:description" content="資料管線 · LLM 應用 · 全端 · 喵盒子創辦人。">
+<meta name="twitter:image" content="https://shironchen.github.io/og.png">
+
+<!-- 讓搜尋引擎知道「陳祺昀」是誰（頁面內容由 JS 生成，這段是純文字保底） -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"陳祺昀","alternateName":"Chen Chi Yun",
+"jobTitle":"AI 數據應用工程師","url":"https://shironchen.github.io/","image":"https://shironchen.github.io/og.png",
+"email":"mailto:shironchen@gmail.com",
+"address":{"@type":"PostalAddress","addressLocality":"台北","addressCountry":"TW"},
+"alumniOf":{"@type":"CollegeOrUniversity","name":"University of Manchester, Alliance Manchester Business School"},
+"worksFor":{"@type":"Organization","name":"聯利媒體 TVBS"},
+"knowsAbout":["資料工程","BigQuery","dbt","Airflow","Terraform","LLM 應用","Swift／iOS","電商營運"],
+"sameAs":["https://github.com/shironchen","https://www.linkedin.com/in/chenchiyun","https://www.meowbox.tw/"]}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -98,10 +131,21 @@ nav a:hover{color:var(--grn)}
 /* ============ HERO ============ */
 .hero{padding:12vh 6vw 9vh;position:relative}
 .over{font-size:16px;letter-spacing:.1em;color:var(--grn2);margin-bottom:20px}
-.hero h1{font-size:clamp(38px,5.6vw,80px);line-height:1.02;font-weight:700;
+/* 視覺標題與 SEO 標題分離：大字保留設計感，h1 給搜尋引擎讀真名 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.hero .h1{font-size:clamp(38px,5.6vw,80px);line-height:1.02;font-weight:700;
   color:var(--ink);text-shadow:0 0 30px rgba(56,255,110,.12)}
 .hero .sub{margin:26px 0 32px;max-width:640px;font-size:17px;color:var(--dim);
   letter-spacing:.06em;line-height:1.9}
+.openTo{display:inline-block;margin:0 0 30px;border:1px solid var(--grn);
+  background:rgba(56,255,110,.06);color:var(--grn2);padding:11px 18px;
+  font-size:14px;letter-spacing:.06em;line-height:1.7}
+.openTo b{color:var(--grn);font-weight:700}
+.openTo .dotLive{display:inline-block;width:7px;height:7px;background:var(--grn);
+  border-radius:50%;margin-right:9px;vertical-align:middle;
+  box-shadow:0 0 8px rgba(56,255,110,.9);animation:beat 2s ease-in-out infinite}
+@keyframes beat{0%,100%{opacity:1}50%{opacity:.25}}
 .heroBtns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;border:1px solid var(--grn);color:var(--grn);
   padding:15px 28px;font-size:14px;letter-spacing:.1em;transition:.15s;background:transparent}
@@ -185,9 +229,9 @@ a.work:hover h3{text-shadow:0 0 12px rgba(56,255,110,.5)}
 /* ============ BIZ (shopee numbers) ============ */
 .biz{padding:70px 3vw;border-top:1px solid var(--line)}
 .bizWrap{max-width:1180px;margin:0 auto}
-.bizGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.bizGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
 .bizStat{border:1px solid var(--line);background:var(--panel);padding:20px 22px;
-  width:100%;text-align:left;font-family:var(--font);cursor:pointer;position:relative;
+  width:100%;min-width:0;text-align:left;font-family:var(--font);cursor:pointer;position:relative;
   transition:.16s}
 .bizStat:hover{border-color:var(--amb);box-shadow:0 0 22px rgba(255,182,72,.16);
   transform:translateY(-2px)}
@@ -197,8 +241,8 @@ a.work:hover h3{text-shadow:0 0 12px rgba(56,255,110,.5)}
 .bizStat.on{border-color:var(--amb);background:linear-gradient(180deg,rgba(255,182,72,.07),transparent 70%),var(--panel);
   box-shadow:0 0 26px rgba(255,182,72,.22)}
 .bizStat.on .go{color:var(--amb)}
-.bizStat b{display:block;font-size:clamp(24px,3vw,34px);color:var(--amb);
-  text-shadow:0 0 16px rgba(255,182,72,.35);line-height:1.2}
+.bizStat b{display:block;font-size:clamp(22px,2.4vw,30px);color:var(--amb);
+  text-shadow:0 0 16px rgba(255,182,72,.35);line-height:1.2;padding-right:62px}
 .bizStat span{display:block;margin-top:7px;font-size:13px;letter-spacing:.06em;color:var(--dim)}
 .bizStat i{font-style:normal;color:var(--grn)}
 /* 可收合面板 */
@@ -312,12 +356,18 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 @media(max-width:900px){
   .grid,.crewGrid,.wGrid{grid-template-columns:1fr}
   .bizGrid{grid-template-columns:repeat(2,1fr)}
+  /* 窄螢幕改把「看趨勢」放回文件流，數字才不必為它讓出 62px，否則版面會被撐爆 */
+  .bizStat{padding:16px 14px}
+  .bizStat b{padding-right:0}
+  .bizStat .go{position:static;display:block;margin-bottom:9px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(2){border-right:none}
   .stat{border-bottom:1px solid var(--line)}
   .stat:nth-child(n+3){border-bottom:none}
   header{flex-wrap:wrap;row-gap:10px}
-  nav{width:100%;justify-content:space-between;gap:8px}
+  nav{width:100%;justify-content:space-between;gap:6px;font-size:13px;letter-spacing:.04em}
+  nav a{white-space:nowrap}
+  .chipBtn{white-space:nowrap;padding:6px 9px;font-size:12px;letter-spacing:.04em}
   #clock{display:none}
   #wings{display:none}
 }
@@ -334,7 +384,26 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 </style>
 </head>
 <body>
-<noscript>請開啟 JavaScript 才能進站。</noscript>
+<noscript>
+  <style>#boot,#rainBg,#rainFg,#grain,#vig,.ticker{display:none!important}
+    .nojs{max-width:760px;margin:0 auto;padding:9vh 6vw;line-height:2}
+    .nojs h2{margin:26px 0 6px}
+    .nojs a{border-bottom:1px solid var(--grndk)}
+    .nojs .k{color:var(--dimmer);letter-spacing:.1em;font-size:13px}</style>
+  <div class="nojs">
+    <div class="k">// 這頁的互動內容需要 JavaScript。以下是純文字版。</div>
+    <h2>陳祺昀（Chen Chi Yun）— AI 數據應用工程師</h2>
+    <p>台北。4 年+ 資料工程（聯利媒體 TVBS、星展銀行），5 年 iOS 開發，
+      曼徹斯特商學院商業分析碩士。喵盒子創辦人。<br>
+      現在做的事：把 LLM 接上真實資料管線，做成有人真的在用的產品。</p>
+    <h2>聯絡</h2>
+    <p>信箱：<a href="mailto:shironchen@gmail.com">shironchen@gmail.com</a><br>
+      正式履歷：<a href="./resume/">繁中／简中／日本語／English</a><br>
+      GitHub：<a href="https://github.com/shironchen">github.com/shironchen</a><br>
+      LinkedIn：<a href="https://www.linkedin.com/in/chenchiyun">linkedin.com/in/chenchiyun</a><br>
+      喵盒子：<a href="https://www.meowbox.tw/">www.meowbox.tw</a></p>
+  </div>
+</noscript>
 
 <div id="boot"><pre id="bootLog"></pre><div id="bootEnter" class="hide">▸ 點擊進站</div></div>
 
@@ -354,7 +423,8 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
     <a href="#manifesto">宣言</a>
     <a href="#contact">聯絡</a>
     <span id="clock">--:--:--</span>
-    <button class="chipBtn on" id="sfxChip">音效:開</button>
+    <button class="chipBtn" id="sfxChip"
+      title="這頁的背景音樂與音效全部由 Web Audio 即時合成，沒有任何音檔。點一下開啟。">♪ 音效:關</button>
   </nav>
 </header>
 
@@ -362,10 +432,12 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 <main>
   <section class="hero">
+    <h1 class="sr-only">陳祺昀（Chen Chi Yun）— AI 數據應用工程師 · 資料工程 · LLM 應用 · 喵盒子創辦人 · 台北</h1>
     <div class="over">// 個人檔案 — 陳祺昀（BZ）· AI 數據應用工程師 · 喵盒子創辦人 · 台北</div>
-    <h1>AI<br>工程師_</h1>
+    <div class="h1">AI<br>工程師_</div>
     <p class="sub">白天在電視台搬資料，晚上在電商倉庫搬貨。
       交貨準時，全年無休。</p>
+    <div class="openTo"><span class="dotLive"></span>目前開放機會：<b>AI 數據應用工程師／資料工程師</b>　·　台北　·　歡迎直接來信</div>
     <div class="heroBtns">
       <a class="btn solid" href="#supply">看貨</a>
       <a class="btn" href="#contact">找我談</a>
@@ -374,10 +446,10 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
   </section>
 
   <section class="stats">
-    <div class="stat"><b>6+</b><span>出貨專案</span></div>
+    <div class="stat"><b>7</b><span>出貨專案</span></div>
     <div class="stat"><b>24/7</b><span>管線運轉中</span></div>
     <div class="stat"><b>257萬</b><span>蝦皮賣場營收 · 2026 前七月</span></div>
-    <div class="stat"><b>0</b><span>條子出沒</span></div>
+    <div class="stat"><b>700萬</b><span>每日處理用戶事件 · TVBS</span></div>
   </section>
 
   <section class="supply" id="supply">
@@ -418,8 +490,9 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
           <div class="chartHint">滑過或點圖表查各月數字 · 點上方板塊換指標，再點一次收合</div>
         </div>
       </div>
-      <p class="bizNote">資料來源：蝦皮賣場後台銷售報表（全部訂單），統計期間 2026/01/01–2026/07/31。
-        已付款訂單口徑為 237.6 萬、4,435 筆。</p>
+      <p class="bizNote">資料來源：蝦皮賣場後台銷售報表，統計期間 2026/01/01–2026/07/31。<br>
+        板塊數字為<b>全部訂單</b>口徑（257.4 萬 · 4,798 筆）；若只計<b>已付款訂單</b>為 237.6 萬 · 4,435 筆。<br>
+        轉換率兩種分母都列出來：訪客轉換率＝訂單 ÷ 賣場訪客（5.30%）；商品點擊轉換率＝訂單 ÷ 商品點擊（3.04%，蝦皮後台原始口徑）。</p>
     </div>
   </section>
 
@@ -484,7 +557,7 @@ footer{padding:26px 3vw;border-top:1px solid var(--line);display:flex;
 
 <footer>
   <span>陳祺昀 V1.0 · 純手工 vanilla — 歡迎看原始碼</span>
-  <span>無 cookie · 無追蹤 · 無條子</span>
+  <span>無 cookie · 無追蹤 · 無廣告</span>
 </footer>
 
 <script>
@@ -661,27 +734,35 @@ const GOODS=[
     {m:'2026/06',rev:358724,ord:637,aov:563.15,cvr:2.92,vis:12532,clk:21779,rfo:4,ref:0.63},
     {m:'2026/07',rev:402237,ord:750,aov:536.32,cvr:2.84,vis:14351,clk:26401,rfo:7,ref:0.93}
   ];
+  /* 訪客轉換率由原始欄位現算，避免手抄出錯 */
+  D.forEach(d=>{d.vcr=d.ord/d.vis*100;});
   const MET={
     rev:{t:'銷售額',f:v=>(v/10000).toFixed(1)+' 萬',ax:v=>(v/10000).toFixed(0)+'萬',
       sub:d=>d.ord+' 筆訂單 · 客單價 NT$'+d.aov.toFixed(0)},
     ord:{t:'訂單數',f:v=>v+' 筆',ax:v=>v.toFixed(0),
       sub:d=>'銷售額 '+(d.rev/10000).toFixed(1)+' 萬'},
-    cvr:{t:'轉換率',f:v=>v.toFixed(2)+' %',ax:v=>v.toFixed(1)+'%',
+    vcr:{t:'訪客轉換率',f:v=>v.toFixed(2)+' %',ax:v=>v.toFixed(1)+'%',
       sub:d=>d.vis.toLocaleString()+' 訪客 → '+d.ord+' 單'},
+    cvr:{t:'商品點擊轉換率',f:v=>v.toFixed(2)+' %',ax:v=>v.toFixed(1)+'%',
+      sub:d=>d.clk.toLocaleString()+' 次點擊 → '+d.ord+' 單'},
     aov:{t:'客單價',f:v=>'NT$ '+v.toFixed(0),ax:v=>v.toFixed(0),
       sub:d=>d.ord+' 筆訂單 · 銷售額 '+(d.rev/10000).toFixed(1)+' 萬'},
     clk:{t:'商品點擊',f:v=>v.toLocaleString(),ax:v=>(v/1000).toFixed(0)+'k',
       sub:d=>d.vis.toLocaleString()+' 位訪客帶來'},
+    vis:{t:'賣場訪客',f:v=>v.toLocaleString(),ax:v=>(v/1000).toFixed(0)+'k',
+      sub:d=>'帶來 '+d.clk.toLocaleString()+' 次商品點擊'},
     ref:{t:'退款率',f:v=>v.toFixed(2)+' %',ax:v=>v.toFixed(1)+'%',
       sub:d=>d.rfo+' 筆退款 / '+d.ord+' 筆訂單'}
   };
-  /* 板塊：點哪一塊就看哪一條線 */
+  /* 板塊：點哪一塊就看哪一條線。轉換率兩種分母都攤開，不含糊 */
   const TILES=[
-    {k:'rev',b:'NT$ 257萬',s:'2026 前七個月銷售額',i:'（4,798 筆訂單）'},
+    {k:'rev',b:'NT$ 257萬',s:'2026 前七個月銷售額',i:'4,798 筆 · 全部訂單口徑'},
     {k:'ord',b:'+363%',s:'訂單數年增',i:'比 2025 同期'},
-    {k:'cvr',b:'3.04%',s:'訂單轉換率',i:'7.7 萬訪客進站'},
+    {k:'vcr',b:'5.30%',s:'訪客轉換率',i:'9.0 萬訪客 → 4,798 單'},
+    {k:'cvr',b:'3.04%',s:'商品點擊轉換率',i:'15.8 萬次點擊 → 4,798 單'},
     {k:'aov',b:'NT$ 536',s:'平均客單價',i:'靠組合包與加購拉高'},
     {k:'clk',b:'15.8萬',s:'商品點擊數',i:'自然流量為主'},
+    {k:'vis',b:'9.0萬',s:'賣場訪客數',i:'沒有投放廣告'},
     {k:'ref',b:'0.83%',s:'退款率',i:'40 / 4,798 筆'}
   ];
   const NS='http://www.w3.org/2000/svg';
@@ -875,6 +956,7 @@ const CREW=[
       let fi=0;
       (function loop(){
         setTimeout(()=>{
+          if(document.hidden){loop();return;}   /* 背景分頁不必動嘴 */
           fi=(fi+1)%F.length;
           if(i===0&&fi===0)
             F[0][6]=' [TXF '+(R(74,97)|0)+'%] ';
@@ -944,8 +1026,9 @@ $('#wings').textContent=asciiRender(92,24,function(g,w,h){
 },' .:!*#%');
 
 /* ---------------- TICKER + CLOCK ---------------- */
-$('#tick').textContent=('★ 目標職位：AI 數據應用工程師 ★ 現貨：資料管線 · LLM 應用 · 機器人 · 貓咪網站 ★ 喵盒子 www.meowbox.tw 創辦人 ★ 數據驅動：蝦皮賣場 2026 前七月營收 257 萬 · 訂單年增 363% ★ SQL 純度 99.9% ★ 跑在 GCP，從不休息 ★ 即時出貨 ★ 沒有條子 ★ ').repeat(6);
-setInterval(()=>{$('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
+$('#tick').textContent=('★ 目標職位：AI 數據應用工程師 ★ 現貨：資料管線 · LLM 應用 · 機器人 · 貓咪網站 ★ 喵盒子 www.meowbox.tw 創辦人 ★ 數據驅動：蝦皮賣場 2026 前七月營收 257 萬 · 訂單年增 363% ★ SQL 純度 99.9% ★ 跑在 GCP，從不休息 ★ 即時出貨 ★ 每日處理 700 萬筆用戶事件 ★ ').repeat(6);
+setInterval(()=>{if(!document.hidden)
+  $('#clock').textContent=new Date().toTimeString().slice(0,8);},1000);
 
 /* ---------------- MATRIX RAIN (bg + fg bleed layer) ---------------- */
 const RAIN_G='BZ01$%#*+=<>/\\|SELECTFROMWHERE';
@@ -997,6 +1080,7 @@ const RAIN_G='BZ01$%#*+=<>/\\|SELECTFROMWHERE';
   const gc=$('#grain'),gg=gc.getContext('2d');
   const id=gg.createImageData(gc.width,gc.height);
   function frame(){
+    if(document.hidden)return;   /* 分頁在背景就別磨 5.7 萬個亂數，手機會燒電 */
     const d=id.data;
     for(let i=0;i<d.length;i+=4){const v=(Math.random()*255)|0;
       d[i]=d[i+1]=d[i+2]=v;d[i+3]=255;}
@@ -1009,7 +1093,8 @@ const RAIN_G='BZ01$%#*+=<>/\\|SELECTFROMWHERE';
    Music: dark ambient loop (drone + slow pad chords + sparse blips).
    SFX: tiny square-sweep ticks. One AudioContext; the SFX chip
    suspends/resumes it, which silences everything at once. */
-let AC=null,sndOn=true,musicOn=false;
+/* 預設靜音：訪客可能在辦公室開這頁，不該被音樂嚇到。想聽的自己按右上角 */
+let AC=null,sndOn=false,musicOn=false;
 function ac(){
   if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
   return AC;
@@ -1149,6 +1234,7 @@ function schedule(){
   }
 }
 function musicPlay(){
+  if(!sndOn)return;
   const c=ac();if(!c)return;
   buildMusic();
   if(c.state==='suspended')c.resume().catch(()=>{});
@@ -1162,11 +1248,14 @@ function musicPlay(){
 /* ---- SFX chip: one switch silences the whole context ---- */
 $('#sfxChip').addEventListener('click',function(){
   sndOn=!sndOn;
-  this.textContent=sndOn?'音效:開':'音效:關';
+  this.textContent=sndOn?'♪ 音效:開':'♪ 音效:關';
   this.classList.toggle('on',sndOn);
-  const c=ac();if(!c)return;
-  if(sndOn){c.resume().catch(()=>{});SFX.tick();}
-  else c.suspend().catch(()=>{});
+  const c=ac();if(!c&&!sndOn)return;
+  if(sndOn){
+    ac()&&ac().resume().catch(()=>{});
+    SFX.tick();
+    musicPlay();   /* 這一下點擊就是瀏覽器要的使用者手勢，可以合法起音 */
+  }else if(c)c.suspend().catch(()=>{});
 });
 
 /* ---------------- BOOT SEQUENCE ---------------- */
