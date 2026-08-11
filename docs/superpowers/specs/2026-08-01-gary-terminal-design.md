@@ -94,12 +94,22 @@
 | uBike | 21.3MB | 12.2MB | 26 |
 | friendy | 19.4MB | 8.9MB | 26 |
 | winformVideo03 | 12.6MB | 0.8MB | 26（螢幕錄影，極好壓） |
+| winformVideo02 | 3.4MB | 0.21MB | 23 |
+| letsPicnic | 3.4MB | 2.5MB | 23 |
+| pySnake | 2.2MB | 0.14MB | 23 |
+| winformVideo01 | 0.8MB | 0.05MB | 23 |
 
-合計 164MB → 59MB。原始檔仍可由 history 取回（`git show <舊 commit>:resume/images/<檔名>`）。
+合計 164MB → 52MB。原始檔仍可由 history 取回（`git show <舊 commit>:resume/images/<檔名>`）。
+
+**經驗法則**：Winform／終端機／模擬器的螢幕錄影壓縮率 −94%，畫質零損失；
+手機實拍與 iOS 模擬器高幀錄影只有 −7~19%，不值得為此犧牲畫質。
+判準：重壓後減量未達 20% 就保留原檔。
+
+未重壓（改善不足或已在壓縮底線）：`mL`（−18%）、`cityWeather`（−19%）、
+`cityMemo`（−7%）、`dingbendongTest`（1080p 但僅 240kbps，已無空間）。
 
 ### 待辦
 
 - history 未清理，`.git` 仍留著舊的大 blob（且會再長）。
   真要縮小需 `git filter-repo` 改寫 history ＋ force push，尚未執行。
 - Git LFS 不是選項——GitHub Pages 不會 serve LFS 檔案。
-- 剩下 8 支（合計 27MB）未處理。
